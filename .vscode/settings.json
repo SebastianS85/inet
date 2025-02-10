@@ -1,0 +1,26 @@
+{
+    "idf.flashType": "UART",
+    "idf.portWin": "COM7",
+    "idf.espIdfPathWin": "c:\\esp\\v5.3.2\\esp-idf",
+    "idf.toolsPathWin": "c:\\esp\\tools",
+    "files.associations": {
+        "*.cps": "javascript",
+        "spi_master.h": "c",
+        "esp_wifi.h": "c",
+        "led_strip_cust.h": "c",
+        "esp_err.h": "c",
+        "esp_now.h": "c",
+        "touch.h": "c",
+        "i2s_stream.h": "c",
+        "ui.h": "c",
+        "lvgl.h": "c",
+        "fonts.h": "c",
+        "esp_netif.h": "c",
+        "audio_element.h": "c",
+        "aht21.h": "c",
+        "esp_log.h": "c",
+        "i2c_master.h": "c",
+        "ens160.h": "c",
+        "esp_heap_caps.h": "c"
+    }
+}

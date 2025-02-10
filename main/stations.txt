@@ -1,0 +1,16 @@
+ "http://c6.radioboss.fm:8207/stream"   ,
+    "http://c26.radioboss.fm:8441/stream",
+    "http://c6.radioboss.fm:8207/stream",
+    "http://c15.radioboss.fm:8520/stream",
+    "http://c2.radioboss.fm:8438/stream",
+    "http://c2.radioboss.fm:8241/stream",
+    "http://c2.radioboss.fm:8671/stream",
+    "http://c26.radioboss.fm:8420/stream",
+    "https://stream.sunshine-live.de/2000er/mp3-192/stream.sunshine-live.de/",
+    "https://80er-90er.stream.laut.fm/80er-90er?ref=vtuner",
+    "https://c15.radioboss.fm:8566/stream",
+    "http://31.192.216.8/rmf_fm",
+    "https://ic2.smcdn.pl/1180-1.mp3",//eska
+    "https://ic1.smcdn.pl/2070-1.mp3",//eska 2
+    "https://stream3.technologicznie.net/muzyczne_radio_192.mp3",//Muzyczne radio
+    "https://n09a-eu.rcs.revma.com/an1ugyygzk8uv?rj-ttl=5&rj-tok=AAABlDvCVcQAzCZhxrbQNf2GfQ",
