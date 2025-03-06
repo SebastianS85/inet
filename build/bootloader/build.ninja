@@ -181,7 +181,7 @@ build uf2-app: phony CMakeFiles/uf2-app
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -193,7 +193,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -205,7 +205,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Custom command for CMakeFiles\menuconfig
 
 build CMakeFiles/menuconfig | ${cmake_ninja_workdir}CMakeFiles/menuconfig: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file C:/esp_projects/inetRadio/build/bootloader/config.env && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe -m kconfgen --list-separator=semicolon --kconfig C:/esp/v5.3.2/esp-idf/Kconfig --sdkconfig-rename C:/esp/v5.3.2/esp-idf/sdkconfig.rename --config C:/esp_projects/inetRadio/sdkconfig --env-file C:/esp_projects/inetRadio/build/bootloader/config.env --env IDF_TARGET=esp32s3 --env IDF_TOOLCHAIN=gcc --env IDF_ENV_FPGA= --env IDF_INIT_VERSION=5.3.2 --dont-write-deprecated --output config C:/esp_projects/inetRadio/sdkconfig && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/tools/check_term.py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E env COMPONENT_KCONFIGS_SOURCE_FILE=C:/esp_projects/inetRadio/build/bootloader/kconfigs.in COMPONENT_KCONFIGS_PROJBUILD_SOURCE_FILE=C:/esp_projects/inetRadio/build/bootloader/kconfigs_projbuild.in KCONFIG_CONFIG=C:/esp_projects/inetRadio/sdkconfig IDF_TARGET=esp32s3 IDF_TOOLCHAIN=gcc IDF_ENV_FPGA= IDF_INIT_VERSION=5.3.2 c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe -m menuconfig C:/esp/v5.3.2/esp-idf/Kconfig && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe -m kconfgen --list-separator=semicolon --kconfig C:/esp/v5.3.2/esp-idf/Kconfig --sdkconfig-rename C:/esp/v5.3.2/esp-idf/sdkconfig.rename --config C:/esp_projects/inetRadio/sdkconfig --env-file C:/esp_projects/inetRadio/build/bootloader/config.env --env IDF_TARGET=esp32s3 --env IDF_TOOLCHAIN=gcc --env IDF_ENV_FPGA= --env IDF_INIT_VERSION=5.3.2 --output config C:/esp_projects/inetRadio/sdkconfig"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file C:/esp_projects/inetRadio/build/bootloader/config.env && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe -m kconfgen --list-separator=semicolon --kconfig C:/esp/v5.3.2/esp-idf/Kconfig --sdkconfig-rename C:/esp/v5.3.2/esp-idf/sdkconfig.rename --config C:/esp_projects/inetRadio/sdkconfig --env-file C:/esp_projects/inetRadio/build/bootloader/config.env --env IDF_TARGET=esp32s3 --env IDF_TOOLCHAIN=gcc --env IDF_ENV_FPGA= --env IDF_INIT_VERSION=5.3.2 --dont-write-deprecated --output config C:/esp_projects/inetRadio/sdkconfig && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/tools/check_term.py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E env COMPONENT_KCONFIGS_SOURCE_FILE=C:/esp_projects/inetRadio/build/bootloader/kconfigs.in COMPONENT_KCONFIGS_PROJBUILD_SOURCE_FILE=C:/esp_projects/inetRadio/build/bootloader/kconfigs_projbuild.in KCONFIG_CONFIG=C:/esp_projects/inetRadio/sdkconfig IDF_TARGET=esp32s3 IDF_TOOLCHAIN=gcc IDF_ENV_FPGA= IDF_INIT_VERSION=5.3.2 c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe -m menuconfig C:/esp/v5.3.2/esp-idf/Kconfig && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe -m kconfgen --list-separator=semicolon --kconfig C:/esp/v5.3.2/esp-idf/Kconfig --sdkconfig-rename C:/esp/v5.3.2/esp-idf/sdkconfig.rename --config C:/esp_projects/inetRadio/sdkconfig --env-file C:/esp_projects/inetRadio/build/bootloader/config.env --env IDF_TARGET=esp32s3 --env IDF_TOOLCHAIN=gcc --env IDF_ENV_FPGA= --env IDF_INIT_VERSION=5.3.2 --output config C:/esp_projects/inetRadio/sdkconfig"
   pool = console
 
 
@@ -213,7 +213,7 @@ build CMakeFiles/menuconfig | ${cmake_ninja_workdir}CMakeFiles/menuconfig: CUSTO
 # Custom command for CMakeFiles\confserver
 
 build CMakeFiles/confserver | ${cmake_ninja_workdir}CMakeFiles/confserver: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file C:/esp_projects/inetRadio/build/bootloader/config.env && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe -m kconfserver --env-file C:/esp_projects/inetRadio/build/bootloader/config.env --kconfig C:/esp/v5.3.2/esp-idf/Kconfig --sdkconfig-rename C:/esp/v5.3.2/esp-idf/sdkconfig.rename --config C:/esp_projects/inetRadio/sdkconfig"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file C:/esp_projects/inetRadio/build/bootloader/config.env && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe -m kconfserver --env-file C:/esp_projects/inetRadio/build/bootloader/config.env --kconfig C:/esp/v5.3.2/esp-idf/Kconfig --sdkconfig-rename C:/esp/v5.3.2/esp-idf/sdkconfig.rename --config C:/esp_projects/inetRadio/sdkconfig"
   pool = console
 
 
@@ -221,7 +221,7 @@ build CMakeFiles/confserver | ${cmake_ninja_workdir}CMakeFiles/confserver: CUSTO
 # Custom command for CMakeFiles\save-defconfig
 
 build CMakeFiles/save-defconfig | ${cmake_ninja_workdir}CMakeFiles/save-defconfig: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file C:/esp_projects/inetRadio/build/bootloader/config.env && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe -m kconfgen --list-separator=semicolon --kconfig C:/esp/v5.3.2/esp-idf/Kconfig --sdkconfig-rename C:/esp/v5.3.2/esp-idf/sdkconfig.rename --config C:/esp_projects/inetRadio/sdkconfig --env-file C:/esp_projects/inetRadio/build/bootloader/config.env --dont-write-deprecated --output savedefconfig C:/esp/v5.3.2/esp-idf/components/bootloader/subproject/sdkconfig.defaults"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/tools/kconfig_new/prepare_kconfig_files.py --list-separator=semicolon --env-file C:/esp_projects/inetRadio/build/bootloader/config.env && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe -m kconfgen --list-separator=semicolon --kconfig C:/esp/v5.3.2/esp-idf/Kconfig --sdkconfig-rename C:/esp/v5.3.2/esp-idf/sdkconfig.rename --config C:/esp_projects/inetRadio/sdkconfig --env-file C:/esp_projects/inetRadio/build/bootloader/config.env --dont-write-deprecated --output savedefconfig C:/esp/v5.3.2/esp-idf/components/bootloader/subproject/sdkconfig.defaults"
   pool = console
 
 
@@ -235,7 +235,7 @@ build CMakeFiles/gen_project_binary | ${cmake_ninja_workdir}CMakeFiles/gen_proje
 # Custom command for .bin_timestamp
 
 build .bin_timestamp | ${cmake_ninja_workdir}.bin_timestamp: CUSTOM_COMMAND bootloader.elf || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_bootloader_format/libesp_bootloader_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/spi_flash/libspi_flash.a esp-idf/xtensa/libxtensa.a
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32s3 elf2image --flash_mode dio --flash_freq 80m --flash_size 16MB --min-rev-full 0 --max-rev-full 99 -o C:/esp_projects/inetRadio/build/bootloader/bootloader.bin C:/esp_projects/inetRadio/build/bootloader/bootloader.elf && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E echo "Generated C:/esp_projects/inetRadio/build/bootloader/bootloader.bin" && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E md5sum C:/esp_projects/inetRadio/build/bootloader/bootloader.bin > C:/esp_projects/inetRadio/build/bootloader/.bin_timestamp"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32s3 elf2image --flash_mode dio --flash_freq 80m --flash_size 16MB --min-rev-full 2 --max-rev-full 99 -o C:/esp_projects/inetRadio/build/bootloader/bootloader.bin C:/esp_projects/inetRadio/build/bootloader/bootloader.elf && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E echo "Generated C:/esp_projects/inetRadio/build/bootloader/bootloader.bin" && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E md5sum C:/esp_projects/inetRadio/build/bootloader/bootloader.bin > C:/esp_projects/inetRadio/build/bootloader/.bin_timestamp"
   DESC = Generating binary image from built executable
   restat = 1
 
@@ -250,7 +250,7 @@ build CMakeFiles/app | ${cmake_ninja_workdir}CMakeFiles/app: phony || _project_e
 # Custom command for CMakeFiles\erase_flash
 
 build CMakeFiles/erase_flash | ${cmake_ninja_workdir}CMakeFiles/erase_flash: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp\v5.3.2\esp-idf\components\esptool_py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/esp/v5.3.2/esp-idf -D SERIAL_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;;C:/esp/v5.3.2/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32s3 -D SERIAL_TOOL_ARGS=erase_flash -P run_serial_tool.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp\v5.3.2\esp-idf\components\esptool_py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/esp/v5.3.2/esp-idf -D SERIAL_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;;C:/esp/v5.3.2/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32s3 -D SERIAL_TOOL_ARGS=erase_flash -P run_serial_tool.cmake"
   pool = console
 
 
@@ -258,7 +258,7 @@ build CMakeFiles/erase_flash | ${cmake_ninja_workdir}CMakeFiles/erase_flash: CUS
 # Custom command for CMakeFiles\merge-bin
 
 build CMakeFiles/merge-bin | ${cmake_ninja_workdir}CMakeFiles/merge-bin: CUSTOM_COMMAND bootloader || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_bootloader_format/libesp_bootloader_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/spi_flash/libspi_flash.a esp-idf/xtensa/libxtensa.a gen_project_binary
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp\v5.3.2\esp-idf\components\esptool_py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/esp/v5.3.2/esp-idf -D SERIAL_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;;C:/esp/v5.3.2/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32s3 -D SERIAL_TOOL_ARGS=merge_bin;-o;C:/esp_projects/inetRadio/build/bootloader/merged-binary.bin;@C:/esp_projects/inetRadio/build/bootloader/flash_args -D WORKING_DIRECTORY=C:/esp_projects/inetRadio/build/bootloader -P run_serial_tool.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp\v5.3.2\esp-idf\components\esptool_py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/esp/v5.3.2/esp-idf -D SERIAL_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;;C:/esp/v5.3.2/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32s3 -D SERIAL_TOOL_ARGS=merge_bin;-o;C:/esp_projects/inetRadio/build/bootloader/merged-binary.bin;@C:/esp_projects/inetRadio/build/bootloader/flash_args -D WORKING_DIRECTORY=C:/esp_projects/inetRadio/build/bootloader -P run_serial_tool.cmake"
   pool = console
 
 
@@ -266,7 +266,7 @@ build CMakeFiles/merge-bin | ${cmake_ninja_workdir}CMakeFiles/merge-bin: CUSTOM_
 # Custom command for CMakeFiles\monitor
 
 build CMakeFiles/monitor | ${cmake_ninja_workdir}CMakeFiles/monitor: CUSTOM_COMMAND || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_bootloader_format/libesp_bootloader_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/spi_flash/libspi_flash.a esp-idf/xtensa/libxtensa.a
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp\v5.3.2\esp-idf\components\esptool_py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/esp/v5.3.2/esp-idf -D SERIAL_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;-m;esp_idf_monitor -D SERIAL_TOOL_ARGS=--toolchain-prefix;xtensa-esp32s3-elf-;;--target;esp32s3;;--revision;0;;C:/esp_projects/inetRadio/build/bootloader/bootloader.elf -D WORKING_DIRECTORY=C:/esp_projects/inetRadio/build/bootloader -P run_serial_tool.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp\v5.3.2\esp-idf\components\esptool_py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/esp/v5.3.2/esp-idf -D SERIAL_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;-m;esp_idf_monitor -D SERIAL_TOOL_ARGS=--toolchain-prefix;xtensa-esp32s3-elf-;;--target;esp32s3;;--revision;2;;C:/esp_projects/inetRadio/build/bootloader/bootloader.elf -D WORKING_DIRECTORY=C:/esp_projects/inetRadio/build/bootloader -P run_serial_tool.cmake"
   pool = console
 
 
@@ -280,7 +280,7 @@ build CMakeFiles/_project_elf_src | ${cmake_ninja_workdir}CMakeFiles/_project_el
 # Custom command for project_elf_src_esp32s3.c
 
 build project_elf_src_esp32s3.c | ${cmake_ninja_workdir}project_elf_src_esp32s3.c: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E touch C:/esp_projects/inetRadio/build/bootloader/project_elf_src_esp32s3.c"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E touch C:/esp_projects/inetRadio/build/bootloader/project_elf_src_esp32s3.c"
   DESC = Generating project_elf_src_esp32s3.c
   restat = 1
 
@@ -289,7 +289,7 @@ build project_elf_src_esp32s3.c | ${cmake_ninja_workdir}project_elf_src_esp32s3.
 # Custom command for CMakeFiles\size
 
 build CMakeFiles/size | ${cmake_ninja_workdir}CMakeFiles/size: CUSTOM_COMMAND bootloader.map
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_SIZE_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;-m;esp_idf_size -D MAP_FILE=C:/esp_projects/inetRadio/build/bootloader/bootloader.map -D OUTPUT_JSON= -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_size_tool.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_SIZE_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;-m;esp_idf_size -D MAP_FILE=C:/esp_projects/inetRadio/build/bootloader/bootloader.map -D OUTPUT_JSON= -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_size_tool.cmake"
   pool = console
 
 
@@ -297,7 +297,7 @@ build CMakeFiles/size | ${cmake_ninja_workdir}CMakeFiles/size: CUSTOM_COMMAND bo
 # Custom command for CMakeFiles\size-files
 
 build CMakeFiles/size-files | ${cmake_ninja_workdir}CMakeFiles/size-files: CUSTOM_COMMAND bootloader.map
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_SIZE_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;-m;esp_idf_size -D IDF_SIZE_MODE=--files -D MAP_FILE=C:/esp_projects/inetRadio/build/bootloader/bootloader.map -D OUTPUT_JSON= -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_size_tool.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_SIZE_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;-m;esp_idf_size -D IDF_SIZE_MODE=--files -D MAP_FILE=C:/esp_projects/inetRadio/build/bootloader/bootloader.map -D OUTPUT_JSON= -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_size_tool.cmake"
   pool = console
 
 
@@ -305,7 +305,7 @@ build CMakeFiles/size-files | ${cmake_ninja_workdir}CMakeFiles/size-files: CUSTO
 # Custom command for CMakeFiles\size-components
 
 build CMakeFiles/size-components | ${cmake_ninja_workdir}CMakeFiles/size-components: CUSTOM_COMMAND bootloader.map
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_SIZE_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;-m;esp_idf_size -D IDF_SIZE_MODE=--archives -D MAP_FILE=C:/esp_projects/inetRadio/build/bootloader/bootloader.map -D OUTPUT_JSON= -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_size_tool.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_SIZE_TOOL=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;-m;esp_idf_size -D IDF_SIZE_MODE=--archives -D MAP_FILE=C:/esp_projects/inetRadio/build/bootloader/bootloader.map -D OUTPUT_JSON= -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_size_tool.cmake"
   pool = console
 
 
@@ -313,7 +313,7 @@ build CMakeFiles/size-components | ${cmake_ninja_workdir}CMakeFiles/size-compone
 # Custom command for CMakeFiles\dfu
 
 build CMakeFiles/dfu | ${cmake_ninja_workdir}CMakeFiles/dfu: CUSTOM_COMMAND bootloader || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_bootloader_format/libesp_bootloader_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/spi_flash/libspi_flash.a esp-idf/xtensa/libxtensa.a gen_project_binary
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/tools/mkdfu.py write -o C:/esp_projects/inetRadio/build/bootloader/dfu.bin --json C:/esp_projects/inetRadio/build/bootloader/flasher_args.json --pid 9 --flash-size 16MB"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/tools/mkdfu.py write -o C:/esp_projects/inetRadio/build/bootloader/dfu.bin --json C:/esp_projects/inetRadio/build/bootloader/flasher_args.json --pid 9 --flash-size 16MB"
   pool = console
 
 
@@ -321,7 +321,7 @@ build CMakeFiles/dfu | ${cmake_ninja_workdir}CMakeFiles/dfu: CUSTOM_COMMAND boot
 # Custom command for CMakeFiles\dfu-list
 
 build CMakeFiles/dfu-list | ${cmake_ninja_workdir}CMakeFiles/dfu-list: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D ESP_DFU_LIST="1" -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_dfu_util.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D ESP_DFU_LIST="1" -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_dfu_util.cmake"
   pool = console
 
 
@@ -329,7 +329,7 @@ build CMakeFiles/dfu-list | ${cmake_ninja_workdir}CMakeFiles/dfu-list: CUSTOM_CO
 # Custom command for CMakeFiles\dfu-flash
 
 build CMakeFiles/dfu-flash | ${cmake_ninja_workdir}CMakeFiles/dfu-flash: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D ESP_DFU_BIN="C:/esp_projects/inetRadio/build/bootloader/dfu.bin" -D ESP_DFU_PID="9" -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_dfu_util.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D ESP_DFU_BIN="C:/esp_projects/inetRadio/build/bootloader/dfu.bin" -D ESP_DFU_PID="9" -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_dfu_util.cmake"
   pool = console
 
 
@@ -337,7 +337,7 @@ build CMakeFiles/dfu-flash | ${cmake_ninja_workdir}CMakeFiles/dfu-flash: CUSTOM_
 # Custom command for CMakeFiles\uf2
 
 build CMakeFiles/uf2 | ${cmake_ninja_workdir}CMakeFiles/uf2: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/esp/v5.3.2/esp-idf -D UF2_CMD=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;C:/esp/v5.3.2/esp-idf/tools/mkuf2.py;write;--chip;esp32s3 -D UF2_ARGS=--json;C:/esp_projects/inetRadio/build/bootloader/flasher_args.json;-o;C:/esp_projects/inetRadio/build/bootloader/uf2.bin -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_uf2_cmds.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/esp/v5.3.2/esp-idf -D UF2_CMD=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;C:/esp/v5.3.2/esp-idf/tools/mkuf2.py;write;--chip;esp32s3 -D UF2_ARGS=--json;C:/esp_projects/inetRadio/build/bootloader/flasher_args.json;-o;C:/esp_projects/inetRadio/build/bootloader/uf2.bin -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_uf2_cmds.cmake"
   pool = console
 
 
@@ -345,7 +345,7 @@ build CMakeFiles/uf2 | ${cmake_ninja_workdir}CMakeFiles/uf2: CUSTOM_COMMAND
 # Custom command for CMakeFiles\uf2-app
 
 build CMakeFiles/uf2-app | ${cmake_ninja_workdir}CMakeFiles/uf2-app: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/esp/v5.3.2/esp-idf -D UF2_CMD=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;C:/esp/v5.3.2/esp-idf/tools/mkuf2.py;write;--chip;esp32s3 -D UF2_ARGS=--json;C:/esp_projects/inetRadio/build/bootloader/flasher_args.json;-o;C:/esp_projects/inetRadio/build/bootloader/uf2-app.bin;--bin;app -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_uf2_cmds.cmake"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/esp/v5.3.2/esp-idf -D UF2_CMD=c:/esp/tools/python_env/idf5.3_py3.11_env/Scripts/python.exe;C:/esp/v5.3.2/esp-idf/tools/mkuf2.py;write;--chip;esp32s3 -D UF2_ARGS=--json;C:/esp_projects/inetRadio/build/bootloader/flasher_args.json;-o;C:/esp_projects/inetRadio/build/bootloader/uf2-app.bin;--bin;app -P C:/esp/v5.3.2/esp-idf/tools/cmake/run_uf2_cmds.cmake"
   pool = console
 
 # =============================================================================
@@ -358,7 +358,7 @@ build CMakeFiles/uf2-app | ${cmake_ninja_workdir}CMakeFiles/uf2-app: CUSTOM_COMM
 # Utility command for edit_cache
 
 build esp-idf/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -370,7 +370,7 @@ build esp-idf/edit_cache: phony esp-idf/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build esp-idf/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -433,7 +433,7 @@ build esp-idf/xtensa/libxtensa.a: C_STATIC_LIBRARY_LINKER____idf_xtensa_ esp-idf
 # Utility command for edit_cache
 
 build esp-idf/xtensa/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\xtensa && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\xtensa && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -445,7 +445,7 @@ build esp-idf/xtensa/edit_cache: phony esp-idf/xtensa/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build esp-idf/xtensa/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\xtensa && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\xtensa && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -462,7 +462,7 @@ build esp-idf/xtensa/rebuild_cache: phony esp-idf/xtensa/CMakeFiles/rebuild_cach
 # Utility command for edit_cache
 
 build esp-idf/newlib/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\newlib && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\newlib && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -474,7 +474,7 @@ build esp-idf/newlib/edit_cache: phony esp-idf/newlib/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build esp-idf/newlib/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\newlib && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\newlib && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -787,7 +787,7 @@ build esp-idf/soc/libsoc.a: C_STATIC_LIBRARY_LINKER____idf_soc_ esp-idf/soc/CMak
 # Utility command for edit_cache
 
 build esp-idf/soc/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\soc && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\soc && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -799,7 +799,7 @@ build esp-idf/soc/edit_cache: phony esp-idf/soc/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build esp-idf/soc/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\soc && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\soc && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -852,7 +852,7 @@ build esp-idf/micro-ecc/libmicro-ecc.a: C_STATIC_LIBRARY_LINKER____idf_micro-ecc
 # Utility command for edit_cache
 
 build esp-idf/micro-ecc/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\micro-ecc && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\micro-ecc && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -864,7 +864,7 @@ build esp-idf/micro-ecc/edit_cache: phony esp-idf/micro-ecc/CMakeFiles/edit_cach
 # Utility command for rebuild_cache
 
 build esp-idf/micro-ecc/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\micro-ecc && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\micro-ecc && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -967,7 +967,7 @@ build esp-idf/hal/libhal.a: C_STATIC_LIBRARY_LINKER____idf_hal_ esp-idf/hal/CMak
 # Utility command for edit_cache
 
 build esp-idf/hal/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\hal && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\hal && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -979,7 +979,7 @@ build esp-idf/hal/edit_cache: phony esp-idf/hal/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build esp-idf/hal/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\hal && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\hal && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -1032,7 +1032,7 @@ build esp-idf/spi_flash/libspi_flash.a: C_STATIC_LIBRARY_LINKER____idf_spi_flash
 # Utility command for edit_cache
 
 build esp-idf/spi_flash/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\spi_flash && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\spi_flash && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -1044,7 +1044,7 @@ build esp-idf/spi_flash/edit_cache: phony esp-idf/spi_flash/CMakeFiles/edit_cach
 # Utility command for rebuild_cache
 
 build esp-idf/spi_flash/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\spi_flash && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\spi_flash && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -1097,7 +1097,7 @@ build esp-idf/esp_bootloader_format/libesp_bootloader_format.a: C_STATIC_LIBRARY
 # Utility command for edit_cache
 
 build esp-idf/esp_bootloader_format/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_bootloader_format && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_bootloader_format && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -1109,7 +1109,7 @@ build esp-idf/esp_bootloader_format/edit_cache: phony esp-idf/esp_bootloader_for
 # Utility command for rebuild_cache
 
 build esp-idf/esp_bootloader_format/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_bootloader_format && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_bootloader_format && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -1126,7 +1126,7 @@ build esp-idf/esp_bootloader_format/rebuild_cache: phony esp-idf/esp_bootloader_
 # Utility command for edit_cache
 
 build esp-idf/esp_app_format/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_app_format && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_app_format && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -1138,7 +1138,7 @@ build esp-idf/esp_app_format/edit_cache: phony esp-idf/esp_app_format/CMakeFiles
 # Utility command for rebuild_cache
 
 build esp-idf/esp_app_format/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_app_format && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_app_format && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -1411,7 +1411,7 @@ build esp-idf/bootloader_support/libbootloader_support.a: C_STATIC_LIBRARY_LINKE
 # Utility command for edit_cache
 
 build esp-idf/bootloader_support/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\bootloader_support && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\bootloader_support && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -1423,7 +1423,7 @@ build esp-idf/bootloader_support/edit_cache: phony esp-idf/bootloader_support/CM
 # Utility command for rebuild_cache
 
 build esp-idf/bootloader_support/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\bootloader_support && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\bootloader_support && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -1588,7 +1588,7 @@ build esp-idf/efuse/efuse_test_table: phony esp-idf/efuse/CMakeFiles/efuse_test_
 # Utility command for edit_cache
 
 build esp-idf/efuse/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -1600,7 +1600,7 @@ build esp-idf/efuse/edit_cache: phony esp-idf/efuse/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build esp-idf/efuse/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -1612,14 +1612,14 @@ build esp-idf/efuse/rebuild_cache: phony esp-idf/efuse/CMakeFiles/rebuild_cache.
 # Custom command for esp-idf\efuse\CMakeFiles\efuse-common-table
 
 build esp-idf/efuse/CMakeFiles/efuse-common-table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/efuse-common-table: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/components/efuse/efuse_table_gen.py C:/esp/v5.3.2/esp-idf/components/efuse/esp32s3/esp_efuse_table.csv -t esp32s3 --max_blk_len 256"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/components/efuse/efuse_table_gen.py C:/esp/v5.3.2/esp-idf/components/efuse/esp32s3/esp_efuse_table.csv -t esp32s3 --max_blk_len 256"
 
 
 #############################################
 # Custom command for esp-idf\efuse\CMakeFiles\efuse_common_table
 
 build esp-idf/efuse/CMakeFiles/efuse_common_table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/efuse_common_table: CUSTOM_COMMAND || esp-idf/efuse/efuse-common-table
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E echo "
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E echo "
   DESC = Warning: command "efuse_common_table" is deprecated. Have you wanted to run "efuse-common-table" instead?
 
 
@@ -1627,7 +1627,7 @@ build esp-idf/efuse/CMakeFiles/efuse_common_table | ${cmake_ninja_workdir}esp-id
 # Custom command for esp-idf\efuse\CMakeFiles\efuse_custom_table
 
 build esp-idf/efuse/CMakeFiles/efuse_custom_table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/efuse_custom_table: CUSTOM_COMMAND || esp-idf/efuse/efuse-custom-table
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E echo "
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E echo "
   DESC = Warning: command "efuse_custom_table" is deprecated. Have you wanted to run "efuse-custom-table" instead?
 
 
@@ -1635,14 +1635,14 @@ build esp-idf/efuse/CMakeFiles/efuse_custom_table | ${cmake_ninja_workdir}esp-id
 # Custom command for esp-idf\efuse\CMakeFiles\show-efuse-table
 
 build esp-idf/efuse/CMakeFiles/show-efuse-table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/show-efuse-table: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/components/efuse/efuse_table_gen.py C:/esp/v5.3.2/esp-idf/components/efuse/esp32s3/esp_efuse_table.csv -t esp32s3 --max_blk_len 256 --info"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/components/efuse/efuse_table_gen.py C:/esp/v5.3.2/esp-idf/components/efuse/esp32s3/esp_efuse_table.csv -t esp32s3 --max_blk_len 256 --info"
 
 
 #############################################
 # Custom command for esp-idf\efuse\CMakeFiles\show_efuse_table
 
 build esp-idf/efuse/CMakeFiles/show_efuse_table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/show_efuse_table: CUSTOM_COMMAND || esp-idf/efuse/show-efuse-table
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E echo "
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E echo "
   DESC = Warning: command "show_efuse_table" is deprecated. Have you wanted to run "show-efuse-table" instead?
 
 
@@ -1650,7 +1650,7 @@ build esp-idf/efuse/CMakeFiles/show_efuse_table | ${cmake_ninja_workdir}esp-idf/
 # Custom command for esp-idf\efuse\CMakeFiles\efuse_test_table
 
 build esp-idf/efuse/CMakeFiles/efuse_test_table | ${cmake_ninja_workdir}esp-idf/efuse/CMakeFiles/efuse_test_table: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/components/efuse/efuse_table_gen.py C:/esp/v5.3.2/esp-idf/components/efuse/test/esp_efuse_test_table.csv -t esp32s3 --max_blk_len 256"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\efuse && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/components/efuse/efuse_table_gen.py C:/esp/v5.3.2/esp-idf/components/efuse/test/esp_efuse_test_table.csv -t esp32s3 --max_blk_len 256"
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -1698,7 +1698,7 @@ build esp-idf/esp_system/libesp_system.a: C_STATIC_LIBRARY_LINKER____idf_esp_sys
 # Utility command for edit_cache
 
 build esp-idf/esp_system/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_system && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_system && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -1710,7 +1710,7 @@ build esp-idf/esp_system/edit_cache: phony esp-idf/esp_system/CMakeFiles/edit_ca
 # Utility command for rebuild_cache
 
 build esp-idf/esp_system/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_system && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_system && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -1853,7 +1853,7 @@ build esp-idf/esp_hw_support/libesp_hw_support.a: C_STATIC_LIBRARY_LINKER____idf
 # Utility command for edit_cache
 
 build esp-idf/esp_hw_support/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -1865,7 +1865,7 @@ build esp-idf/esp_hw_support/edit_cache: phony esp-idf/esp_hw_support/CMakeFiles
 # Utility command for rebuild_cache
 
 build esp-idf/esp_hw_support/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -1882,7 +1882,7 @@ build esp-idf/esp_hw_support/rebuild_cache: phony esp-idf/esp_hw_support/CMakeFi
 # Utility command for edit_cache
 
 build esp-idf/esp_hw_support/port/esp32s3/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support\port\esp32s3 && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support\port\esp32s3 && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -1894,7 +1894,7 @@ build esp-idf/esp_hw_support/port/esp32s3/edit_cache: phony esp-idf/esp_hw_suppo
 # Utility command for rebuild_cache
 
 build esp-idf/esp_hw_support/port/esp32s3/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support\port\esp32s3 && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support\port\esp32s3 && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -1911,7 +1911,7 @@ build esp-idf/esp_hw_support/port/esp32s3/rebuild_cache: phony esp-idf/esp_hw_su
 # Utility command for edit_cache
 
 build esp-idf/esp_hw_support/lowpower/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support\lowpower && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support\lowpower && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -1923,7 +1923,7 @@ build esp-idf/esp_hw_support/lowpower/edit_cache: phony esp-idf/esp_hw_support/l
 # Utility command for rebuild_cache
 
 build esp-idf/esp_hw_support/lowpower/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support\lowpower && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_hw_support\lowpower && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -1976,7 +1976,7 @@ build esp-idf/esp_common/libesp_common.a: C_STATIC_LIBRARY_LINKER____idf_esp_com
 # Utility command for edit_cache
 
 build esp-idf/esp_common/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_common && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_common && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -1988,7 +1988,7 @@ build esp-idf/esp_common/edit_cache: phony esp-idf/esp_common/CMakeFiles/edit_ca
 # Utility command for rebuild_cache
 
 build esp-idf/esp_common/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_common && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_common && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -2131,7 +2131,7 @@ build esp-idf/esp_rom/libesp_rom.a: C_STATIC_LIBRARY_LINKER____idf_esp_rom_ esp-
 # Utility command for edit_cache
 
 build esp-idf/esp_rom/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_rom && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_rom && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -2143,7 +2143,7 @@ build esp-idf/esp_rom/edit_cache: phony esp-idf/esp_rom/CMakeFiles/edit_cache.ut
 # Utility command for rebuild_cache
 
 build esp-idf/esp_rom/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_rom && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esp_rom && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -2216,7 +2216,7 @@ build esp-idf/log/liblog.a: C_STATIC_LIBRARY_LINKER____idf_log_ esp-idf/log/CMak
 # Utility command for edit_cache
 
 build esp-idf/log/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\log && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\log && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -2228,7 +2228,7 @@ build esp-idf/log/edit_cache: phony esp-idf/log/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build esp-idf/log/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\log && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\log && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -2251,7 +2251,7 @@ build esp-idf/esptool_py/bootloader_check_size: phony esp-idf/esptool_py/CMakeFi
 # Utility command for edit_cache
 
 build esp-idf/esptool_py/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esptool_py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esptool_py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -2263,7 +2263,7 @@ build esp-idf/esptool_py/edit_cache: phony esp-idf/esptool_py/CMakeFiles/edit_ca
 # Utility command for rebuild_cache
 
 build esp-idf/esptool_py/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esptool_py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esptool_py && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -2275,7 +2275,7 @@ build esp-idf/esptool_py/rebuild_cache: phony esp-idf/esptool_py/CMakeFiles/rebu
 # Custom command for esp-idf\esptool_py\CMakeFiles\bootloader_check_size
 
 build esp-idf/esptool_py/CMakeFiles/bootloader_check_size | ${cmake_ninja_workdir}esp-idf/esptool_py/CMakeFiles/bootloader_check_size: CUSTOM_COMMAND || _project_elf_src bootloader.elf esp-idf/bootloader_support/libbootloader_support.a esp-idf/efuse/libefuse.a esp-idf/esp_bootloader_format/libesp_bootloader_format.a esp-idf/esp_common/libesp_common.a esp-idf/esp_hw_support/libesp_hw_support.a esp-idf/esp_rom/libesp_rom.a esp-idf/esp_system/libesp_system.a esp-idf/hal/libhal.a esp-idf/log/liblog.a esp-idf/main/libmain.a esp-idf/micro-ecc/libmicro-ecc.a esp-idf/soc/libsoc.a esp-idf/spi_flash/libspi_flash.a esp-idf/xtensa/libxtensa.a gen_project_binary
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esptool_py && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 C:/esp_projects/inetRadio/build/bootloader/bootloader.bin"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\esptool_py && c:\esp\tools\python_env\idf5.3_py3.11_env\Scripts\python.exe C:/esp/v5.3.2/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 C:/esp_projects/inetRadio/build/bootloader/bootloader.bin"
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -2287,7 +2287,7 @@ build esp-idf/esptool_py/CMakeFiles/bootloader_check_size | ${cmake_ninja_workdi
 # Utility command for edit_cache
 
 build esp-idf/partition_table/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\partition_table && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\partition_table && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -2299,7 +2299,7 @@ build esp-idf/partition_table/edit_cache: phony esp-idf/partition_table/CMakeFil
 # Utility command for rebuild_cache
 
 build esp-idf/partition_table/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\partition_table && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\partition_table && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -2316,7 +2316,7 @@ build esp-idf/partition_table/rebuild_cache: phony esp-idf/partition_table/CMake
 # Utility command for edit_cache
 
 build esp-idf/bootloader/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -2328,7 +2328,7 @@ build esp-idf/bootloader/edit_cache: phony esp-idf/bootloader/CMakeFiles/edit_ca
 # Utility command for rebuild_cache
 
 build esp-idf/bootloader/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\bootloader && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -2345,7 +2345,7 @@ build esp-idf/bootloader/rebuild_cache: phony esp-idf/bootloader/CMakeFiles/rebu
 # Utility command for edit_cache
 
 build esp-idf/freertos/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\freertos && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\freertos && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -2357,7 +2357,7 @@ build esp-idf/freertos/edit_cache: phony esp-idf/freertos/CMakeFiles/edit_cache.
 # Utility command for rebuild_cache
 
 build esp-idf/freertos/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\freertos && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\freertos && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -2410,7 +2410,7 @@ build esp-idf/main/libmain.a: C_STATIC_LIBRARY_LINKER____idf_main_ esp-idf/main/
 # Utility command for edit_cache
 
 build esp-idf/main/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\main && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\main && C:\esp\tools\tools\cmake\3.30.2\bin\cmake-gui.exe -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -2422,7 +2422,7 @@ build esp-idf/main/edit_cache: phony esp-idf/main/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build esp-idf/main/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\main && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\esp_projects\inetRadio\build\bootloader\esp-idf\main && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\esp\v5.3.2\esp-idf\components\bootloader\subproject -BC:\esp_projects\inetRadio\build\bootloader"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1

@@ -1,9 +1,12 @@
 dependencies:
   espressif/esp_hosted:
-    version: "~0.0.9"
+    version: ~0.0.9
     rules:
-      - if: "target in [esp32p4]"
+    - if: target in [esp32p4]
   espressif/esp_wifi_remote:
-    version: "~0.3.0"
+    version: ~0.3.0
     rules:
-      - if: "target in [esp32p4]"
+    - if: target in [esp32p4]
+  espressif/mdns: ^1.7.0
+  k0i05/esp_ssd1306: ^1.1.0
+  k0i05/esp_type_utils: ^1.1.3

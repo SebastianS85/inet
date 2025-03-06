@@ -82,6 +82,10 @@ C:/esp_projects/inetRadio/build/esp-idf/spiffs/libspiffs.a
 C:/esp_projects/inetRadio/build/esp-idf/touch_element/libtouch_element.a
 C:/esp_projects/inetRadio/build/esp-idf/usb/libusb.a
 C:/esp_projects/inetRadio/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
+C:/esp_projects/inetRadio/build/esp-idf/espressif__mdns/libespressif__mdns.a
+C:/esp_projects/inetRadio/build/esp-idf/k0i05__esp_type_utils/libk0i05__esp_type_utils.a
+C:/esp_projects/inetRadio/build/esp-idf/k0i05__esp_driver_i2c_ext/libk0i05__esp_driver_i2c_ext.a
+C:/esp_projects/inetRadio/build/esp-idf/k0i05__esp_ssd1306/libk0i05__esp_ssd1306.a
 C:/esp_projects/inetRadio/build/esp-idf/main/libmain.a
 C:/esp_projects/inetRadio/build/esp-idf/audio_sal/libaudio_sal.a
 C:/esp_projects/inetRadio/build/esp-idf/adf_utils/libadf_utils.a
@@ -111,3 +115,6 @@ C:/esp_projects/inetRadio/build/esp-idf/input_key_service/libinput_key_service.a
 C:/esp_projects/inetRadio/build/esp-idf/ota_service/libota_service.a
 C:/esp_projects/inetRadio/build/esp-idf/playlist/libplaylist.a
 C:/esp_projects/inetRadio/build/esp-idf/my_board/libmy_board.a
+C:/esp_projects/inetRadio/build/esp-idf/audio/libaudio.a
+C:/esp_projects/inetRadio/build/esp-idf/i2c/libi2c.a
+C:/esp_projects/inetRadio/build/esp-idf/server/libserver.a

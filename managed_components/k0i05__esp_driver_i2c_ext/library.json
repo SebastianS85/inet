@@ -1,0 +1,23 @@
+{
+    "name": "esp_driver_i2c_ext",
+    "keywords": "esp32, espressif, espidf, i2c",
+    "description": "ESP32 espressif IoT development framework (esp-idf) compatible I2C driver extension component.",
+    "authors":
+    [
+      {
+        "name": "Eric Gionet",
+        "email": "gionet.c.eric@gmail.com",
+        "maintainer": true
+      }
+    ],
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/K0I05/ESP32-S3_ESP-IDF_COMPONENTS/tree/main/components/peripherals/i2c/esp_driver_i2c_ext"
+    },
+    "version": "1.1.0",
+    "license": "MIT",
+    "frameworks": "espidf",
+    "platforms": "*",
+    "headers": "i2c_master_ext.h"
+  }

@@ -86,7 +86,7 @@ MEMORY
 
    */
   /* IRAM for PRO CPU. */
-  iram0_0_seg (RX) : org = (0x40370000 + 0x4000), len = (((0x403CB700 - (0x40378000 - 0x3FC88000)) - 0x3FC88000) + 0x8000 - 0x4000)
+  iram0_0_seg (RX) : org = (0x40370000 + 0x8000), len = (((0x403CB700 - (0x40378000 - 0x3FC88000)) - 0x3FC88000) + 0x8000 - 0x8000)
   /* Flash mapped instruction data */
   iram0_2_seg (RX) : org = 0x42000020, len = 0x800000-0x20
   /**

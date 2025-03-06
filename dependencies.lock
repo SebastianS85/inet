@@ -19,6 +19,16 @@ dependencies:
       registry_url: https://components.espressif.com/
       type: service
     version: 1.1.0
+  espressif/mdns:
+    component_hash: fe546a92ee741cfabf2c2bb52c9024314e1d0ad32b44794f45323a0ecf1543d7
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.7.0
   espressif/nghttp:
     component_hash: c52b83cc3d1083ae669751534ea4f7445974b86d91d49a5273bdb0fbf87f34d6
     dependencies:
@@ -43,12 +53,58 @@ dependencies:
     source:
       type: idf
     version: 5.3.2
+  k0i05/esp_driver_i2c_ext:
+    component_hash: 8f618474ac80466be3106fde2784be80363c7a4512f452a8f949f46ab5c1db62
+    dependencies:
+    - name: idf
+      require: private
+      version: '>5.3.0'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    targets:
+    - esp32
+    - esp32s3
+    version: 1.1.0
+  k0i05/esp_ssd1306:
+    component_hash: 761787642a8e308505f38b32e37ee33d9affc6b8bf748dad980fb517d62c1ff0
+    dependencies:
+    - name: idf
+      require: private
+      version: '>5.3.0'
+    - name: k0i05/esp_driver_i2c_ext
+      registry_url: https://components.espressif.com
+      require: private
+      version: '>=1.0.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    targets:
+    - esp32
+    - esp32s3
+    version: 1.1.0
+  k0i05/esp_type_utils:
+    component_hash: 0026adf09d537d9c2d68216bd0854e15d418892da6d9e8d9f4863a8b614c0cbc
+    dependencies:
+    - name: idf
+      require: private
+      version: '>5.3.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    targets:
+    - esp32
+    - esp32s3
+    version: 1.1.3
 direct_dependencies:
 - espressif/esp-dsp
 - espressif/jsmn
+- espressif/mdns
 - espressif/nghttp
 - espressif/zlib
 - idf
-manifest_hash: 5d2dea31049e0ce85624e6293100c8ee86c78ab308a237111b60424ebc7a07d7
+- k0i05/esp_ssd1306
+- k0i05/esp_type_utils
+manifest_hash: 7d6f87d8bd824a83e335992fe77d66fa9f20e9c7d10bb9fd0b3cae60d9fb080c
 target: esp32s3
 version: 2.0.0

@@ -1,0 +1,23 @@
+{
+    "name": "esp_type_utils",
+    "keywords": "esp32, espressif, espidf",
+    "description": "ESP32 espressif IoT development framework (esp-idf) type utilities component.",
+    "authors":
+    [
+      {
+        "name": "Eric Gionet",
+        "email": "gionet.c.eric@gmail.com",
+        "maintainer": true
+      }
+    ],
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/K0I05/ESP32-S3_ESP-IDF_COMPONENTS/tree/main/components/utilities/esp_type_utils"
+    },
+    "version": "1.1.0",
+    "license": "MIT",
+    "frameworks": "espidf",
+    "platforms": "*",
+    "headers": "type_utils.h"
+  }

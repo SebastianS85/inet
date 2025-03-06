@@ -6,3 +6,5 @@ include($ENV{ADF_PATH}/CMakeLists.txt)
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 
 project(inetRadio)
+
+fatfs_create_rawflash_image(storage ../inetradio/site/dist FLASH_IN_PROJECT)

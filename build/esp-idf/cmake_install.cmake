@@ -544,6 +544,26 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("C:/esp_projects/inetRadio/build/esp-idf/espressif__mdns/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/esp_projects/inetRadio/build/esp-idf/k0i05__esp_type_utils/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/esp_projects/inetRadio/build/esp-idf/k0i05__esp_driver_i2c_ext/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/esp_projects/inetRadio/build/esp-idf/k0i05__esp_ssd1306/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("C:/esp_projects/inetRadio/build/esp-idf/main/cmake_install.cmake")
 endif()
 
@@ -700,5 +720,20 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("C:/esp_projects/inetRadio/build/esp-idf/my_board/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/esp_projects/inetRadio/build/esp-idf/audio/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/esp_projects/inetRadio/build/esp-idf/i2c/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/esp_projects/inetRadio/build/esp-idf/server/cmake_install.cmake")
 endif()
 

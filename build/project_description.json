@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "inetRadio",
-    "project_version":    "1",
+    "project_version":    "c5ea089-dirty",
     "project_path":       "C:/esp_projects/inetRadio",
     "idf_path":           "C:/esp/v5.3.2/esp-idf",
     "build_dir":          "C:/esp_projects/inetRadio/build",
@@ -14,19 +14,19 @@
     "git_revision":       "v5.3.2-dirty",
     "target":             "esp32s3",
     "rev":                "",
-    "min_rev":            "0",
+    "min_rev":            "2",
     "max_rev":            "99",
-    "phy_data_partition": "",
+    "phy_data_partition": "y",
     "monitor_baud" :      "115200",
     "monitor_toolprefix": "xtensa-esp32s3-elf-",
     "c_compiler":         "C:/esp/tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc.exe",
     "config_environment" : {
-        "COMPONENT_KCONFIGS" : "C:/esp/v5.3.2/esp-idf/components/app_trace/Kconfig;C:/esp/v5.3.2/esp-idf/components/bt/Kconfig;C:/esp/v5.3.2/esp-idf/components/console/Kconfig;C:/esp/v5.3.2/esp-idf/components/driver/Kconfig;C:/esp/v5.3.2/esp-idf/components/efuse/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp-tls/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_adc/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_coex/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_common/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_ana_cmpr/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_cam/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_dac/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_gpio/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_gptimer/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_i2c/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_i2s/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_isp/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_jpeg/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_ledc/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_mcpwm/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_parlio/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_pcnt/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_rmt/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_sdm/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_spi/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_touch_sens/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_tsens/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_uart/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_usb_serial_jtag/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_eth/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_event/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_gdbstub/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_http_client/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_http_server/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_https_ota/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_https_server/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_hw_support/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_lcd/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_netif/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_partition/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_phy/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_pm/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_psram/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_ringbuf/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_system/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_timer/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_wifi/Kconfig;C:/esp/v5.3.2/esp-idf/components/espcoredump/Kconfig;C:/esp/v5.3.2/esp-idf/components/fatfs/Kconfig;C:/esp/v5.3.2/esp-idf/components/freertos/Kconfig;C:/esp/v5.3.2/esp-idf/components/hal/Kconfig;C:/esp/v5.3.2/esp-idf/components/heap/Kconfig;C:/esp/v5.3.2/esp-idf/components/ieee802154/Kconfig;C:/esp/v5.3.2/esp-idf/components/log/Kconfig;C:/esp/v5.3.2/esp-idf/components/lwip/Kconfig;C:/esp/v5.3.2/esp-idf/components/mbedtls/Kconfig;C:/esp/v5.3.2/esp-idf/components/mqtt/esp-mqtt/Kconfig;C:/esp/v5.3.2/esp-idf/components/newlib/Kconfig;C:/esp/v5.3.2/esp-idf/components/nvs_flash/Kconfig;C:/esp/v5.3.2/esp-idf/components/nvs_sec_provider/Kconfig;C:/esp/v5.3.2/esp-idf/components/openthread/Kconfig;C:/esp/v5.3.2/esp-idf/components/protocomm/Kconfig;C:/esp/v5.3.2/esp-idf/components/pthread/Kconfig;C:/esp/v5.3.2/esp-idf/components/soc/Kconfig;C:/esp/v5.3.2/esp-idf/components/spi_flash/Kconfig;C:/esp/v5.3.2/esp-idf/components/spiffs/Kconfig;C:/esp/v5.3.2/esp-idf/components/tcp_transport/Kconfig;C:/esp/v5.3.2/esp-idf/components/ulp/Kconfig;C:/esp/v5.3.2/esp-idf/components/unity/Kconfig;C:/esp/v5.3.2/esp-idf/components/usb/Kconfig;C:/esp/v5.3.2/esp-idf/components/vfs/Kconfig;C:/esp/v5.3.2/esp-idf/components/wear_levelling/Kconfig;C:/esp/v5.3.2/esp-idf/components/wifi_provisioning/Kconfig;C:/esp/tools/esp-adf/components/dueros_service/Kconfig;C:/esp/tools/esp-adf/components/esp_codec_dev/Kconfig;C:/esp_projects/inetRadio/managed_components/espressif__esp-dsp/Kconfig;C:/esp_projects/inetRadio/managed_components/espressif__jsmn/Kconfig",
+        "COMPONENT_KCONFIGS" : "C:/esp/v5.3.2/esp-idf/components/app_trace/Kconfig;C:/esp/v5.3.2/esp-idf/components/bt/Kconfig;C:/esp/v5.3.2/esp-idf/components/console/Kconfig;C:/esp/v5.3.2/esp-idf/components/driver/Kconfig;C:/esp/v5.3.2/esp-idf/components/efuse/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp-tls/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_adc/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_coex/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_common/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_ana_cmpr/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_cam/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_dac/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_gpio/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_gptimer/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_i2c/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_i2s/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_isp/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_jpeg/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_ledc/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_mcpwm/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_parlio/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_pcnt/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_rmt/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_sdm/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_spi/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_touch_sens/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_tsens/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_uart/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_driver_usb_serial_jtag/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_eth/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_event/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_gdbstub/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_http_client/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_http_server/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_https_ota/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_https_server/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_hw_support/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_lcd/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_netif/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_partition/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_phy/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_pm/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_psram/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_ringbuf/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_system/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_timer/Kconfig;C:/esp/v5.3.2/esp-idf/components/esp_wifi/Kconfig;C:/esp/v5.3.2/esp-idf/components/espcoredump/Kconfig;C:/esp/v5.3.2/esp-idf/components/fatfs/Kconfig;C:/esp/v5.3.2/esp-idf/components/freertos/Kconfig;C:/esp/v5.3.2/esp-idf/components/hal/Kconfig;C:/esp/v5.3.2/esp-idf/components/heap/Kconfig;C:/esp/v5.3.2/esp-idf/components/ieee802154/Kconfig;C:/esp/v5.3.2/esp-idf/components/log/Kconfig;C:/esp/v5.3.2/esp-idf/components/lwip/Kconfig;C:/esp/v5.3.2/esp-idf/components/mbedtls/Kconfig;C:/esp/v5.3.2/esp-idf/components/mqtt/esp-mqtt/Kconfig;C:/esp/v5.3.2/esp-idf/components/newlib/Kconfig;C:/esp/v5.3.2/esp-idf/components/nvs_flash/Kconfig;C:/esp/v5.3.2/esp-idf/components/nvs_sec_provider/Kconfig;C:/esp/v5.3.2/esp-idf/components/openthread/Kconfig;C:/esp/v5.3.2/esp-idf/components/protocomm/Kconfig;C:/esp/v5.3.2/esp-idf/components/pthread/Kconfig;C:/esp/v5.3.2/esp-idf/components/soc/Kconfig;C:/esp/v5.3.2/esp-idf/components/spi_flash/Kconfig;C:/esp/v5.3.2/esp-idf/components/spiffs/Kconfig;C:/esp/v5.3.2/esp-idf/components/tcp_transport/Kconfig;C:/esp/v5.3.2/esp-idf/components/ulp/Kconfig;C:/esp/v5.3.2/esp-idf/components/unity/Kconfig;C:/esp/v5.3.2/esp-idf/components/usb/Kconfig;C:/esp/v5.3.2/esp-idf/components/vfs/Kconfig;C:/esp/v5.3.2/esp-idf/components/wear_levelling/Kconfig;C:/esp/v5.3.2/esp-idf/components/wifi_provisioning/Kconfig;C:/esp/tools/esp-adf/components/dueros_service/Kconfig;C:/esp/tools/esp-adf/components/esp_codec_dev/Kconfig;C:/esp_projects/inetRadio/managed_components/espressif__esp-dsp/Kconfig;C:/esp_projects/inetRadio/managed_components/espressif__jsmn/Kconfig;C:/esp_projects/inetRadio/managed_components/espressif__mdns/Kconfig",
         "COMPONENT_KCONFIGS_PROJBUILD" : "C:/esp/v5.3.2/esp-idf/components/bootloader/Kconfig.projbuild;C:/esp/v5.3.2/esp-idf/components/esp_app_format/Kconfig.projbuild;C:/esp/v5.3.2/esp-idf/components/esp_rom/Kconfig.projbuild;C:/esp/v5.3.2/esp-idf/components/esptool_py/Kconfig.projbuild;C:/esp/v5.3.2/esp-idf/components/partition_table/Kconfig.projbuild;C:/esp_projects/inetRadio/main/Kconfig.projbuild;C:/esp/tools/esp-adf/components/audio_board/Kconfig.projbuild;C:/esp/tools/esp-adf/components/esp-adf-libs/Kconfig.projbuild;C:/esp/tools/esp-adf/components/esp-sr/Kconfig.projbuild;C:/esp/tools/esp-adf/components/esp_dispatcher/Kconfig.projbuild;C:/esp_projects/inetRadio/components/my_board/Kconfig.projbuild"
     },
     "common_component_reqs": [ "cxx", "newlib", "freertos", "esp_hw_support", "heap", "log", "soc", "hal", "esp_rom", "esp_common", "esp_system", "xtensa" ],
-    "build_components" : [ "adf_utils", "app_trace", "app_update", "audio_board", "audio_hal", "audio_mixer", "audio_pipeline", "audio_recorder", "audio_sal", "audio_stream", "battery_service", "bluetooth_service", "bootloader", "bootloader_support", "bt", "clouds", "cmock", "console", "coredump_upload_service", "cxx", "display_service", "driver", "dueros_service", "efuse", "esp-adf-libs", "esp-sr", "esp-tls", "esp_actions", "esp_adc", "esp_app_format", "esp_bootloader_format", "esp_codec_dev", "esp_coex", "esp_common", "esp_dispatcher", "esp_driver_ana_cmpr", "esp_driver_cam", "esp_driver_dac", "esp_driver_gpio", "esp_driver_gptimer", "esp_driver_i2c", "esp_driver_i2s", "esp_driver_isp", "esp_driver_jpeg", "esp_driver_ledc", "esp_driver_mcpwm", "esp_driver_parlio", "esp_driver_pcnt", "esp_driver_ppa", "esp_driver_rmt", "esp_driver_sdio", "esp_driver_sdm", "esp_driver_sdmmc", "esp_driver_sdspi", "esp_driver_spi", "esp_driver_touch_sens", "esp_driver_tsens", "esp_driver_uart", "esp_driver_usb_serial_jtag", "esp_eth", "esp_event", "esp_event_cast", "esp_gdbstub", "esp_hid", "esp_http_client", "esp_http_server", "esp_https_ota", "esp_https_server", "esp_hw_support", "esp_lcd", "esp_local_ctrl", "esp_mm", "esp_netif", "esp_netif_stack", "esp_partition", "esp_peripherals", "esp_phy", "esp_pm", "esp_psram", "esp_ringbuf", "esp_rom", "esp_system", "esp_timer", "esp_vfs_console", "esp_wifi", "espcoredump", "espressif__esp-dsp", "espressif__jsmn", "espressif__nghttp", "espressif__zlib", "esptool_py", "fatfs", "freertos", "hal", "heap", "http_parser", "idf_test", "ieee802154", "input_key_service", "json", "log", "lwip", "main", "mbedtls", "mqtt", "my_board", "newlib", "nvs_flash", "nvs_sec_provider", "openthread", "ota_service", "partition_table", "perfmon", "playlist", "protobuf-c", "protocomm", "pthread", "sdmmc", "soc", "spi_flash", "spiffs", "tcp_transport", "tone_partition", "touch_element", "ulp", "unity", "usb", "vfs", "wear_levelling", "wifi_provisioning", "wifi_service", "wpa_supplicant", "xtensa", "" ],
-    "build_component_paths" : [ "C:/esp/tools/esp-adf/components/adf_utils", "C:/esp/v5.3.2/esp-idf/components/app_trace", "C:/esp/v5.3.2/esp-idf/components/app_update", "C:/esp/tools/esp-adf/components/audio_board", "C:/esp/tools/esp-adf/components/audio_hal", "C:/esp/tools/esp-adf/components/audio_mixer", "C:/esp/tools/esp-adf/components/audio_pipeline", "C:/esp/tools/esp-adf/components/audio_recorder", "C:/esp/tools/esp-adf/components/audio_sal", "C:/esp/tools/esp-adf/components/audio_stream", "C:/esp/tools/esp-adf/components/battery_service", "C:/esp/tools/esp-adf/components/bluetooth_service", "C:/esp/v5.3.2/esp-idf/components/bootloader", "C:/esp/v5.3.2/esp-idf/components/bootloader_support", "C:/esp/v5.3.2/esp-idf/components/bt", "C:/esp/tools/esp-adf/components/clouds", "C:/esp/v5.3.2/esp-idf/components/cmock", "C:/esp/v5.3.2/esp-idf/components/console", "C:/esp/tools/esp-adf/components/coredump_upload_service", "C:/esp/v5.3.2/esp-idf/components/cxx", "C:/esp/tools/esp-adf/components/display_service", "C:/esp/v5.3.2/esp-idf/components/driver", "C:/esp/tools/esp-adf/components/dueros_service", "C:/esp/v5.3.2/esp-idf/components/efuse", "C:/esp/tools/esp-adf/components/esp-adf-libs", "C:/esp/tools/esp-adf/components/esp-sr", "C:/esp/v5.3.2/esp-idf/components/esp-tls", "C:/esp/tools/esp-adf/components/esp_actions", "C:/esp/v5.3.2/esp-idf/components/esp_adc", "C:/esp/v5.3.2/esp-idf/components/esp_app_format", "C:/esp/v5.3.2/esp-idf/components/esp_bootloader_format", "C:/esp/tools/esp-adf/components/esp_codec_dev", "C:/esp/v5.3.2/esp-idf/components/esp_coex", "C:/esp/v5.3.2/esp-idf/components/esp_common", "C:/esp/tools/esp-adf/components/esp_dispatcher", "C:/esp/v5.3.2/esp-idf/components/esp_driver_ana_cmpr", "C:/esp/v5.3.2/esp-idf/components/esp_driver_cam", "C:/esp/v5.3.2/esp-idf/components/esp_driver_dac", "C:/esp/v5.3.2/esp-idf/components/esp_driver_gpio", "C:/esp/v5.3.2/esp-idf/components/esp_driver_gptimer", "C:/esp/v5.3.2/esp-idf/components/esp_driver_i2c", "C:/esp/v5.3.2/esp-idf/components/esp_driver_i2s", "C:/esp/v5.3.2/esp-idf/components/esp_driver_isp", "C:/esp/v5.3.2/esp-idf/components/esp_driver_jpeg", "C:/esp/v5.3.2/esp-idf/components/esp_driver_ledc", "C:/esp/v5.3.2/esp-idf/components/esp_driver_mcpwm", "C:/esp/v5.3.2/esp-idf/components/esp_driver_parlio", "C:/esp/v5.3.2/esp-idf/components/esp_driver_pcnt", "C:/esp/v5.3.2/esp-idf/components/esp_driver_ppa", "C:/esp/v5.3.2/esp-idf/components/esp_driver_rmt", "C:/esp/v5.3.2/esp-idf/components/esp_driver_sdio", "C:/esp/v5.3.2/esp-idf/components/esp_driver_sdm", "C:/esp/v5.3.2/esp-idf/components/esp_driver_sdmmc", "C:/esp/v5.3.2/esp-idf/components/esp_driver_sdspi", "C:/esp/v5.3.2/esp-idf/components/esp_driver_spi", "C:/esp/v5.3.2/esp-idf/components/esp_driver_touch_sens", "C:/esp/v5.3.2/esp-idf/components/esp_driver_tsens", "C:/esp/v5.3.2/esp-idf/components/esp_driver_uart", "C:/esp/v5.3.2/esp-idf/components/esp_driver_usb_serial_jtag", "C:/esp/v5.3.2/esp-idf/components/esp_eth", "C:/esp/v5.3.2/esp-idf/components/esp_event", "C:/esp/tools/esp-adf/components/esp_event_cast", "C:/esp/v5.3.2/esp-idf/components/esp_gdbstub", "C:/esp/v5.3.2/esp-idf/components/esp_hid", "C:/esp/v5.3.2/esp-idf/components/esp_http_client", "C:/esp/v5.3.2/esp-idf/components/esp_http_server", "C:/esp/v5.3.2/esp-idf/components/esp_https_ota", "C:/esp/v5.3.2/esp-idf/components/esp_https_server", "C:/esp/v5.3.2/esp-idf/components/esp_hw_support", "C:/esp/v5.3.2/esp-idf/components/esp_lcd", "C:/esp/v5.3.2/esp-idf/components/esp_local_ctrl", "C:/esp/v5.3.2/esp-idf/components/esp_mm", "C:/esp/v5.3.2/esp-idf/components/esp_netif", "C:/esp/v5.3.2/esp-idf/components/esp_netif_stack", "C:/esp/v5.3.2/esp-idf/components/esp_partition", "C:/esp/tools/esp-adf/components/esp_peripherals", "C:/esp/v5.3.2/esp-idf/components/esp_phy", "C:/esp/v5.3.2/esp-idf/components/esp_pm", "C:/esp/v5.3.2/esp-idf/components/esp_psram", "C:/esp/v5.3.2/esp-idf/components/esp_ringbuf", "C:/esp/v5.3.2/esp-idf/components/esp_rom", "C:/esp/v5.3.2/esp-idf/components/esp_system", "C:/esp/v5.3.2/esp-idf/components/esp_timer", "C:/esp/v5.3.2/esp-idf/components/esp_vfs_console", "C:/esp/v5.3.2/esp-idf/components/esp_wifi", "C:/esp/v5.3.2/esp-idf/components/espcoredump", "C:/esp_projects/inetRadio/managed_components/espressif__esp-dsp", "C:/esp_projects/inetRadio/managed_components/espressif__jsmn", "C:/esp_projects/inetRadio/managed_components/espressif__nghttp", "C:/esp_projects/inetRadio/managed_components/espressif__zlib", "C:/esp/v5.3.2/esp-idf/components/esptool_py", "C:/esp/v5.3.2/esp-idf/components/fatfs", "C:/esp/v5.3.2/esp-idf/components/freertos", "C:/esp/v5.3.2/esp-idf/components/hal", "C:/esp/v5.3.2/esp-idf/components/heap", "C:/esp/v5.3.2/esp-idf/components/http_parser", "C:/esp/v5.3.2/esp-idf/components/idf_test", "C:/esp/v5.3.2/esp-idf/components/ieee802154", "C:/esp/tools/esp-adf/components/input_key_service", "C:/esp/v5.3.2/esp-idf/components/json", "C:/esp/v5.3.2/esp-idf/components/log", "C:/esp/v5.3.2/esp-idf/components/lwip", "C:/esp_projects/inetRadio/main", "C:/esp/v5.3.2/esp-idf/components/mbedtls", "C:/esp/v5.3.2/esp-idf/components/mqtt", "C:/esp_projects/inetRadio/components/my_board", "C:/esp/v5.3.2/esp-idf/components/newlib", "C:/esp/v5.3.2/esp-idf/components/nvs_flash", "C:/esp/v5.3.2/esp-idf/components/nvs_sec_provider", "C:/esp/v5.3.2/esp-idf/components/openthread", "C:/esp/tools/esp-adf/components/ota_service", "C:/esp/v5.3.2/esp-idf/components/partition_table", "C:/esp/v5.3.2/esp-idf/components/perfmon", "C:/esp/tools/esp-adf/components/playlist", "C:/esp/v5.3.2/esp-idf/components/protobuf-c", "C:/esp/v5.3.2/esp-idf/components/protocomm", "C:/esp/v5.3.2/esp-idf/components/pthread", "C:/esp/v5.3.2/esp-idf/components/sdmmc", "C:/esp/v5.3.2/esp-idf/components/soc", "C:/esp/v5.3.2/esp-idf/components/spi_flash", "C:/esp/v5.3.2/esp-idf/components/spiffs", "C:/esp/v5.3.2/esp-idf/components/tcp_transport", "C:/esp/tools/esp-adf/components/tone_partition", "C:/esp/v5.3.2/esp-idf/components/touch_element", "C:/esp/v5.3.2/esp-idf/components/ulp", "C:/esp/v5.3.2/esp-idf/components/unity", "C:/esp/v5.3.2/esp-idf/components/usb", "C:/esp/v5.3.2/esp-idf/components/vfs", "C:/esp/v5.3.2/esp-idf/components/wear_levelling", "C:/esp/v5.3.2/esp-idf/components/wifi_provisioning", "C:/esp/tools/esp-adf/components/wifi_service", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant", "C:/esp/v5.3.2/esp-idf/components/xtensa", "" ],
+    "build_components" : [ "adf_utils", "app_trace", "app_update", "audio", "audio_board", "audio_hal", "audio_mixer", "audio_pipeline", "audio_recorder", "audio_sal", "audio_stream", "battery_service", "bluetooth_service", "bootloader", "bootloader_support", "bt", "clouds", "cmock", "console", "coredump_upload_service", "cxx", "display_service", "driver", "dueros_service", "efuse", "esp-adf-libs", "esp-sr", "esp-tls", "esp_actions", "esp_adc", "esp_app_format", "esp_bootloader_format", "esp_codec_dev", "esp_coex", "esp_common", "esp_dispatcher", "esp_driver_ana_cmpr", "esp_driver_cam", "esp_driver_dac", "esp_driver_gpio", "esp_driver_gptimer", "esp_driver_i2c", "esp_driver_i2s", "esp_driver_isp", "esp_driver_jpeg", "esp_driver_ledc", "esp_driver_mcpwm", "esp_driver_parlio", "esp_driver_pcnt", "esp_driver_ppa", "esp_driver_rmt", "esp_driver_sdio", "esp_driver_sdm", "esp_driver_sdmmc", "esp_driver_sdspi", "esp_driver_spi", "esp_driver_touch_sens", "esp_driver_tsens", "esp_driver_uart", "esp_driver_usb_serial_jtag", "esp_eth", "esp_event", "esp_event_cast", "esp_gdbstub", "esp_hid", "esp_http_client", "esp_http_server", "esp_https_ota", "esp_https_server", "esp_hw_support", "esp_lcd", "esp_local_ctrl", "esp_mm", "esp_netif", "esp_netif_stack", "esp_partition", "esp_peripherals", "esp_phy", "esp_pm", "esp_psram", "esp_ringbuf", "esp_rom", "esp_system", "esp_timer", "esp_vfs_console", "esp_wifi", "espcoredump", "espressif__esp-dsp", "espressif__jsmn", "espressif__mdns", "espressif__nghttp", "espressif__zlib", "esptool_py", "fatfs", "freertos", "hal", "heap", "http_parser", "i2c", "idf_test", "ieee802154", "input_key_service", "json", "k0i05__esp_driver_i2c_ext", "k0i05__esp_ssd1306", "k0i05__esp_type_utils", "log", "lwip", "main", "mbedtls", "mqtt", "my_board", "newlib", "nvs_flash", "nvs_sec_provider", "openthread", "ota_service", "partition_table", "perfmon", "playlist", "protobuf-c", "protocomm", "pthread", "sdmmc", "server", "soc", "spi_flash", "spiffs", "tcp_transport", "tone_partition", "touch_element", "ulp", "unity", "usb", "vfs", "wear_levelling", "wifi_provisioning", "wifi_service", "wpa_supplicant", "xtensa", "" ],
+    "build_component_paths" : [ "C:/esp/tools/esp-adf/components/adf_utils", "C:/esp/v5.3.2/esp-idf/components/app_trace", "C:/esp/v5.3.2/esp-idf/components/app_update", "C:/esp_projects/inetRadio/components/audio", "C:/esp/tools/esp-adf/components/audio_board", "C:/esp/tools/esp-adf/components/audio_hal", "C:/esp/tools/esp-adf/components/audio_mixer", "C:/esp/tools/esp-adf/components/audio_pipeline", "C:/esp/tools/esp-adf/components/audio_recorder", "C:/esp/tools/esp-adf/components/audio_sal", "C:/esp/tools/esp-adf/components/audio_stream", "C:/esp/tools/esp-adf/components/battery_service", "C:/esp/tools/esp-adf/components/bluetooth_service", "C:/esp/v5.3.2/esp-idf/components/bootloader", "C:/esp/v5.3.2/esp-idf/components/bootloader_support", "C:/esp/v5.3.2/esp-idf/components/bt", "C:/esp/tools/esp-adf/components/clouds", "C:/esp/v5.3.2/esp-idf/components/cmock", "C:/esp/v5.3.2/esp-idf/components/console", "C:/esp/tools/esp-adf/components/coredump_upload_service", "C:/esp/v5.3.2/esp-idf/components/cxx", "C:/esp/tools/esp-adf/components/display_service", "C:/esp/v5.3.2/esp-idf/components/driver", "C:/esp/tools/esp-adf/components/dueros_service", "C:/esp/v5.3.2/esp-idf/components/efuse", "C:/esp/tools/esp-adf/components/esp-adf-libs", "C:/esp/tools/esp-adf/components/esp-sr", "C:/esp/v5.3.2/esp-idf/components/esp-tls", "C:/esp/tools/esp-adf/components/esp_actions", "C:/esp/v5.3.2/esp-idf/components/esp_adc", "C:/esp/v5.3.2/esp-idf/components/esp_app_format", "C:/esp/v5.3.2/esp-idf/components/esp_bootloader_format", "C:/esp/tools/esp-adf/components/esp_codec_dev", "C:/esp/v5.3.2/esp-idf/components/esp_coex", "C:/esp/v5.3.2/esp-idf/components/esp_common", "C:/esp/tools/esp-adf/components/esp_dispatcher", "C:/esp/v5.3.2/esp-idf/components/esp_driver_ana_cmpr", "C:/esp/v5.3.2/esp-idf/components/esp_driver_cam", "C:/esp/v5.3.2/esp-idf/components/esp_driver_dac", "C:/esp/v5.3.2/esp-idf/components/esp_driver_gpio", "C:/esp/v5.3.2/esp-idf/components/esp_driver_gptimer", "C:/esp/v5.3.2/esp-idf/components/esp_driver_i2c", "C:/esp/v5.3.2/esp-idf/components/esp_driver_i2s", "C:/esp/v5.3.2/esp-idf/components/esp_driver_isp", "C:/esp/v5.3.2/esp-idf/components/esp_driver_jpeg", "C:/esp/v5.3.2/esp-idf/components/esp_driver_ledc", "C:/esp/v5.3.2/esp-idf/components/esp_driver_mcpwm", "C:/esp/v5.3.2/esp-idf/components/esp_driver_parlio", "C:/esp/v5.3.2/esp-idf/components/esp_driver_pcnt", "C:/esp/v5.3.2/esp-idf/components/esp_driver_ppa", "C:/esp/v5.3.2/esp-idf/components/esp_driver_rmt", "C:/esp/v5.3.2/esp-idf/components/esp_driver_sdio", "C:/esp/v5.3.2/esp-idf/components/esp_driver_sdm", "C:/esp/v5.3.2/esp-idf/components/esp_driver_sdmmc", "C:/esp/v5.3.2/esp-idf/components/esp_driver_sdspi", "C:/esp/v5.3.2/esp-idf/components/esp_driver_spi", "C:/esp/v5.3.2/esp-idf/components/esp_driver_touch_sens", "C:/esp/v5.3.2/esp-idf/components/esp_driver_tsens", "C:/esp/v5.3.2/esp-idf/components/esp_driver_uart", "C:/esp/v5.3.2/esp-idf/components/esp_driver_usb_serial_jtag", "C:/esp/v5.3.2/esp-idf/components/esp_eth", "C:/esp/v5.3.2/esp-idf/components/esp_event", "C:/esp/tools/esp-adf/components/esp_event_cast", "C:/esp/v5.3.2/esp-idf/components/esp_gdbstub", "C:/esp/v5.3.2/esp-idf/components/esp_hid", "C:/esp/v5.3.2/esp-idf/components/esp_http_client", "C:/esp/v5.3.2/esp-idf/components/esp_http_server", "C:/esp/v5.3.2/esp-idf/components/esp_https_ota", "C:/esp/v5.3.2/esp-idf/components/esp_https_server", "C:/esp/v5.3.2/esp-idf/components/esp_hw_support", "C:/esp/v5.3.2/esp-idf/components/esp_lcd", "C:/esp/v5.3.2/esp-idf/components/esp_local_ctrl", "C:/esp/v5.3.2/esp-idf/components/esp_mm", "C:/esp/v5.3.2/esp-idf/components/esp_netif", "C:/esp/v5.3.2/esp-idf/components/esp_netif_stack", "C:/esp/v5.3.2/esp-idf/components/esp_partition", "C:/esp/tools/esp-adf/components/esp_peripherals", "C:/esp/v5.3.2/esp-idf/components/esp_phy", "C:/esp/v5.3.2/esp-idf/components/esp_pm", "C:/esp/v5.3.2/esp-idf/components/esp_psram", "C:/esp/v5.3.2/esp-idf/components/esp_ringbuf", "C:/esp/v5.3.2/esp-idf/components/esp_rom", "C:/esp/v5.3.2/esp-idf/components/esp_system", "C:/esp/v5.3.2/esp-idf/components/esp_timer", "C:/esp/v5.3.2/esp-idf/components/esp_vfs_console", "C:/esp/v5.3.2/esp-idf/components/esp_wifi", "C:/esp/v5.3.2/esp-idf/components/espcoredump", "C:/esp_projects/inetRadio/managed_components/espressif__esp-dsp", "C:/esp_projects/inetRadio/managed_components/espressif__jsmn", "C:/esp_projects/inetRadio/managed_components/espressif__mdns", "C:/esp_projects/inetRadio/managed_components/espressif__nghttp", "C:/esp_projects/inetRadio/managed_components/espressif__zlib", "C:/esp/v5.3.2/esp-idf/components/esptool_py", "C:/esp/v5.3.2/esp-idf/components/fatfs", "C:/esp/v5.3.2/esp-idf/components/freertos", "C:/esp/v5.3.2/esp-idf/components/hal", "C:/esp/v5.3.2/esp-idf/components/heap", "C:/esp/v5.3.2/esp-idf/components/http_parser", "C:/esp_projects/inetRadio/components/i2c", "C:/esp/v5.3.2/esp-idf/components/idf_test", "C:/esp/v5.3.2/esp-idf/components/ieee802154", "C:/esp/tools/esp-adf/components/input_key_service", "C:/esp/v5.3.2/esp-idf/components/json", "C:/esp_projects/inetRadio/managed_components/k0i05__esp_driver_i2c_ext", "C:/esp_projects/inetRadio/managed_components/k0i05__esp_ssd1306", "C:/esp_projects/inetRadio/managed_components/k0i05__esp_type_utils", "C:/esp/v5.3.2/esp-idf/components/log", "C:/esp/v5.3.2/esp-idf/components/lwip", "C:/esp_projects/inetRadio/main", "C:/esp/v5.3.2/esp-idf/components/mbedtls", "C:/esp/v5.3.2/esp-idf/components/mqtt", "C:/esp_projects/inetRadio/components/my_board", "C:/esp/v5.3.2/esp-idf/components/newlib", "C:/esp/v5.3.2/esp-idf/components/nvs_flash", "C:/esp/v5.3.2/esp-idf/components/nvs_sec_provider", "C:/esp/v5.3.2/esp-idf/components/openthread", "C:/esp/tools/esp-adf/components/ota_service", "C:/esp/v5.3.2/esp-idf/components/partition_table", "C:/esp/v5.3.2/esp-idf/components/perfmon", "C:/esp/tools/esp-adf/components/playlist", "C:/esp/v5.3.2/esp-idf/components/protobuf-c", "C:/esp/v5.3.2/esp-idf/components/protocomm", "C:/esp/v5.3.2/esp-idf/components/pthread", "C:/esp/v5.3.2/esp-idf/components/sdmmc", "C:/esp_projects/inetRadio/components/server", "C:/esp/v5.3.2/esp-idf/components/soc", "C:/esp/v5.3.2/esp-idf/components/spi_flash", "C:/esp/v5.3.2/esp-idf/components/spiffs", "C:/esp/v5.3.2/esp-idf/components/tcp_transport", "C:/esp/tools/esp-adf/components/tone_partition", "C:/esp/v5.3.2/esp-idf/components/touch_element", "C:/esp/v5.3.2/esp-idf/components/ulp", "C:/esp/v5.3.2/esp-idf/components/unity", "C:/esp/v5.3.2/esp-idf/components/usb", "C:/esp/v5.3.2/esp-idf/components/vfs", "C:/esp/v5.3.2/esp-idf/components/wear_levelling", "C:/esp/v5.3.2/esp-idf/components/wifi_provisioning", "C:/esp/tools/esp-adf/components/wifi_service", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant", "C:/esp/v5.3.2/esp-idf/components/xtensa", "" ],
     "build_component_info" : {
         "adf_utils": {
             "alias": "idf::adf_utils",
@@ -71,6 +71,21 @@
             "managed_priv_reqs": [],
             "file": "C:/esp_projects/inetRadio/build/esp-idf/app_update/libapp_update.a",
             "sources": [ "C:/esp/v5.3.2/esp-idf/components/app_update/esp_ota_ops.c", "C:/esp/v5.3.2/esp-idf/components/app_update/esp_ota_app_desc.c" ],
+            "include_dirs": [ "include" ]
+        },
+        "audio": {
+            "alias": "idf::audio",
+            "target": "___idf_audio",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/components/audio",
+            "type": "LIBRARY",
+            "lib": "__idf_audio",
+            "reqs": [ "audio_hal", "audio_pipeline", "my_board", "log", "esp_http_client", "esp_peripherals", "audio_stream", "esp_http_server" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "file": "C:/esp_projects/inetRadio/build/esp-idf/audio/libaudio.a",
+            "sources": [ "C:/esp_projects/inetRadio/components/audio/audio.c" ],
             "include_dirs": [ "include" ]
         },
         "audio_board": {
@@ -1348,6 +1363,21 @@
             "sources": [],
             "include_dirs": [ "include" ]
         },
+        "espressif__mdns": {
+            "alias": "idf::espressif__mdns",
+            "target": "___idf_espressif__mdns",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/managed_components/espressif__mdns",
+            "type": "LIBRARY",
+            "lib": "__idf_espressif__mdns",
+            "reqs": [ "lwip", "console", "esp_netif" ],
+            "priv_reqs": [ "esp_timer", "esp_wifi" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "file": "C:/esp_projects/inetRadio/build/esp-idf/espressif__mdns/libespressif__mdns.a",
+            "sources": [ "C:/esp_projects/inetRadio/managed_components/espressif__mdns/mdns.c", "C:/esp_projects/inetRadio/managed_components/espressif__mdns/mdns_mem_caps.c", "C:/esp_projects/inetRadio/managed_components/espressif__mdns/mdns_networking_lwip.c", "C:/esp_projects/inetRadio/managed_components/espressif__mdns/mdns_console.c" ],
+            "include_dirs": [ "include" ]
+        },
         "espressif__nghttp": {
             "alias": "idf::espressif__nghttp",
             "target": "___idf_espressif__nghttp",
@@ -1468,6 +1498,21 @@
             "sources": [ "C:/esp/v5.3.2/esp-idf/components/http_parser/http_parser.c" ],
             "include_dirs": [ "." ]
         },
+        "i2c": {
+            "alias": "idf::i2c",
+            "target": "___idf_i2c",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/components/i2c",
+            "type": "LIBRARY",
+            "lib": "__idf_i2c",
+            "reqs": [ "driver" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "file": "C:/esp_projects/inetRadio/build/esp-idf/i2c/libi2c.a",
+            "sources": [ "C:/esp_projects/inetRadio/components/i2c/i2c.c" ],
+            "include_dirs": [ "include" ]
+        },
         "idf_test": {
             "alias": "idf::idf_test",
             "target": "___idf_idf_test",
@@ -1528,6 +1573,51 @@
             "sources": [ "C:/esp/v5.3.2/esp-idf/components/json/cJSON/cJSON.c", "C:/esp/v5.3.2/esp-idf/components/json/cJSON/cJSON_Utils.c" ],
             "include_dirs": [ "cJSON" ]
         },
+        "k0i05__esp_driver_i2c_ext": {
+            "alias": "idf::k0i05__esp_driver_i2c_ext",
+            "target": "___idf_k0i05__esp_driver_i2c_ext",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/managed_components/k0i05__esp_driver_i2c_ext",
+            "type": "LIBRARY",
+            "lib": "__idf_k0i05__esp_driver_i2c_ext",
+            "reqs": [ "esp_driver_i2c", "k0i05__esp_type_utils" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "file": "C:/esp_projects/inetRadio/build/esp-idf/k0i05__esp_driver_i2c_ext/libk0i05__esp_driver_i2c_ext.a",
+            "sources": [ "C:/esp_projects/inetRadio/managed_components/k0i05__esp_driver_i2c_ext/i2c_master_ext.c" ],
+            "include_dirs": [ "include" ]
+        },
+        "k0i05__esp_ssd1306": {
+            "alias": "idf::k0i05__esp_ssd1306",
+            "target": "___idf_k0i05__esp_ssd1306",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/managed_components/k0i05__esp_ssd1306",
+            "type": "LIBRARY",
+            "lib": "__idf_k0i05__esp_ssd1306",
+            "reqs": [ "k0i05__esp_driver_i2c_ext", "esp_common" ],
+            "priv_reqs": [ "k0i05__esp_driver_i2c_ext" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [ "k0i05__esp_driver_i2c_ext" ],
+            "file": "C:/esp_projects/inetRadio/build/esp-idf/k0i05__esp_ssd1306/libk0i05__esp_ssd1306.a",
+            "sources": [ "C:/esp_projects/inetRadio/managed_components/k0i05__esp_ssd1306/ssd1306.c" ],
+            "include_dirs": [ "include" ]
+        },
+        "k0i05__esp_type_utils": {
+            "alias": "idf::k0i05__esp_type_utils",
+            "target": "___idf_k0i05__esp_type_utils",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/managed_components/k0i05__esp_type_utils",
+            "type": "LIBRARY",
+            "lib": "__idf_k0i05__esp_type_utils",
+            "reqs": [ "esp_common" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "file": "C:/esp_projects/inetRadio/build/esp-idf/k0i05__esp_type_utils/libk0i05__esp_type_utils.a",
+            "sources": [ "C:/esp_projects/inetRadio/managed_components/k0i05__esp_type_utils/type_utils.c" ],
+            "include_dirs": [ "include" ]
+        },
         "log": {
             "alias": "idf::log",
             "target": "___idf_log",
@@ -1566,11 +1656,11 @@
             "type": "LIBRARY",
             "lib": "__idf_main",
             "reqs": [],
-            "priv_reqs": [],
+            "priv_reqs": [ "espressif__mdns", "k0i05__esp_ssd1306", "k0i05__esp_type_utils" ],
             "managed_reqs": [],
-            "managed_priv_reqs": [],
+            "managed_priv_reqs": [ "espressif__mdns", "k0i05__esp_ssd1306", "k0i05__esp_type_utils" ],
             "file": "C:/esp_projects/inetRadio/build/esp-idf/main/libmain.a",
-            "sources": [ "C:/esp_projects/inetRadio/main/play_living_stream_example.c" ],
+            "sources": [ "C:/esp_projects/inetRadio/main/main.c" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {
@@ -1798,6 +1888,21 @@
             "sources": [ "C:/esp/v5.3.2/esp-idf/components/sdmmc/sdmmc_cmd.c", "C:/esp/v5.3.2/esp-idf/components/sdmmc/sdmmc_common.c", "C:/esp/v5.3.2/esp-idf/components/sdmmc/sdmmc_init.c", "C:/esp/v5.3.2/esp-idf/components/sdmmc/sdmmc_io.c", "C:/esp/v5.3.2/esp-idf/components/sdmmc/sdmmc_mmc.c", "C:/esp/v5.3.2/esp-idf/components/sdmmc/sdmmc_sd.c", "C:/esp/v5.3.2/esp-idf/components/sdmmc/sd_pwr_ctrl/sd_pwr_ctrl.c" ],
             "include_dirs": [ "include" ]
         },
+        "server": {
+            "alias": "idf::server",
+            "target": "___idf_server",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/components/server",
+            "type": "LIBRARY",
+            "lib": "__idf_server",
+            "reqs": [ "esp_http_server", "audio", "json", "esp_wifi" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "file": "C:/esp_projects/inetRadio/build/esp-idf/server/libserver.a",
+            "sources": [ "C:/esp_projects/inetRadio/components/server/server.c" ],
+            "include_dirs": [ "include" ]
+        },
         "soc": {
             "alias": "idf::soc",
             "target": "___idf_soc",
@@ -2005,7 +2110,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "C:/esp_projects/inetRadio/build/esp-idf/wpa_supplicant/libwpa_supplicant.a",
-            "sources": [ "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/port/os_xtensa.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/port/eloop.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/ap_config.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/ieee802_1x.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/wpa_auth.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/wpa_auth_ie.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/pmksa_cache_auth.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/sta_info.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/ieee802_11.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/comeback_token.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/sae.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/dragonfly.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/wpa_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/bitfield.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/aes-siv.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha256-kdf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/ccmp.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/aes-gcm.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/crypto_ops.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/dh_group5.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/dh_groups.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/ms_funcs.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha1-tlsprf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha256-tlsprf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha384-tlsprf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha256-prf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha1-prf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha384-prf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/md4-internal.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha1-tprf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_common/eap_wsc_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/ieee802_11_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/chap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_mschapv2.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_peap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_peap_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_tls.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_tls_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_ttls.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/mschapv2.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_fast.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_fast_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_fast_pac.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa_ie.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/base64.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/ext_password.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/uuid.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/wpabuf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/wpa_debug.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/json.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_attr_build.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_attr_parse.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_attr_process.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_dev_attr.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_enrollee.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/sae_pk.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_eap_client.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa2_api_port.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpas_glue.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wps.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa3.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_owe.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_hostap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/tls_mbedtls.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/fastpbkdf2.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-bignum.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-rsa.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-ec.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/rc4.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/des-internal.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/aes-wrap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/aes-unwrap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/aes-ccm.c" ],
+            "sources": [ "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/port/os_xtensa.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/port/eloop.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/ap_config.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/ieee802_1x.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/wpa_auth.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/wpa_auth_ie.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/pmksa_cache_auth.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/sta_info.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/ieee802_11.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/ap/comeback_token.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/sae.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/dragonfly.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/wpa_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/bitfield.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/aes-siv.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha256-kdf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/ccmp.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/aes-gcm.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/crypto_ops.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/dh_group5.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/dh_groups.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/ms_funcs.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha1-tlsprf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha256-tlsprf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha384-tlsprf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha256-prf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha1-prf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha384-prf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/md4-internal.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/sha1-tprf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_common/eap_wsc_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/ieee802_11_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/chap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_mschapv2.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_peap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_peap_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_tls.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_tls_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_ttls.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/mschapv2.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_fast.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_fast_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/eap_peer/eap_fast_pac.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa_ie.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/base64.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/ext_password.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/uuid.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/wpabuf.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/wpa_debug.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/utils/json.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_attr_build.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_attr_parse.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_attr_process.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_dev_attr.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/wps/wps_enrollee.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/sae_pk.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/bss.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/scan.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_scan.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_eap_client.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa2_api_port.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpas_glue.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_common.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wps.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa3.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_owe.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_hostap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/tls_mbedtls.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/rrm.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/common/wnm_sta.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa_ft.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/fastpbkdf2.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-bignum.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-rsa.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-ec.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/rc4.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/des-internal.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/aes-wrap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/aes-unwrap.c", "C:/esp/v5.3.2/esp-idf/components/wpa_supplicant/src/crypto/aes-ccm.c" ],
             "include_dirs": [ "include", "port/include", "esp_supplicant/include" ]
         },
         "xtensa": {
@@ -3268,9 +3373,9 @@
             "dir": "C:/esp_projects/inetRadio/main",
             "lib": "__idf_main",
             "reqs": [],
-            "priv_reqs": [],
+            "priv_reqs": [ "espressif__mdns", "k0i05__esp_ssd1306", "k0i05__esp_type_utils" ],
             "managed_reqs": [],
-            "managed_priv_reqs": [],
+            "managed_priv_reqs": [ "espressif__mdns", "k0i05__esp_ssd1306", "k0i05__esp_type_utils" ],
             "include_dirs": [ "." ]
         },
         "adf_utils": {
@@ -3585,6 +3690,30 @@
             "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
         },
+        "audio": {
+            "alias": "idf::audio",
+            "target": "___idf_audio",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/components/audio",
+            "lib": "__idf_audio",
+            "reqs": [ "audio_hal", "audio_pipeline", "my_board", "log", "esp_http_client", "esp_peripherals", "audio_stream", "esp_http_server" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
+        "i2c": {
+            "alias": "idf::i2c",
+            "target": "___idf_i2c",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/components/i2c",
+            "lib": "__idf_i2c",
+            "reqs": [ "driver" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
         "my_board": {
             "alias": "idf::my_board",
             "target": "___idf_my_board",
@@ -3596,6 +3725,18 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "include_dirs": [ "./my_board_v1_0", "./my_codec_driver" ]
+        },
+        "server": {
+            "alias": "idf::server",
+            "target": "___idf_server",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/components/server",
+            "lib": "__idf_server",
+            "reqs": [ "esp_http_server", "audio", "json", "esp_wifi" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
         },
         "espressif__esp-dsp": {
             "alias": "idf::espressif__esp-dsp",
@@ -3617,6 +3758,18 @@
             "lib": "__idf_espressif__jsmn",
             "reqs": [],
             "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
+        "espressif__mdns": {
+            "alias": "idf::espressif__mdns",
+            "target": "___idf_espressif__mdns",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/managed_components/espressif__mdns",
+            "lib": "__idf_espressif__mdns",
+            "reqs": [ "lwip", "console", "esp_netif" ],
+            "priv_reqs": [ "esp_timer", "esp_wifi" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "include_dirs": [ "include" ]
@@ -3644,6 +3797,42 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "include_dirs": [ "zlib" ]
+        },
+        "k0i05__esp_driver_i2c_ext": {
+            "alias": "idf::k0i05__esp_driver_i2c_ext",
+            "target": "___idf_k0i05__esp_driver_i2c_ext",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/managed_components/k0i05__esp_driver_i2c_ext",
+            "lib": "__idf_k0i05__esp_driver_i2c_ext",
+            "reqs": [ "esp_driver_i2c", "k0i05__esp_type_utils" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
+        },
+        "k0i05__esp_ssd1306": {
+            "alias": "idf::k0i05__esp_ssd1306",
+            "target": "___idf_k0i05__esp_ssd1306",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/managed_components/k0i05__esp_ssd1306",
+            "lib": "__idf_k0i05__esp_ssd1306",
+            "reqs": [ "k0i05__esp_driver_i2c_ext", "esp_common" ],
+            "priv_reqs": [ "k0i05__esp_driver_i2c_ext" ],
+            "managed_reqs": [],
+            "managed_priv_reqs": [ "k0i05__esp_driver_i2c_ext" ],
+            "include_dirs": [ "include" ]
+        },
+        "k0i05__esp_type_utils": {
+            "alias": "idf::k0i05__esp_type_utils",
+            "target": "___idf_k0i05__esp_type_utils",
+            "prefix": "idf",
+            "dir": "C:/esp_projects/inetRadio/managed_components/k0i05__esp_type_utils",
+            "lib": "__idf_k0i05__esp_type_utils",
+            "reqs": [ "esp_common" ],
+            "priv_reqs": [],
+            "managed_reqs": [],
+            "managed_priv_reqs": [],
+            "include_dirs": [ "include" ]
         }
     },
     "debug_prefix_map_gdbinit": ""

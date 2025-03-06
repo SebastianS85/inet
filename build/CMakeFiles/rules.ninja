@@ -25,7 +25,7 @@ rule C_COMPILER__inetRadio.2eelf_unscanned_
 # Rule for linking CXX executable.
 
 rule CXX_EXECUTABLE_LINKER__inetRadio.2eelf_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-g++.exe $FLAGS $LINK_FLAGS @$RSP_FILE -o $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-g++.exe $FLAGS $LINK_FLAGS @$RSP_FILE -o $TARGET_FILE && $POST_BUILD"
   description = Linking CXX executable $TARGET_FILE
   rspfile = $RSP_FILE
   rspfile_content = $in $LINK_PATH $LINK_LIBRARIES
@@ -64,7 +64,7 @@ rule C_COMPILER____idf_xtensa_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_xtensa_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -83,7 +83,7 @@ rule C_COMPILER____idf_esp_driver_gpio_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_gpio_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -102,7 +102,7 @@ rule C_COMPILER____idf_esp_pm_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_pm_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -131,7 +131,7 @@ rule C_COMPILER____idf_mbedtls_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_mbedtls_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -150,7 +150,7 @@ rule C_COMPILER__everest_unscanned_
 # Rule for linking CXX static library.
 
 rule CXX_STATIC_LIBRARY_LINKER__everest_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT
 
@@ -169,7 +169,7 @@ rule C_COMPILER__p256m_unscanned_
 # Rule for linking CXX static library.
 
 rule CXX_STATIC_LIBRARY_LINKER__p256m_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT
 
@@ -188,7 +188,7 @@ rule C_COMPILER__mbedcrypto_unscanned_
 # Rule for linking CXX static library.
 
 rule CXX_STATIC_LIBRARY_LINKER__mbedcrypto_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS @$RSP_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS @$RSP_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking CXX static library $TARGET_FILE
   rspfile = $RSP_FILE
   rspfile_content = $in $LINK_PATH $LINK_LIBRARIES
@@ -209,7 +209,7 @@ rule C_COMPILER__mbedx509_unscanned_
 # Rule for linking CXX static library.
 
 rule CXX_STATIC_LIBRARY_LINKER__mbedx509_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT
 
@@ -228,7 +228,7 @@ rule C_COMPILER__mbedtls_unscanned_
 # Rule for linking CXX static library.
 
 rule CXX_STATIC_LIBRARY_LINKER__mbedtls_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT
 
@@ -247,7 +247,7 @@ rule C_COMPILER____idf_esp_app_format_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_app_format_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -266,7 +266,7 @@ rule C_COMPILER____idf_esp_bootloader_format_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_bootloader_format_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -285,7 +285,7 @@ rule C_COMPILER____idf_app_update_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_app_update_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -304,7 +304,7 @@ rule C_COMPILER____idf_esp_partition_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_partition_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -323,7 +323,7 @@ rule C_COMPILER____idf_efuse_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_efuse_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -342,7 +342,7 @@ rule C_COMPILER____idf_bootloader_support_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_bootloader_support_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -361,7 +361,7 @@ rule C_COMPILER____idf_esp_mm_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_mm_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -380,7 +380,7 @@ rule C_COMPILER____idf_spi_flash_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_spi_flash_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -409,7 +409,7 @@ rule C_COMPILER____idf_esp_system_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_system_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -428,7 +428,7 @@ rule C_COMPILER____idf_esp_common_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_common_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -457,7 +457,7 @@ rule C_COMPILER____idf_esp_rom_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_rom_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -476,7 +476,7 @@ rule C_COMPILER____idf_hal_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_hal_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -495,7 +495,7 @@ rule C_COMPILER____idf_log_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_log_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -514,7 +514,7 @@ rule C_COMPILER____idf_heap_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_heap_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -533,7 +533,7 @@ rule C_COMPILER____idf_soc_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_soc_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -552,7 +552,7 @@ rule C_COMPILER____idf_esp_hw_support_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_hw_support_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -581,7 +581,7 @@ rule C_COMPILER____idf_freertos_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_freertos_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -600,7 +600,7 @@ rule C_COMPILER____idf_newlib_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_newlib_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -619,7 +619,7 @@ rule C_COMPILER____idf_pthread_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_pthread_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -638,7 +638,7 @@ rule CXX_COMPILER____idf_cxx_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_cxx_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -657,7 +657,7 @@ rule C_COMPILER____idf_esp_timer_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_timer_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -676,7 +676,7 @@ rule C_COMPILER____idf_esp_driver_gptimer_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_gptimer_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -695,7 +695,7 @@ rule C_COMPILER____idf_esp_ringbuf_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_ringbuf_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -714,7 +714,7 @@ rule C_COMPILER____idf_esp_driver_uart_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_uart_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -733,7 +733,7 @@ rule C_COMPILER____idf_app_trace_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_app_trace_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -752,7 +752,7 @@ rule C_COMPILER____idf_esp_event_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_event_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -771,7 +771,7 @@ rule CXX_COMPILER____idf_nvs_flash_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_nvs_flash_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -790,7 +790,7 @@ rule C_COMPILER____idf_esp_driver_pcnt_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_pcnt_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -809,7 +809,7 @@ rule C_COMPILER____idf_esp_driver_spi_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_spi_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -828,7 +828,7 @@ rule C_COMPILER____idf_esp_driver_mcpwm_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_mcpwm_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -847,7 +847,7 @@ rule C_COMPILER____idf_esp_driver_i2s_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_i2s_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -866,7 +866,7 @@ rule C_COMPILER____idf_sdmmc_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_sdmmc_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -885,7 +885,7 @@ rule C_COMPILER____idf_esp_driver_sdmmc_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_sdmmc_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -904,7 +904,7 @@ rule C_COMPILER____idf_esp_driver_sdspi_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_sdspi_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -923,7 +923,7 @@ rule C_COMPILER____idf_esp_driver_rmt_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_rmt_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -942,7 +942,7 @@ rule C_COMPILER____idf_esp_driver_tsens_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_tsens_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -961,7 +961,7 @@ rule C_COMPILER____idf_esp_driver_sdm_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_sdm_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -980,7 +980,7 @@ rule C_COMPILER____idf_esp_driver_i2c_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_i2c_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -999,7 +999,7 @@ rule C_COMPILER____idf_esp_driver_ledc_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_ledc_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1018,7 +1018,7 @@ rule C_COMPILER____idf_esp_driver_usb_serial_jtag_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_usb_serial_jtag_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1037,7 +1037,7 @@ rule C_COMPILER____idf_driver_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_driver_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1056,7 +1056,7 @@ rule C_COMPILER____idf_esp_phy_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_phy_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1075,7 +1075,7 @@ rule C_COMPILER____idf_esp_vfs_console_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_vfs_console_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1094,7 +1094,7 @@ rule C_COMPILER____idf_vfs_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_vfs_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1113,7 +1113,7 @@ rule C_COMPILER____idf_lwip_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_lwip_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1132,7 +1132,7 @@ rule C_COMPILER____idf_esp_netif_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_netif_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1151,7 +1151,7 @@ rule C_COMPILER____idf_wpa_supplicant_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_wpa_supplicant_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS @$RSP_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS @$RSP_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   rspfile = $RSP_FILE
   rspfile_content = $in $LINK_PATH $LINK_LIBRARIES
@@ -1172,7 +1172,7 @@ rule C_COMPILER____idf_esp_coex_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_coex_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1191,7 +1191,7 @@ rule C_COMPILER____idf_esp_wifi_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_wifi_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1210,7 +1210,7 @@ rule C_COMPILER____idf_unity_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_unity_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1229,7 +1229,7 @@ rule C_COMPILER____idf_cmock_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_cmock_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1248,7 +1248,7 @@ rule C_COMPILER____idf_console_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_console_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1267,7 +1267,7 @@ rule C_COMPILER____idf_http_parser_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_http_parser_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1286,7 +1286,7 @@ rule C_COMPILER____idf_esp-tls_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp-tls_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1305,7 +1305,7 @@ rule C_COMPILER____idf_esp_adc_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_adc_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1324,7 +1324,7 @@ rule C_COMPILER____idf_esp_driver_cam_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_driver_cam_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1343,7 +1343,7 @@ rule C_COMPILER____idf_esp_eth_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_eth_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1372,7 +1372,7 @@ rule C_COMPILER____idf_esp_gdbstub_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_gdbstub_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1391,7 +1391,7 @@ rule C_COMPILER____idf_esp_hid_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_hid_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1410,7 +1410,7 @@ rule C_COMPILER____idf_tcp_transport_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_tcp_transport_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1429,7 +1429,7 @@ rule C_COMPILER____idf_esp_http_client_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_http_client_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1448,7 +1448,7 @@ rule C_COMPILER____idf_esp_http_server_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_http_server_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1467,7 +1467,7 @@ rule C_COMPILER____idf_esp_https_ota_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_https_ota_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1486,7 +1486,7 @@ rule C_COMPILER____idf_esp_https_server_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_https_server_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1505,7 +1505,7 @@ rule C_COMPILER____idf_esp_psram_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_psram_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1524,7 +1524,7 @@ rule C_COMPILER____idf_esp_lcd_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_lcd_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1543,7 +1543,7 @@ rule C_COMPILER____idf_protobuf-c_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_protobuf-c_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1562,7 +1562,7 @@ rule C_COMPILER____idf_protocomm_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_protocomm_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1581,7 +1581,7 @@ rule C_COMPILER____idf_esp_local_ctrl_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_local_ctrl_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1600,7 +1600,7 @@ rule C_COMPILER____idf_espcoredump_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_espcoredump_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1619,7 +1619,7 @@ rule CXX_COMPILER____idf_wear_levelling_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_wear_levelling_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1638,7 +1638,7 @@ rule C_COMPILER____idf_fatfs_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_fatfs_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1657,7 +1657,7 @@ rule C_COMPILER____idf_json_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_json_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1676,7 +1676,7 @@ rule C_COMPILER____idf_mqtt_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_mqtt_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1695,7 +1695,7 @@ rule C_COMPILER____idf_nvs_sec_provider_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_nvs_sec_provider_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1714,7 +1714,7 @@ rule C_COMPILER____idf_perfmon_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_perfmon_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1733,7 +1733,7 @@ rule C_COMPILER____idf_spiffs_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_spiffs_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1752,7 +1752,7 @@ rule C_COMPILER____idf_touch_element_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_touch_element_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1771,7 +1771,7 @@ rule C_COMPILER____idf_usb_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_usb_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1790,7 +1790,83 @@ rule C_COMPILER____idf_wifi_provisioning_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_wifi_provisioning_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling C files.
+
+rule C_COMPILER____idf_espressif__mdns_unscanned_
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER____idf_espressif__mdns_
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling C files.
+
+rule C_COMPILER____idf_k0i05__esp_type_utils_unscanned_
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER____idf_k0i05__esp_type_utils_
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling C files.
+
+rule C_COMPILER____idf_k0i05__esp_driver_i2c_ext_unscanned_
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER____idf_k0i05__esp_driver_i2c_ext_
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling C files.
+
+rule C_COMPILER____idf_k0i05__esp_ssd1306_unscanned_
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER____idf_k0i05__esp_ssd1306_
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1809,7 +1885,7 @@ rule C_COMPILER____idf_main_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_main_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1828,7 +1904,7 @@ rule C_COMPILER____idf_audio_sal_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_audio_sal_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1847,7 +1923,7 @@ rule C_COMPILER____idf_adf_utils_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_adf_utils_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1866,7 +1942,7 @@ rule C_COMPILER____idf_display_service_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_display_service_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1885,7 +1961,7 @@ rule C_COMPILER____idf_esp_dispatcher_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_dispatcher_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1904,7 +1980,7 @@ rule C_COMPILER____idf_audio_hal_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_audio_hal_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1923,7 +1999,7 @@ rule C_COMPILER____idf_espressif__nghttp_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_espressif__nghttp_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1942,7 +2018,7 @@ rule C_COMPILER____idf_esp-adf-libs_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp-adf-libs_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1961,7 +2037,7 @@ rule C_COMPILER____idf_audio_pipeline_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_audio_pipeline_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1980,7 +2056,7 @@ rule C_COMPILER____idf_esp_peripherals_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_peripherals_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -1999,7 +2075,7 @@ rule C_COMPILER____idf_audio_mixer_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_audio_mixer_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2038,7 +2114,7 @@ rule CXX_COMPILER____idf_espressif__esp-dsp_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_espressif__esp-dsp_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS @$RSP_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS @$RSP_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   rspfile = $RSP_FILE
   rspfile_content = $in $LINK_PATH $LINK_LIBRARIES
@@ -2059,7 +2135,7 @@ rule C_COMPILER____idf_esp-sr_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp-sr_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2078,7 +2154,7 @@ rule C_COMPILER____idf_audio_recorder_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_audio_recorder_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2097,7 +2173,7 @@ rule C_COMPILER____idf_wifi_service_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_wifi_service_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2116,7 +2192,7 @@ rule C_COMPILER____idf_espressif__zlib_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_espressif__zlib_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2135,7 +2211,7 @@ rule C_COMPILER____idf_dueros_service_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_dueros_service_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2154,7 +2230,7 @@ rule C_COMPILER____idf_esp_actions_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_actions_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2173,7 +2249,7 @@ rule C_COMPILER____idf_tone_partition_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_tone_partition_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2192,7 +2268,7 @@ rule C_COMPILER____idf_audio_stream_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_audio_stream_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2211,7 +2287,7 @@ rule C_COMPILER____idf_battery_service_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_battery_service_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2230,7 +2306,7 @@ rule C_COMPILER____idf_bluetooth_service_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_bluetooth_service_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2249,7 +2325,7 @@ rule C_COMPILER____idf_coredump_upload_service_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_coredump_upload_service_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2268,7 +2344,7 @@ rule C_COMPILER____idf_esp_codec_dev_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_codec_dev_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2287,7 +2363,7 @@ rule C_COMPILER____idf_esp_event_cast_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_esp_event_cast_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2306,7 +2382,7 @@ rule C_COMPILER____idf_input_key_service_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_input_key_service_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2325,7 +2401,7 @@ rule C_COMPILER____idf_ota_service_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_ota_service_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2344,7 +2420,7 @@ rule C_COMPILER____idf_playlist_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_playlist_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 
@@ -2363,7 +2439,64 @@ rule C_COMPILER____idf_my_board_unscanned_
 # Rule for linking C static library.
 
 rule C_STATIC_LIBRARY_LINKER____idf_my_board_
-  command = C:\Windows\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling C files.
+
+rule C_COMPILER____idf_audio_unscanned_
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER____idf_audio_
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling C files.
+
+rule C_COMPILER____idf_i2c_unscanned_
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER____idf_i2c_
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling C files.
+
+rule C_COMPILER____idf_server_unscanned_
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER____idf_server_
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\esp\tools\tools\cmake\3.30.2\bin\cmake.exe -E rm -f $TARGET_FILE && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\esp\tools\tools\xtensa-esp-elf\esp-13.2.0_20240530\xtensa-esp-elf\bin\xtensa-esp32s3-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT
 

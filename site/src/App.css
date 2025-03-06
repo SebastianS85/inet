@@ -1,0 +1,181 @@
+/* App.css */
+
+/* Container for the spectrum analyzer */
+.spectrum-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 150px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Each individual spectrum bar */
+.spectrum-bar {
+  width: 8%;
+  background-color: #4CAF50;
+  border-radius: 4px;
+  transition: height 0.1s ease-in-out;
+}
+
+/* Optional: Add a glow effect to the bars for a more dynamic feel */
+.spectrum-bar {
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
+}
+/* === MODERN STORM DESIGN === */
+
+/* Background - Dark Greenish Storm */
+.modern-bg {
+  background: #1b1f22; /* Dark grey-green */
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card - Clean Modern Look */
+.modern-card {
+  background: #2a2f33; /* Slightly lighter grey-green */
+  border-radius: 12px;
+  border: 1px solid #3c474d;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  width: 420px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Header Text */
+.storm-text {
+  color: #8fc1a9; /* Soft Stormy Green */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Now Playing Alert */
+.modern-alert {
+  background: rgba(143, 193, 169, 0.2);
+  color: #8fc1a9;
+  border: 1px solid #8fc1a9;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Buttons */
+.modern-btn {
+  height: 50px; /* Set uniform height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #4CAF50;
+  border-color: #59C05DFF;
+}
+
+.selected {
+  background-color: #4CAF50 !important; /* Highlight selected station */
+  color: white !important;
+}
+
+.modern-btn:hover {
+  background: #8fc1a9;
+  color: #1B221FFF;
+}
+
+
+
+/* Play/Pause Button Style */
+.play-pause-btn {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 25px;
+  min-height: 70px;
+  background: #5c7b6b; /* Stormy Green */
+  color: #fff;
+  width: 100%;
+  border-radius: 12px;
+  border: none;
+  transition: background 0.3s ease, transform 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play-pause-btn:hover {
+  background: #8fc1a9;
+  color: #1b1f22;
+  transform: scale(1.05);
+}
+
+.play-pause-btn:active {
+  background: #6d8d7d;
+  transform: scale(0.98);
+}
+
+/* Buttons Grid */
+.row.g-2 {
+  margin-top: 10px;
+}
+
+/* Styling the icons to fit well */
+.play-pause-btn svg {
+  margin-right: 10px;
+}
+
+.yellow-icon {
+  color: #4CAF50;
+}
+
+/* Basic Logo Style */
+.storm-logo {
+  display: flex;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  color: white;
+  background-color: #2a2f33; /* Dark background */
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+}
+
+/* Styling the Thunderbolt Icon */
+.storm-icon {
+  color: gold;
+  font-size: 48px; /* Icon size */
+  margin-right: 10px; /* Space between icon and text */
+  animation: thunder 1s infinite; /* Animation for lightning effect */
+}
+
+/* Text Styling */
+.storm-text {
+  font-size: 32px;
+  color:#4CAF50;
+}
+
+/* Keyframes for the Thunderbolt Animation */
+@keyframes thunder {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
