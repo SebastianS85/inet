@@ -137,6 +137,8 @@ typedef union i2c_ssd1306_out_column_t {
 
 
 
+
+
 esp_err_t ssd1306_load_bitmap_font(const uint8_t *font, int encoding, uint8_t *bitmap, ssd1306_bdf_font_t *const bdf_font) {
 	ESP_LOGI(TAG, "encoding=%d", encoding);
 	int index = 2;

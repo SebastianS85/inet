@@ -12,6 +12,7 @@
 #include "esp_http_server.h"
 #include "esp_log.h"
 #include "board.h"
+#include "display.h"
 
 static const char *TAG = "AUDIO STREAM";
 
@@ -125,11 +126,13 @@ void audio_start(esp_periph_set_handle_t set)
 
     ESP_LOGI(TAG, "[ 5 ] Start audio_pipeline");
     audio_pipeline_run(pipeline);
+    display_set_text(" playing stream", 1,false);
 }
 
 void change_radio_station(uint8_t station_index)
 {
-
+    display_set_text("                ", 1,false);
+    display_set_text("changing station", 1,false);
     if (current_station_index != station_index)
     {
         if (xSemaphoreTake(station_Mutex, pdMS_TO_TICKS(1000) && current_station_index != station_index))
@@ -148,6 +151,8 @@ void change_radio_station(uint8_t station_index)
             audio_pipeline_reset_ringbuffer(pipeline);      // Reset pipeline buffers
             audio_pipeline_reset_items_state(pipeline);     // Reset pipeline states
             audio_pipeline_resume(pipeline);
+            display_set_text("                ", 1,false);
+            display_set_text(" playing stream", 1,false);
             xSemaphoreGive(station_Mutex); // Release mutex
         }
         else
@@ -159,6 +164,8 @@ void change_radio_station(uint8_t station_index)
     else
     {
         ESP_LOGI(TAG, "Station is already playing. Skipping.\n");
+        display_set_text("                ", 1,false);
+        display_set_text(" playing stream", 1,false);
     }
 }
 
@@ -267,7 +274,6 @@ char *current_station_info(void)
         return NULL; // or a default value
     }
 
-    ESP_LOGI(TAG, "Current station index: %d", current_station_index);
 
     snprintf(index_str, sizeof(index_str), "%d", current_station_index);
     return index_str;
@@ -275,9 +281,13 @@ char *current_station_info(void)
 void audio_pause()
 {
     audio_pipeline_pause(pipeline);
+    display_set_text("                ", 1,false);
+    display_set_text(" pause stream", 1,false);
 }
 
 void audio_resume()
 {
     audio_pipeline_resume(pipeline);
+    display_set_text("                ", 1,false);
+    display_set_text(" playing stream", 1,false);
 }

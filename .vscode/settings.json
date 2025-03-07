@@ -1,6 +1,6 @@
 {
     "idf.flashType": "UART",
-    "idf.portWin": "COM9",
+    "idf.portWin": "COM5",
     "idf.espIdfPathWin": "c:\\esp\\v5.3.2\\esp-idf",
     "idf.toolsPathWin": "c:\\esp\\tools",
     "files.associations": {
@@ -26,7 +26,9 @@
         "task.h": "c",
         "event_groups.h": "c",
         "periph_wifi.h": "c",
-        "ssd1306.h": "c"
+        "ssd1306.h": "c",
+        "esp_peripherals.h": "c",
+        "display.h": "c"
     },
     "idf.openOcdConfigs": [
         "board/esp32s3-bridge.cfg"

@@ -34,6 +34,11 @@
 #include "driver/i2c_master.h"
 #include "i2c.h"
 #include "audio_idf_version.h"
+#include  "display.h"
+
+
+
+
 
 static const char *BASE_PATH = "/store";
 
@@ -71,43 +76,40 @@ void mount_fs()
     esp_vfs_fat_spiflash_mount_ro(BASE_PATH, "storage", &fat_mount_config);
 }
 
+void print_ip_address() {
+    esp_netif_ip_info_t ip_info;
+
+    // Get the default netif (interface)
+    esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+
+    if (netif == NULL) {
+        ESP_LOGE(TAG, "No network interface found!");
+        return;
+    }
+
+    // Get the IP info
+    if (esp_netif_get_ip_info(netif, &ip_info) == ESP_OK) {
+        char ip_str[32];  
+        snprintf(ip_str, sizeof(ip_str)," "IPSTR, IP2STR(&ip_info.ip));
+
+        display_set_text(ip_str,0,false);  
+    } else {
+        ESP_LOGE(TAG, "Failed to get IP information");
+        display_set_text("No IP check wifi", 0,false);
+    }
+}
+
 void app_main(void)
 
 {
 
     i2c_init();
-
-    ssd1306_config_t dev_cfg = I2C_SSD1306_128x32_CONFIG_DEFAULT;
-    ssd1306_handle_t dev_hdl;
-
-    ssd1306_init(i2c0_bus_hdl, &dev_cfg, &dev_hdl);
-    if (dev_hdl == NULL)
-    {
-        ESP_LOGE(TAG, "ssd1306 handle init failed");
-        assert(dev_hdl);
-    }
-
-    //
-    int center = 1, top = 0, bottom = 1;
-    char lineChar[16];
-    uint8_t image[24];
-
-    ESP_LOGI(TAG, "Panel is 128x64");
-
-    // Display x3 text
-
-    ESP_LOGI(TAG, "Horizontal Scroll");
-    ssd1306_clear_display(dev_hdl, false);
-    ssd1306_set_contrast(dev_hdl, 0xff);
-    ssd1306_display_text_x2(dev_hdl, 0, "RMF FM", false);
-   // ssd1306_set_hardware_scroll(dev_hdl, SSD1306_SCROLL_LEFT, SSD1306_SCROLL_64_FRAMES);
-
-    ESP_LOGI(TAG, "Horizontal Scroll");
-
-    ssd1306_display_text(dev_hdl, 2, "192.168.188.61", false);
-  
-  
-
+    init_display();
+    display_clear();
+    display_set_contrast(0x80);
+    display_set_text("Connecting to wifi..", 0, false);
+    
+ 
     esp_err_t err = nvs_flash_init();
 
     if (err == ESP_ERR_NVS_NO_FREE_PAGES)
@@ -122,7 +124,7 @@ void app_main(void)
     tcpip_adapter_init();
 #endif
 
-
+  
     esp_wifi_set_storage(WIFI_STORAGE_RAM);
     esp_periph_config_t periph_cfg = DEFAULT_ESP_PERIPH_SET_CONFIG();
     esp_periph_set_handle_t set = esp_periph_set_init(&periph_cfg);
@@ -134,6 +136,11 @@ void app_main(void)
     esp_periph_handle_t wifi_handle = periph_wifi_init(&wifi_cfg);
     esp_periph_start(set, wifi_handle);
     periph_wifi_wait_for_connected(wifi_handle, portMAX_DELAY);
+    display_clear();
+    display_set_text("wifi connected", 0, false);
+    print_ip_address();
+    display_set_text("  radio.local    ", 2, true);
+
 
     esp_err_t ret1 = esp_wifi_set_ps(WIFI_PS_NONE);
     if (ret1 == ESP_OK)
