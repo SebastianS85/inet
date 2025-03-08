@@ -1,4 +1,4 @@
- "http://c6.radioboss.fm:8207/stream"   ,
+      "http://c6.radioboss.fm:8207/stream"   ,
     "http://c26.radioboss.fm:8441/stream",
     "http://c6.radioboss.fm:8207/stream",
     "http://c15.radioboss.fm:8520/stream",
@@ -14,6 +14,39 @@
     "https://ic1.smcdn.pl/2070-1.mp3",//eska 2
     "https://stream3.technologicznie.net/muzyczne_radio_192.mp3",//Muzyczne radio
     "https://n09a-eu.rcs.revma.com/an1ugyygzk8uv?rj-ttl=5&rj-tok=AAABlDvCVcQAzCZhxrbQNf2GfQ",
+
+
+    #define NUM_STATIONS 27
+const char *station_list[NUM_STATIONS] = {
+    "https://icecast1.play.cz/kisshady64.mp3",                                                                         // kiss fm
+    "https://sluchaj2.radiopark.biz.pl:8443/stream",                                                                   // park fm
+    "http://c6.radioboss.fm:8207/stream",                                                                              //	ETHNIK
+    "http://c26.radioboss.fm:8441/stream",                                                                             // spanisch cocktail
+    "http://c6.radioboss.fm:8207/stream",                                                                              // Mykonos Scorpions
+    "http://c15.radioboss.fm:8520/stream",                                                                             // Greek Taverna
+    "http://c2.radioboss.fm:8438/stream",                                                                              // bar house
+    "http://c2.radioboss.fm:8241/stream",                                                                              // chillout
+    "http://c2.radioboss.fm:8671/stream",                                                                              // greek emporika
+    "http://c26.radioboss.fm:8420/stream",                                                                             // greek vs ethnik
+    "https://stream.sunshine-live.de/2000er/mp3-192/stream.sunshine-live.de/",                                         // sunshine
+    "https://80er-90er.stream.laut.fm/80er-90er?ref=vtuner",                                                           // 90"
+    "https://c15.radioboss.fm:8566/stream",                                                                            // fiesta mexico
+    "http://31.192.216.8/rmf_fm",                                                                                      // rmff fm
+    "https://ic2.smcdn.pl/1180-1.mp3",                                                                                 // eska
+    "http://n32a-eu.rcs.revma.com/an1ugyygzk8uv?rj-ttl=5&rj-tok=AAABlT6ZdMEADfAg3Z-lirUfoA",                           // radio357
+    "https://stream3.technologicznie.net/muzyczne_radio_192.mp3",                                                      // muzyczne
+    "https://n09a-eu.rcs.revma.com/an1ugyygzk8uv?rj-ttl=5&rj-tok=AAABlDvCVcQAzCZhxrbQNf2GfQ",                          // ZET
+    "https://27793.live.streamtheworld.com/ANTYRADIO.mp3?dist=myradioonline",                                          // Antyradio
+    "https://kathy.torontocast.com:1190/stream",                                                                       // CINEMIX
+    "https://c18.radioboss.fm:8061/stream",                                                                            // timeDanceFM
+    "https://c34.radioboss.fm:8106/stream",                                                                            // Radio 857
+    "https://c2.radioboss.fm:8224/320k.mp3",                                                                           // live house
+    "https://c15.radioboss.fm:8512/stream",                                                                            // Playa Radio
+    "https://radiosidewinder.out.airtime.pro:8000/radiosidewinder_b?_ga=1.133037898.513622194.1447957646/;stream.mp3", // Sidewinder
+    "https://public.isekoi-radio.com/listen/isekoi/radio.mp3",                                                         // Isekoi radio
+    "https://c34.radioboss.fm:8106/stream",                                                                             // Radio 897
+
+};
 
 
 

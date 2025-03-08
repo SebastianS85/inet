@@ -16,6 +16,45 @@
 
 static const char *TAG = "AUDIO STREAM";
 
+Station stations[MAX_STATIONS];
+int station_count = 0;
+
+void load_stations() {
+    FILE *file = fopen("/store/stations.txt", "r");
+    if (!file) {
+        ESP_LOGE("STATIONS", "Failed to open stations.txt");
+        return;
+    }
+
+    char line[512];
+
+    while (fgets(line, sizeof(line), file) && station_count < MAX_STATIONS) {
+        // Trim spaces (optional)
+        char *newline_pos = strchr(line, '\n');
+        if (newline_pos) *newline_pos = '\0';  // Remove newline
+
+        // Parse name, URL, and genre separated by '|'
+        if (sscanf(line, "%127[^|]|%255[^|]|%63[^\n]", stations[station_count].name, stations[station_count].url, stations[station_count].genre) == 3) {
+            if (strlen(stations[station_count].name) > 0 && strlen(stations[station_count].url) > 0 && strlen(stations[station_count].genre) > 0) {
+                stations[station_count].index = station_count;  // Assign index dynamically
+                station_count++;
+            } else {
+                ESP_LOGW("STATIONS", "Skipping invalid entry: %s", line);
+            }
+        } else {
+            ESP_LOGW("STATIONS", "Failed to parse line: %s", line);
+        }
+    }
+
+    fclose(file);
+
+    if (station_count == 0) {
+        ESP_LOGW("STATIONS", "No stations loaded from the file.");
+    } else {
+        ESP_LOGI("STATIONS", "Successfully loaded %d stations.", station_count);
+    }
+}
+
 SemaphoreHandle_t station_Mutex;
 
 #define NUM_STATIONS 27
@@ -131,41 +170,71 @@ void audio_start(esp_periph_set_handle_t set)
 
 void change_radio_station(uint8_t station_index)
 {
-    display_set_text("                ", 1,false);
-    display_set_text("changing station", 1,false);
+    display_set_text("                ", 1, false);  // Clear the OLED display
+    display_set_text("Changing station", 1, false); // Show a message indicating a change
+
+    // Assuming station_list is populated via the web request
     if (current_station_index != station_index)
     {
-        if (xSemaphoreTake(station_Mutex, pdMS_TO_TICKS(1000) && current_station_index != station_index))
-        { // Wait max 5s
-            printf("Changing station to: %s\n", station_list[station_index]);
+        if (xSemaphoreTake(station_Mutex, pdMS_TO_TICKS(1000)))
+        { 
+            // Check if the index is valid before proceeding
+            if (station_index < MAX_STATIONS)
+            {
+                // Print the current station details
+                printf("Changing station to: %s\n", stations[station_index].name);  // Assuming stations[] contains station objects with 'name' field
 
-            const char *uri = station_list[station_index];
-            current_station_index = station_index; // Get next station URI
-            ESP_LOGI(TAG, "Changing to station: %s", uri);
+                // Display the station name on OLED
+                display_set_text("                ", 1, false);
+                display_set_text(stations[station_index].name, 1, false);
 
-            audio_pipeline_pause(pipeline);                 // Stop current pipeline
-            audio_element_set_uri(http_stream_reader, uri); // Set new station URI
-            audio_pipeline_wait_for_stop(pipeline);         // Wait for stop to complete
-            audio_element_reset_state(mp3_decoder);         // Reset decoder state
-            audio_element_reset_state(i2s_stream_writer);   // Reset I2S state
-            audio_pipeline_reset_ringbuffer(pipeline);      // Reset pipeline buffers
-            audio_pipeline_reset_items_state(pipeline);     // Reset pipeline states
-            audio_pipeline_resume(pipeline);
-            display_set_text("                ", 1,false);
-            display_set_text(" playing stream", 1,false);
-            xSemaphoreGive(station_Mutex); // Release mutex
+                const char *uri = stations[station_index].url;  // Get the station's URL
+
+                // Update the current station index
+                current_station_index = station_index;
+
+                ESP_LOGI(TAG, "Changing to station: %s", uri);
+
+                // Stop current audio pipeline
+                audio_pipeline_pause(pipeline);                 
+                
+                // Set new station URI
+                audio_element_set_uri(http_stream_reader, uri);
+                
+                // Wait for the stop operation to complete
+                audio_pipeline_wait_for_stop(pipeline);
+
+                // Reset the decoder and I2S states
+                audio_element_reset_state(mp3_decoder);
+                audio_element_reset_state(i2s_stream_writer);
+
+                // Reset pipeline buffers and item states
+                audio_pipeline_reset_ringbuffer(pipeline);
+                audio_pipeline_reset_items_state(pipeline);
+
+                // Resume the pipeline
+                audio_pipeline_resume(pipeline);
+
+                // Update OLED again to show it's playing the new station
+               
+                
+
+                xSemaphoreGive(station_Mutex);  // Release mutex
+            }
+            else
+            {
+                ESP_LOGE(TAG, "Invalid station index: %d", station_index);
+            }
         }
         else
         {
             ESP_LOGI(TAG, "Failed to acquire mutex. Try again later.\n");
         }
     }
-
     else
     {
         ESP_LOGI(TAG, "Station is already playing. Skipping.\n");
-        display_set_text("                ", 1,false);
-        display_set_text(" playing stream", 1,false);
+        
     }
 }
 
@@ -264,19 +333,26 @@ void stream_task(void *arg)
         vTaskDelay(pdMS_TO_TICKS(100)); // Reduce CPU usage
     }
 }
-char index_str[10];
 
 char *current_station_info(void)
 {
-    if (current_station_index < 0 || current_station_index >= sizeof(station_list) / sizeof(station_list[0]))
+    // Check if the current station index is valid
+    if (current_station_index < 0 || current_station_index >= station_count) 
     {
         ESP_LOGE(TAG, "Invalid station index: %d", current_station_index);
-        return NULL; // or a default value
+        return NULL; // Return NULL or handle an invalid index case
     }
 
+    // Buffer to store the station information string
+    static char station_info[512];
 
-    snprintf(index_str, sizeof(index_str), "%d", current_station_index);
-    return index_str;
+    // Format the station details into a string
+    snprintf(station_info, sizeof(station_info), "Station: %s\nGenre: %s\nURL: %s\n",
+             stations[current_station_index].name,
+             stations[current_station_index].genre,
+             stations[current_station_index].url);
+
+    return station_info;
 }
 void audio_pause()
 {
@@ -288,6 +364,5 @@ void audio_pause()
 void audio_resume()
 {
     audio_pipeline_resume(pipeline);
-    display_set_text("                ", 1,false);
-    display_set_text(" playing stream", 1,false);
+    
 }

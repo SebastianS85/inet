@@ -6,40 +6,51 @@ import SpectrumAnalyzer from './SpectrumAnalyzer';
 // FontAwesome Icon Imports
 import { FaPlay, FaPause } from "react-icons/fa"; // Importing Play/Pause icons
 
-const stations: string[] = [
-  "KISS FM", "Radio Park", "Greek Ethink", "Spanisch Cocktail", "Mykonos Scorpions",
-  "Greek Taverna", "Bar House", "Chillout", "Greek Emporika", "Greek vs Ethnik",
-  "Sunshine Live", "90s", "Fiesta Mexico", "RMF FM", "Eska",
-  "Radio 357", "Muzyczne Radio", "Radio Zet", "Antyradio", "Cinemix",
-  "timeDanceFM", "Radio 857", "Live House", "Playa Radio", "Sidewinder", "Isekoi Radio",
-  "pirat fm"
-];
-
 export default function App() {
+  const [stations, setStations] = useState<{ index: number; name: string }[]>([]);
   const [currentStation, setCurrentStation] = useState<string>("Loading...");
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
+  // Fetch the station list when the component mounts
   useEffect(() => {
-    fetchCurrentStation();
-    
+    fetchStationList();
   }, []);
 
-  
+  // Fetch the list of stations from the backend
+  const fetchStationList = async () => {
+    try {
+      const response = await fetch("/stations");
+      if (!response.ok) throw new Error("Failed to fetch station list");
+      const data = await response.json();
+      setStations(data);  // Set the stations state to the fetched data
+    } catch (error) {
+      console.error("Error fetching station list:", error);
+    }
+  };
 
+  // Fetch the current station from the backend only when stations are fetched
+  useEffect(() => {
+    if (stations.length > 0) {
+      fetchCurrentStation();
+    }
+  }, [stations]);  // Trigger when stations are populated
+
+  // Fetch the current station from the backend
   const fetchCurrentStation = async () => {
     try {
       const response = await fetch("/current-station");
-      if (!response.ok) throw new Error("Failed to fetch station");
-      const stationName = await response.text();
-      setCurrentStation(stations[Number(stationName)]);
-      setSelectedIndex(Number(stationName));
+      if (!response.ok) throw new Error("Failed to fetch current station");
+      const stationIndex = await response.text();
+      setCurrentStation(stations[Number(stationIndex)]?.name || "Unknown Station");
+      setSelectedIndex(Number(stationIndex));
     } catch (error) {
-      console.error("Error fetching station:", error);
+      console.error("Error fetching current station:", error);
       setCurrentStation("Unknown Station");
     }
   };
 
+  // Change the station by sending the index to the backend
   const changeStation = async (index: number) => {
     try {
       await fetch('/set-station', {
@@ -48,12 +59,13 @@ export default function App() {
         body: JSON.stringify({ index })
       });
       setSelectedIndex(index);
-      setCurrentStation(stations[index]);
+      setCurrentStation(stations[index]?.name || "Unknown Station");
     } catch (error) {
       console.error("Error changing station:", error);
     }
   };
 
+  // Toggle between play and pause states
   const togglePlayPause = async () => {
     const action = isPlaying ? "/pause" : "/start";
     try {
@@ -84,20 +96,17 @@ export default function App() {
 
         {/* Station Selection */}
         <div className="row g-2">
-          {stations.map((station, index) => (
-            <div className="col-4 d-flex" key={index}>
+          {stations.map((station) => (
+            <div className="col-4 d-flex" key={station.index}>
               <button
-                className={`btn modern-btn w-100 ${index === selectedIndex ? "selected" : ""}`}
-                onClick={() => changeStation(index)}
+                className={`btn modern-btn w-100 ${station.index === selectedIndex ? "selected" : ""}`}
+                onClick={() => changeStation(station.index)}
               >
-                {station}
+                {station.name}
               </button>
             </div>
           ))}
         </div>
-
-       
-        
       </div>
     </div>
   );

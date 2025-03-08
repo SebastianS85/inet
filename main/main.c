@@ -34,10 +34,7 @@
 #include "driver/i2c_master.h"
 #include "i2c.h"
 #include "audio_idf_version.h"
-#include  "display.h"
-
-
-
+#include "display.h"
 
 
 static const char *BASE_PATH = "/store";
@@ -76,28 +73,35 @@ void mount_fs()
     esp_vfs_fat_spiflash_mount_ro(BASE_PATH, "storage", &fat_mount_config);
 }
 
-void print_ip_address() {
+void print_ip_address()
+{
     esp_netif_ip_info_t ip_info;
 
     // Get the default netif (interface)
     esp_netif_t *netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
 
-    if (netif == NULL) {
+    if (netif == NULL)
+    {
         ESP_LOGE(TAG, "No network interface found!");
         return;
     }
 
     // Get the IP info
-    if (esp_netif_get_ip_info(netif, &ip_info) == ESP_OK) {
-        char ip_str[32];  
-        snprintf(ip_str, sizeof(ip_str)," "IPSTR, IP2STR(&ip_info.ip));
+    if (esp_netif_get_ip_info(netif, &ip_info) == ESP_OK)
+    {
+        char ip_str[32];
+        snprintf(ip_str, sizeof(ip_str), " " IPSTR, IP2STR(&ip_info.ip));
 
-        display_set_text(ip_str,0,false);  
-    } else {
-        ESP_LOGE(TAG, "Failed to get IP information");
-        display_set_text("No IP check wifi", 0,false);
+        display_set_text(ip_str, 0, false);
     }
+    else
+    {
+        ESP_LOGE(TAG, "Failed to get IP information");
+        display_set_text("No IP check wifi", 0, false);
+    }
+
 }
+
 
 void app_main(void)
 
@@ -108,8 +112,7 @@ void app_main(void)
     display_clear();
     display_set_contrast(0x80);
     display_set_text("Connecting to wifi..", 0, false);
-    
- 
+
     esp_err_t err = nvs_flash_init();
 
     if (err == ESP_ERR_NVS_NO_FREE_PAGES)
@@ -124,7 +127,6 @@ void app_main(void)
     tcpip_adapter_init();
 #endif
 
-  
     esp_wifi_set_storage(WIFI_STORAGE_RAM);
     esp_periph_config_t periph_cfg = DEFAULT_ESP_PERIPH_SET_CONFIG();
     esp_periph_set_handle_t set = esp_periph_set_init(&periph_cfg);
@@ -141,7 +143,6 @@ void app_main(void)
     print_ip_address();
     display_set_text("  radio.local    ", 2, true);
 
-
     esp_err_t ret1 = esp_wifi_set_ps(WIFI_PS_NONE);
     if (ret1 == ESP_OK)
     {
@@ -152,12 +153,13 @@ void app_main(void)
         ESP_LOGE("WiFi", "Failed to disable Wi-Fi power saving: %d", ret1);
     }
 
-   
     audio_init();
     audio_start(set);
     mount_fs();
     init_server();
     start_mdns_service();
+    load_stations();
+   
     xTaskCreatePinnedToCore(stream_task, "stream_task", (10 * 1024), NULL, 7, NULL, 1);
     xTaskCreatePinnedToCore(check_memory_task, "check_memory_task", (4 * 1024), NULL, 6, NULL, 1);
 
