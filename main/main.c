@@ -153,12 +153,13 @@ void app_main(void)
         ESP_LOGE("WiFi", "Failed to disable Wi-Fi power saving: %d", ret1);
     }
 
+    mount_fs();
+    load_stations();
     audio_init();
     audio_start(set);
-    mount_fs();
     init_server();
     start_mdns_service();
-    load_stations();
+    
    
     xTaskCreatePinnedToCore(stream_task, "stream_task", (10 * 1024), NULL, 7, NULL, 1);
     xTaskCreatePinnedToCore(check_memory_task, "check_memory_task", (4 * 1024), NULL, 6, NULL, 1);

@@ -57,37 +57,7 @@ void load_stations() {
 
 SemaphoreHandle_t station_Mutex;
 
-#define NUM_STATIONS 27
-const char *station_list[NUM_STATIONS] = {
-    "https://icecast1.play.cz/kisshady64.mp3",                                                                         // kiss fm
-    "https://sluchaj2.radiopark.biz.pl:8443/stream",                                                                   // park fm
-    "http://c6.radioboss.fm:8207/stream",                                                                              //	ETHNIK
-    "http://c26.radioboss.fm:8441/stream",                                                                             // spanisch cocktail
-    "http://c6.radioboss.fm:8207/stream",                                                                              // Mykonos Scorpions
-    "http://c15.radioboss.fm:8520/stream",                                                                             // Greek Taverna
-    "http://c2.radioboss.fm:8438/stream",                                                                              // bar house
-    "http://c2.radioboss.fm:8241/stream",                                                                              // chillout
-    "http://c2.radioboss.fm:8671/stream",                                                                              // greek emporika
-    "http://c26.radioboss.fm:8420/stream",                                                                             // greek vs ethnik
-    "https://stream.sunshine-live.de/2000er/mp3-192/stream.sunshine-live.de/",                                         // sunshine
-    "https://80er-90er.stream.laut.fm/80er-90er?ref=vtuner",                                                           // 90"
-    "https://c15.radioboss.fm:8566/stream",                                                                            // fiesta mexico
-    "http://31.192.216.8/rmf_fm",                                                                                      // rmff fm
-    "https://ic2.smcdn.pl/1180-1.mp3",                                                                                 // eska
-    "http://n32a-eu.rcs.revma.com/an1ugyygzk8uv?rj-ttl=5&rj-tok=AAABlT6ZdMEADfAg3Z-lirUfoA",                           // radio357
-    "https://stream3.technologicznie.net/muzyczne_radio_192.mp3",                                                      // muzyczne
-    "https://n09a-eu.rcs.revma.com/an1ugyygzk8uv?rj-ttl=5&rj-tok=AAABlDvCVcQAzCZhxrbQNf2GfQ",                          // ZET
-    "https://27793.live.streamtheworld.com/ANTYRADIO.mp3?dist=myradioonline",                                          // Antyradio
-    "https://kathy.torontocast.com:1190/stream",                                                                       // CINEMIX
-    "https://c18.radioboss.fm:8061/stream",                                                                            // timeDanceFM
-    "https://c34.radioboss.fm:8106/stream",                                                                            // Radio 857
-    "https://c2.radioboss.fm:8224/320k.mp3",                                                                           // live house
-    "https://c15.radioboss.fm:8512/stream",                                                                            // Playa Radio
-    "https://radiosidewinder.out.airtime.pro:8000/radiosidewinder_b?_ga=1.133037898.513622194.1447957646/;stream.mp3", // Sidewinder
-    "https://public.isekoi-radio.com/listen/isekoi/radio.mp3",                                                         // Isekoi radio
-    "https://c34.radioboss.fm:8106/stream",                                                                             // Radio 897
 
-};
 
 int current_station_index = 0;
 audio_pipeline_handle_t pipeline;
@@ -151,7 +121,8 @@ void audio_start(esp_periph_set_handle_t set)
     audio_pipeline_link(pipeline, &link_tag[0], 3);
 
     ESP_LOGI(TAG, "[2.6] Set up  uri (http as http_stream, aac as aac decoder, and default output is i2s)");
-    audio_element_set_uri(http_stream_reader, station_list[0]);
+    ESP_LOGE(TAG, "uri: %s", stations[current_station_index].url);
+    audio_element_set_uri(http_stream_reader, stations[current_station_index].url);
 
     ESP_LOGI(TAG, "[ 4 ] Set up  event listener");
     audio_event_iface_cfg_t evt_cfg = AUDIO_EVENT_IFACE_DEFAULT_CFG();
@@ -165,7 +136,7 @@ void audio_start(esp_periph_set_handle_t set)
 
     ESP_LOGI(TAG, "[ 5 ] Start audio_pipeline");
     audio_pipeline_run(pipeline);
-    display_set_text(" playing stream", 1,false);
+    display_set_text(stations[current_station_index].name, 1,false);
 }
 
 void change_radio_station(uint8_t station_index)
@@ -260,6 +231,7 @@ void stream_task(void *arg)
 {
     while (1)
     {
+      
         audio_event_iface_msg_t msg;
         esp_err_t ret = audio_event_iface_listen(evt, &msg, portMAX_DELAY);
         if (ret != ESP_OK)
@@ -336,23 +308,17 @@ void stream_task(void *arg)
 
 char *current_station_info(void)
 {
-    // Check if the current station index is valid
-    if (current_station_index < 0 || current_station_index >= station_count) 
+    static char index_str[12]; // Increase buffer size to safely fit large integers and null terminator
+
+    if (current_station_index < 0 || current_station_index >= station_count)
     {
         ESP_LOGE(TAG, "Invalid station index: %d", current_station_index);
-        return NULL; // Return NULL or handle an invalid index case
+        return NULL;
     }
 
-    // Buffer to store the station information string
-    static char station_info[512];
-
-    // Format the station details into a string
-    snprintf(station_info, sizeof(station_info), "Station: %s\nGenre: %s\nURL: %s\n",
-             stations[current_station_index].name,
-             stations[current_station_index].genre,
-             stations[current_station_index].url);
-
-    return station_info;
+    snprintf(index_str, sizeof(index_str), "%d", current_station_index);
+    ESP_LOGI(TAG, "Current station index: %s", index_str);
+    return index_str;
 }
 void audio_pause()
 {

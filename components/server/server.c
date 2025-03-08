@@ -145,6 +145,7 @@ static esp_err_t current_station(httpd_req_t *req)
     }
 
     // Send the station info as a response
+    
     httpd_resp_send(req, response, HTTPD_RESP_USE_STRLEN);
     return ESP_OK;
 }
@@ -229,11 +230,6 @@ void init_server(void)
         .method = HTTP_GET,
         .handler = start};
 
-    httpd_uri_t current_station_url = {
-        .uri = "/current-station",
-        .method = HTTP_GET,
-        .handler = current_station};
-
     httpd_uri_t station_list_url = {
         .uri = "/stations",
         .method = HTTP_GET,
@@ -243,6 +239,11 @@ void init_server(void)
         .uri = "/rssi",
         .method = HTTP_GET,
         .handler = on_rssi};
+
+        httpd_uri_t current_station_url = {
+            .uri = "/current-station",
+            .method = HTTP_GET,
+            .handler = current_station};
 
     httpd_uri_t default_url = {
         .uri = "/*",
