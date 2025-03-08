@@ -364,5 +364,6 @@ void audio_pause()
 void audio_resume()
 {
     audio_pipeline_resume(pipeline);
-    
+    display_set_text("                ", 1,false);
+    display_set_text(" playing stream", 1,false);
 }
