@@ -12,24 +12,8 @@ export default function App() {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  // Fetch the station list when the component mounts
-  useEffect(() => {
-    fetchStationList();
-  }, []);
 
-  // Fetch the list of stations from the backend
-  const fetchStationList = async () => {
-    try {
-      const response = await fetch("/stations");
-      if (!response.ok) throw new Error("Failed to fetch station list");
-      const data = await response.json();
-      setStations(data);  // Set the stations state to the fetched data
-    } catch (error) {
-      console.error("Error fetching station list:", error);
-    }
-  };
 
-  // Fetch the current station from the backend only when stations are fetched
   useEffect(() => {
     if (stations.length > 0) {
       fetchCurrentStation();
@@ -49,6 +33,25 @@ export default function App() {
       setCurrentStation("Unknown Station");
     }
   };
+  // Fetch the station list when the component mounts
+  useEffect(() => {
+    fetchStationList();
+  }, []);
+
+  // Fetch the list of stations from the backend
+  const fetchStationList = async () => {
+    try {
+      const response = await fetch("/stations");
+      if (!response.ok) throw new Error("Failed to fetch station list");
+      const data = await response.json();
+      setStations(data);  // Set the stations state to the fetched data
+    } catch (error) {
+      console.error("Error fetching station list:", error);
+    }
+  };
+
+  // Fetch the current station from the backend only when stations are fetched
+ 
 
   // Change the station by sending the index to the backend
   const changeStation = async (index: number) => {
