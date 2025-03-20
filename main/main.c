@@ -59,6 +59,8 @@ void check_memory_task(void *pvParameter)
     {
         size_t free_heap = heap_caps_get_free_size(MALLOC_CAP_8BIT);
         size_t min_free_heap = heap_caps_get_minimum_free_size(MALLOC_CAP_8BIT);
+        ESP_LOGI(TAG, "Free heap: %d bytes", free_heap);
+        ESP_LOGI(TAG, "Minimum free heap: %d bytes", min_free_heap);
         vTaskDelay(pdMS_TO_TICKS(5000));
     }
 }

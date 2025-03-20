@@ -141,8 +141,7 @@ void audio_start(esp_periph_set_handle_t set)
 
 void change_radio_station(uint8_t station_index)
 {
-    display_set_text("                ", 1, false);  // Clear the OLED display
-    display_set_text("Changing station", 1, false); // Show a message indicating a change
+   
 
     // Assuming station_list is populated via the web request
     if (current_station_index != station_index)

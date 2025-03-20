@@ -4,6 +4,9 @@
 #include "driver/i2c_master.h"
 
 
+
+//.scl_io_num = GPIO_NUM_21,
+//.sda_io_num = GPIO_NUM_20,
 i2c_master_bus_handle_t i2c0_bus_hdl;
 void i2c_init(){
     i2c_master_bus_config_t i2c_bus_config = {
