@@ -7,6 +7,107 @@
 #include "esp_wifi.h"
 
 #define TAG "SERVER"
+
+
+
+#define MAX_AP_COUNT 20
+
+static esp_err_t wifi_scan_handler(httpd_req_t *req) {
+    wifi_ap_record_t ap_records[MAX_AP_COUNT];
+    uint16_t ap_count = MAX_AP_COUNT;  // UWAGA: ustaw maksymalną liczbę rekordów
+
+    // Konfiguracja skanowania
+    wifi_scan_config_t scan_config = {
+        .ssid = NULL,           // Zmień z 0 na NULL
+        .bssid = NULL,          // Zmień z 0 na NULL
+        .channel = 0,
+        .show_hidden = true,    // Pokaż ukryte sieci
+        .scan_type = WIFI_SCAN_TYPE_ACTIVE,  // Aktywne skanowanie
+        .scan_time.active.min = 100,  // Minimalne skanowanie 100ms
+        .scan_time.active.max = 300   // Maksymalne skanowanie 300ms
+    };
+
+    // Dodatkowa diagnostyka przed skanowaniem
+    wifi_mode_t mode;
+    esp_wifi_get_mode(&mode);
+    ESP_LOGE(TAG, "Current WiFi Mode: %d", mode);
+
+    // Zatrzymaj poprzednie skanowanie (jeśli jest)
+    esp_wifi_scan_stop();
+
+    // Wykonanie skanowania
+    esp_err_t scan_result = esp_wifi_scan_start(&scan_config, true);
+    if (scan_result != ESP_OK) {
+        ESP_LOGE(TAG, "Scan start failed with error: %s", esp_err_to_name(scan_result));
+        httpd_resp_send_500(req);
+        return ESP_FAIL;
+    }
+
+    // Odczekaj krótko na zakończenie skanowania
+    vTaskDelay(pdMS_TO_TICKS(1000));
+
+    // Pobranie wyników skanowania
+    scan_result = esp_wifi_scan_get_ap_records(&ap_count, ap_records);
+    if (scan_result != ESP_OK) {
+        ESP_LOGE(TAG, "Scan get records failed with error: %s", esp_err_to_name(scan_result));
+        httpd_resp_send_500(req);
+        return ESP_FAIL;
+    }
+
+    // Dodatkowa diagnostyka
+    ESP_LOGE(TAG, "Found %d networks", ap_count);
+
+    // Utworzenie JSON z wynikami
+    cJSON *root = cJSON_CreateObject();
+    cJSON *networks = cJSON_CreateArray();
+
+    for (int i = 0; i < ap_count; i++) {
+        // Dodatkowe logowanie każdej sieci
+        ESP_LOGE(TAG, "Network %d: SSID: %s, RSSI: %d", 
+                 i, ap_records[i].ssid, ap_records[i].rssi);
+
+        cJSON *network = cJSON_CreateObject();
+        
+        // Zabezpieczenie przed pustymi SSID
+        if (strlen((char*)ap_records[i].ssid) > 0) {
+            cJSON_AddStringToObject(network, "ssid", 
+                (char*)ap_records[i].ssid);
+            
+            // BSSID (MAC)
+            char bssid_str[18];
+            snprintf(bssid_str, sizeof(bssid_str), 
+                "%02x:%02x:%02x:%02x:%02x:%02x",
+                ap_records[i].bssid[0], ap_records[i].bssid[1],
+                ap_records[i].bssid[2], ap_records[i].bssid[3],
+                ap_records[i].bssid[4], ap_records[i].bssid[5]);
+            cJSON_AddStringToObject(network, "bssid", bssid_str);
+            
+            // Dodatkowe parametry
+            cJSON_AddNumberToObject(network, "rssi", ap_records[i].rssi);
+            cJSON_AddNumberToObject(network, "channel", ap_records[i].primary);
+            cJSON_AddNumberToObject(network, "authmode", ap_records[i].authmode);
+
+            cJSON_AddItemToArray(networks, network);
+        }
+    }
+
+    cJSON_AddItemToObject(root, "networks", networks);
+    cJSON_AddNumberToObject(root, "total_networks", ap_count);
+
+    // Konwersja do stringa
+    char *response = cJSON_Print(root);
+
+    // Wysłanie odpowiedzi HTTP
+    httpd_resp_set_type(req, "application/json");
+    httpd_resp_sendstr(req, response);
+    ESP_LOGE(TAG, "Response: %s", response);
+
+    // Czyszczenie
+    free(response);
+    cJSON_Delete(root);
+
+    return ESP_OK;
+}
 static esp_err_t get_station_list(httpd_req_t *req)
 {
     ESP_LOGI("STATIONS", "Serving station list");
@@ -29,7 +130,7 @@ static esp_err_t get_station_list(httpd_req_t *req)
     char *json_str = cJSON_PrintUnformatted(response);
     httpd_resp_set_type(req, "application/json");
     httpd_resp_send(req, json_str, HTTPD_RESP_USE_STRLEN);
-
+    printf("%s", json_str);
     // Clean up the JSON object
     cJSON_Delete(response);
     free(json_str);
@@ -225,6 +326,14 @@ void init_server(void)
         .method = HTTP_POST,
         .handler = post_handler};
 
+
+        httpd_uri_t wifi_scan_uri = {
+            .uri       = "/wifi/scan",
+            .method    = HTTP_GET,
+            .handler   = wifi_scan_handler,
+            .user_ctx  = NULL
+        };
+
     httpd_uri_t start_url = {
         .uri = "/start",
         .method = HTTP_GET,
@@ -250,6 +359,7 @@ void init_server(void)
         .method = HTTP_GET,
         .handler = on_default_url};
 
+    httpd_register_uri_handler(server, &wifi_scan_uri);        
     httpd_register_uri_handler(server, &current_station_url);
     httpd_register_uri_handler(server, &start_url);
     httpd_register_uri_handler(server, &set_station_url);
