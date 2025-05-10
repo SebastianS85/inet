@@ -84,13 +84,12 @@ void audio_init(void)
 
     ESP_LOGI(TAG, "[2.1] Create http stream to read data");
     http_stream_cfg_t http_cfg = HTTP_STREAM_CFG_DEFAULT();
-
     http_cfg.event_handle = _http_stream_event_handle;
-    ;
     http_cfg.type = AUDIO_STREAM_READER;
     http_cfg.enable_playlist_parser = true;
+    
+    
     http_stream_reader = http_stream_init(&http_cfg);
-
     ESP_LOGI(TAG, "[2.2] Create i2s stream to write data to codec chip");
 #if defined CONFIG_ESP32_C3_LYRA_V2_BOARD
     i2s_stream_cfg_t i2s_cfg = I2S_STREAM_PDM_TX_CFG_DEFAULT();

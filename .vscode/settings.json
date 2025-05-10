@@ -28,7 +28,10 @@
         "periph_wifi.h": "c",
         "ssd1306.h": "c",
         "esp_peripherals.h": "c",
-        "display.h": "c"
+        "display.h": "c",
+        "machine_test.h": "c",
+        "common.h": "c",
+        "common_wifi.h": "c"
     },
     "idf.openOcdConfigs": [
         "board/esp32s3-bridge.cfg"
