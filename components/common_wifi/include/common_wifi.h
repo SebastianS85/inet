@@ -19,6 +19,8 @@
 
 
 void print_ip_address(const char *mode);
+void setup_gpio38_interrupt();
+void wifi_init_softap(void);
 
 
 #endif

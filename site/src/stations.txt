@@ -1,0 +1,30 @@
+Kiss FM|https://icecast1.play.cz/kisshady64.mp3|Pop
+Park FM|https://sluchaj2.radiopark.biz.pl:8443/stream|Pop
+Vox FM |https://ic2.smcdn.pl/3140-1.mp3|Pop
+Muzo FM |https://n13a-eu.rcs.revma.com/1nnezw8qz7zuv?rj-ttl=5&rj-tok=AAABlXbs_4UA837yopAhu9nMAw|Pop
+RMF maxx |https://rs201-krk.rmfstream.pl/rmf_maxxx|Pop
+Bar House|http://c2.radioboss.fm:8438/stream|House
+Chillout|http://c2.radioboss.fm:8241/stream|Chillout
+Sunshine|https://stream.sunshine-live.de/2000er/mp3-192/stream.sunshine-live.de/|Dance
+90'|https://80er-90er.stream.laut.fm/80er-90er?ref=vtuner|80s-90s
+Fiesta Mexico|https://c15.radioboss.fm:8566/stream|Mexican
+RMF FM|http://31.192.216.8/rmf_fm|Pop
+Eska|https://ic2.smcdn.pl/1180-1.mp3|Pop
+Radio357|http://n32a-eu.rcs.revma.com/an1ugyygzk8uv?rj-ttl=5&rj-tok=AAABlT6ZdMEADfAg3Z-lirUfoA|Variety
+Muzyczne|https://stream3.technologicznie.net/muzyczne_radio_192.mp3|Pop
+ZET|https://n09a-eu.rcs.revma.com/an1ugyygzk8uv?rj-ttl=5&rj-tok=AAABlDvCVcQAzCZhxrbQNf2GfQ|Pop
+Antyradio|https://27793.live.streamtheworld.com/ANTYRADIO.mp3?dist=myradioonline|Rock
+CINEMIX|https://kathy.torontocast.com:1190/stream|Movie Soundtracks
+TimeDanceFM|https://c18.radioboss.fm:8061/stream|Dance
+Radio 857|https://c34.radioboss.fm:8106/stream|Pop
+Live House|https://c2.radioboss.fm:8224/320k.mp3|House
+Playa Radio|https://c15.radioboss.fm:8512/stream|Latin
+Sidewinder|https://radiosidewinder.out.airtime.pro:8000/radiosidewinder_b?_ga=1.133037898.513622194.1447957646/;stream.mp3|Rock
+Isekoi Radio|https://public.isekoi-radio.com/listen/isekoi/radio.mp3|Anime
+Radio 857|https://c34.radioboss.fm:8106/stream|Pop
+Ethnik|http://c6.radioboss.fm:8207/stream|Ethnic
+Spanish Cocktail|http://c26.radioboss.fm:8441/stream|Spanish
+Mykonos Scorpions|http://c6.radioboss.fm:8207/stream|Greek
+Greek Taverna|http://c15.radioboss.fm:8520/stream|Greek
+Greek Emporika|http://c2.radioboss.fm:8671/stream|Greek
+Greek vs Ethnik|http://c26.radioboss.fm:8420/stream|Ethnic

@@ -24,6 +24,8 @@ int _http_stream_event_handle(http_stream_event_msg_t *msg);
 void change_radio_station(uint8_t station_index);
 char * current_station_info(void);
 void load_stations(void);
+esp_err_t add_station_to_file(const char *name, const char *url, const char *genre);
+esp_err_t delete_station_from_file(int index_to_delete);
 
 
 

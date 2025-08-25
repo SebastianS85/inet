@@ -13,51 +13,94 @@
 #include "esp_log.h"
 #include "board.h"
 #include "display.h"
+#include "nvs_flash.h"
+#include "nvs.h"
+#include "common_wifi.h"
+#include <errno.h>
+#include <unistd.h>
 
 static const char *TAG = "AUDIO STREAM";
+#define STATION_INDEX_KEY "station_idx"
 
 Station stations[MAX_STATIONS];
 int station_count = 0;
 
-void load_stations() {
+esp_err_t save_station_index_to_nvs(int index)
+{
+    nvs_handle_t nvs_handle;
+    esp_err_t err = nvs_open(STORAGE_NAMESPACE, NVS_READWRITE, &nvs_handle);
+    if (err != ESP_OK)
+        return err;
+    err = nvs_set_i32(nvs_handle, STATION_INDEX_KEY, index);
+    if (err == ESP_OK)
+        err = nvs_commit(nvs_handle);
+    nvs_close(nvs_handle);
+    return err;
+}
+
+int load_station_index_from_nvs(int default_index)
+{
+    nvs_handle_t nvs_handle;
+    esp_err_t err = nvs_open(STORAGE_NAMESPACE, NVS_READONLY, &nvs_handle);
+    if (err != ESP_OK)
+        return default_index;
+    int32_t index = 0;
+    err = nvs_get_i32(nvs_handle, STATION_INDEX_KEY, &index);
+    nvs_close(nvs_handle);
+    return (err == ESP_OK) ? index : default_index;
+}
+
+void load_stations()
+{
+    station_count = 0; // Reset station count to avoid appending to old data
     FILE *file = fopen("/store/stations.txt", "r");
-    if (!file) {
+    if (!file)
+    {
         ESP_LOGE("STATIONS", "Failed to open stations.txt");
         return;
     }
 
     char line[512];
 
-    while (fgets(line, sizeof(line), file) && station_count < MAX_STATIONS) {
+    while (fgets(line, sizeof(line), file) && station_count < MAX_STATIONS)
+    {
         // Trim spaces (optional)
         char *newline_pos = strchr(line, '\n');
-        if (newline_pos) *newline_pos = '\0';  // Remove newline
+        if (newline_pos)
+            *newline_pos = '\0'; // Remove newline
 
         // Parse name, URL, and genre separated by '|'
-        if (sscanf(line, "%127[^|]|%255[^|]|%63[^\n]", stations[station_count].name, stations[station_count].url, stations[station_count].genre) == 3) {
-            if (strlen(stations[station_count].name) > 0 && strlen(stations[station_count].url) > 0 && strlen(stations[station_count].genre) > 0) {
-                stations[station_count].index = station_count;  // Assign index dynamically
+        if (sscanf(line, "%127[^|]|%255[^|]|%63[^\n]", stations[station_count].name, stations[station_count].url, stations[station_count].genre) == 3)
+        {
+            if (strlen(stations[station_count].name) > 0 && strlen(stations[station_count].url) > 0 && strlen(stations[station_count].genre) > 0)
+            {
+                stations[station_count].index = station_count; // Assign index dynamically
                 station_count++;
-            } else {
+            }
+            else
+            {
                 ESP_LOGW("STATIONS", "Skipping invalid entry: %s", line);
             }
-        } else {
+        }
+        else
+        {
             ESP_LOGW("STATIONS", "Failed to parse line: %s", line);
         }
     }
 
     fclose(file);
 
-    if (station_count == 0) {
+    if (station_count == 0)
+    {
         ESP_LOGW("STATIONS", "No stations loaded from the file.");
-    } else {
+    }
+    else
+    {
         ESP_LOGI("STATIONS", "Successfully loaded %d stations.", station_count);
     }
 }
 
 SemaphoreHandle_t station_Mutex;
-
-
 
 int current_station_index = 0;
 audio_pipeline_handle_t pipeline;
@@ -79,7 +122,7 @@ void audio_init(void)
 
     ESP_LOGI(TAG, "[2.0] Create audio pipeline for playback");
     audio_pipeline_cfg_t pipeline_cfg = DEFAULT_AUDIO_PIPELINE_CONFIG();
-   
+
     pipeline = audio_pipeline_init(&pipeline_cfg);
 
     ESP_LOGI(TAG, "[2.1] Create http stream to read data");
@@ -87,8 +130,7 @@ void audio_init(void)
     http_cfg.event_handle = _http_stream_event_handle;
     http_cfg.type = AUDIO_STREAM_READER;
     http_cfg.enable_playlist_parser = true;
-    
-    
+
     http_stream_reader = http_stream_init(&http_cfg);
     ESP_LOGI(TAG, "[2.2] Create i2s stream to write data to codec chip");
 #if defined CONFIG_ESP32_C3_LYRA_V2_BOARD
@@ -120,8 +162,8 @@ void audio_start(esp_periph_set_handle_t set)
     audio_pipeline_link(pipeline, &link_tag[0], 3);
 
     ESP_LOGI(TAG, "[2.6] Set up  uri (http as http_stream, aac as aac decoder, and default output is i2s)");
-    ESP_LOGE(TAG, "uri: %s", stations[current_station_index].url);
-    audio_element_set_uri(http_stream_reader, stations[current_station_index].url);
+    ESP_LOGE(TAG, "uri: %s", stations[load_station_index_from_nvs(0)].url);
+    audio_element_set_uri(http_stream_reader, stations[load_station_index_from_nvs(0)].url);
 
     ESP_LOGI(TAG, "[ 4 ] Set up  event listener");
     audio_event_iface_cfg_t evt_cfg = AUDIO_EVENT_IFACE_DEFAULT_CFG();
@@ -135,29 +177,167 @@ void audio_start(esp_periph_set_handle_t set)
 
     ESP_LOGI(TAG, "[ 5 ] Start audio_pipeline");
     audio_pipeline_run(pipeline);
-    display_set_text(stations[current_station_index].name, 1,false);
+    display_set_text(stations[load_station_index_from_nvs(0)].name, 1, false);
+}
+
+esp_err_t add_station_to_file(const char *name, const char *url, const char *genre)
+{
+    FILE *file = fopen("/store/stations.txt", "a+");
+    if (!file)
+    {
+        ESP_LOGE("STATIONS", "Failed to open stations.txt for appending, errno=%d (%s)", errno, strerror(errno));
+        return ESP_FAIL;
+    }
+    // Ensure file ends with a newline before appending
+    fseek(file, 0, SEEK_END);
+    long filesize = ftell(file);
+    if (filesize > 0)
+    {
+        fseek(file, -1, SEEK_END);
+        int last = fgetc(file);
+        if (last != '\n')
+        {
+            fputc('\n', file);
+        }
+    }
+    // Write in the expected format
+    int written = fprintf(file, "%s|%s|%s\n", name, url, genre);
+    fflush(file);
+    int fd = fileno(file);
+    if (fd >= 0)
+    {
+        fsync(fd);
+    }
+    fclose(file);
+    if (written < 0)
+    {
+        ESP_LOGE("STATIONS", "Failed to write to stations.txt, errno=%d (%s)", errno, strerror(errno));
+        return ESP_FAIL;
+    }
+    ESP_LOGI("STATIONS", "Added new station: %s", name);
+    load_stations();
+    return ESP_OK;
+}
+
+esp_err_t delete_station_from_file(int index_to_delete)
+{
+    FILE *file = fopen("/store/stations.txt", "r");
+    if (!file)
+    {
+        ESP_LOGE("STATIONS", "Failed to open stations.txt for reading");
+        return ESP_FAIL;
+    }
+
+    // Read all lines into a dynamic array
+    char **lines = NULL;
+    size_t count = 0;
+    size_t capacity = 32;
+    lines = malloc(capacity * sizeof(char *));
+    if (!lines)
+    {
+        fclose(file);
+        ESP_LOGE("STATIONS", "Memory allocation failed");
+        return ESP_ERR_NO_MEM;
+    }
+    char buf[512];
+    while (fgets(buf, sizeof(buf), file))
+    {
+        size_t len = strlen(buf);
+        if (len == 0 || (len == 1 && buf[0] == '\n'))
+            continue; // skip blank lines
+        if (count >= capacity)
+        {
+            capacity *= 2;
+            char **new_lines = realloc(lines, capacity * sizeof(char *));
+            if (!new_lines)
+            {
+                for (size_t i = 0; i < count; ++i)
+                    free(lines[i]);
+                free(lines);
+                fclose(file);
+                ESP_LOGE("STATIONS", "Memory allocation failed");
+                return ESP_ERR_NO_MEM;
+            }
+            lines = new_lines;
+        }
+        lines[count] = strdup(buf);
+        if (!lines[count])
+        {
+            for (size_t i = 0; i < count; ++i)
+                free(lines[i]);
+            free(lines);
+            fclose(file);
+            ESP_LOGE("STATIONS", "Memory allocation failed");
+            return ESP_ERR_NO_MEM;
+        }
+        count++;
+    }
+    fclose(file);
+
+    if (index_to_delete < 0 || (size_t)index_to_delete >= count)
+    {
+        ESP_LOGE("STATIONS", "Invalid index to delete: %d", index_to_delete);
+        for (size_t i = 0; i < count; ++i)
+            free(lines[i]);
+        free(lines);
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    // Write back all except the one to delete
+    file = fopen("/store/stations.txt", "w");
+    if (!file)
+    {
+        ESP_LOGE("STATIONS", "Failed to open stations.txt for writing");
+        for (size_t i = 0; i < count; ++i)
+            free(lines[i]);
+        free(lines);
+        return ESP_FAIL;
+    }
+    for (size_t i = 0; i < count; ++i)
+    {
+        if ((int)i != index_to_delete)
+        {
+            fputs(lines[i], file);
+            size_t l = strlen(lines[i]);
+            if (l == 0 || lines[i][l - 1] != '\n')
+                fputc('\n', file);
+        }
+    }
+    fflush(file);
+    int fd = fileno(file);
+    if (fd >= 0)
+        fsync(fd);
+    fclose(file);
+    // Free all lines after writing
+    for (size_t i = 0; i < count; ++i)
+    {
+        free(lines[i]);
+    }
+    free(lines);
+    ESP_LOGI("STATIONS", "Deleted station at index: %d", index_to_delete);
+    load_stations();
+    return ESP_OK;
 }
 
 void change_radio_station(uint8_t station_index)
 {
-   
 
     // Assuming station_list is populated via the web request
     if (current_station_index != station_index)
     {
         if (xSemaphoreTake(station_Mutex, pdMS_TO_TICKS(1000)))
-        { 
+        {
             // Check if the index is valid before proceeding
             if (station_index < MAX_STATIONS)
             {
                 // Print the current station details
-                printf("Changing station to: %s\n", stations[station_index].name);  // Assuming stations[] contains station objects with 'name' field
+                printf("Changing station to: %s\n", stations[station_index].name); // Assuming stations[] contains station objects with 'name' field
 
                 // Display the station name on OLED
                 display_set_text("                ", 1, false);
                 display_set_text(stations[station_index].name, 1, false);
 
-                const char *uri = stations[station_index].url;  // Get the station's URL
+                const char *uri = stations[station_index].url; // Get the station's URL
 
                 // Update the current station index
                 current_station_index = station_index;
@@ -165,11 +345,11 @@ void change_radio_station(uint8_t station_index)
                 ESP_LOGI(TAG, "Changing to station: %s", uri);
 
                 // Stop current audio pipeline
-                audio_pipeline_pause(pipeline);                 
-                
+                audio_pipeline_pause(pipeline);
+
                 // Set new station URI
                 audio_element_set_uri(http_stream_reader, uri);
-                
+
                 // Wait for the stop operation to complete
                 audio_pipeline_wait_for_stop(pipeline);
 
@@ -185,10 +365,10 @@ void change_radio_station(uint8_t station_index)
                 audio_pipeline_resume(pipeline);
 
                 // Update OLED again to show it's playing the new station
-               
-                
 
-                xSemaphoreGive(station_Mutex);  // Release mutex
+                save_station_index_to_nvs(current_station_index);
+
+                xSemaphoreGive(station_Mutex); // Release mutex
             }
             else
             {
@@ -203,7 +383,6 @@ void change_radio_station(uint8_t station_index)
     else
     {
         ESP_LOGI(TAG, "Station is already playing. Skipping.\n");
-        
     }
 }
 
@@ -229,7 +408,7 @@ void stream_task(void *arg)
 {
     while (1)
     {
-      
+
         audio_event_iface_msg_t msg;
         esp_err_t ret = audio_event_iface_listen(evt, &msg, portMAX_DELAY);
         if (ret != ESP_OK)
@@ -321,13 +500,13 @@ char *current_station_info(void)
 void audio_pause()
 {
     audio_pipeline_pause(pipeline);
-    display_set_text("                ", 1,false);
-    display_set_text(" pause stream", 1,false);
+    display_set_text("                ", 1, false);
+    display_set_text(" pause stream", 1, false);
 }
 
 void audio_resume()
 {
     audio_pipeline_resume(pipeline);
-    display_set_text("                ", 1,false);
-    display_set_text(" playing stream", 1,false);
+    display_set_text("                ", 1, false);
+    display_set_text(" playing stream", 1, false);
 }

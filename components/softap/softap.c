@@ -12,7 +12,7 @@
 
 
 
-esp_err_t save_wifi_credentials(const char* ssid, const char* password) {
+esp_err_t save_wifi_credentialss(const char* ssid, const char* password) {
     nvs_handle_t nvs_handle;
     esp_err_t err;
 
@@ -319,7 +319,7 @@ static esp_err_t save_wifi_handler(httpd_req_t *req) {
     ESP_LOGI(TAG, "SSID: %s, Password: %s", ssid_json->valuestring, password_json->valuestring);
 
     // Save credentials
-    esp_err_t save_result = save_wifi_credentials(ssid_json->valuestring, password_json->valuestring);
+    esp_err_t save_result = save_wifi_credentialss(ssid_json->valuestring, password_json->valuestring);
 
     // Prepare response
     httpd_resp_set_type(req, "application/json");
@@ -485,7 +485,7 @@ static const httpd_uri_t root = {
     .handler   = root_get_handler
 };
 
-static const httpd_uri_t save_wifi = {
+static const httpd_uri_t save_wifii = {
     .uri       = "/save_wifi",
     .method    = HTTP_POST,
     .handler   = save_wifi_handler
@@ -514,8 +514,8 @@ static httpd_handle_t start_webserver(void) {
     if (httpd_start(&server, &config) == ESP_OK) {
         // Register URI handlers
         httpd_register_uri_handler(server, &root);
-         httpd_register_uri_handler(server, &wifi_scan_uri); 
-        httpd_register_uri_handler(server, &save_wifi);
+        httpd_register_uri_handler(server, &wifi_scan_uri); 
+        httpd_register_uri_handler(server, &save_wifii);
         httpd_register_uri_handler(server, &delete_wifi); // Register delete_wifi handler
     } else {
         ESP_LOGE(TAG, "Failed to start webserver");
