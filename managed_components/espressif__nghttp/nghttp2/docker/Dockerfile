@@ -4,32 +4,36 @@ ARG NGHTTP2_BRANCH=master
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        git clang make binutils autoconf automake autotools-dev libtool \
+        git clang-19 make binutils autoconf automake autotools-dev libtool \
         pkg-config cmake cmake-data \
         zlib1g-dev libev-dev libjemalloc-dev ruby-dev libc-ares-dev bison \
         libelf-dev libbrotli-dev
 
-RUN git clone --recursive --depth 1 -b v1.26.0 https://github.com/aws/aws-lc && \
+RUN git clone --recursive --shallow-submodules --depth 1 -b v1.62.0 https://github.com/aws/aws-lc && \
     cd aws-lc && \
+    export CC=clang-19 CXX=clang++-19 && \
     cmake -B build -DDISABLE_GO=ON && \
     make -j$(nproc) -C build && \
     cmake --install build && \
     cd .. && \
     rm -rf aws-lc
 
-RUN git clone --recursive --depth 1 -b v1.3.0 https://github.com/ngtcp2/nghttp3 && \
+RUN git clone --recursive --shallow-submodules --depth 1 -b v1.12.0 https://github.com/ngtcp2/nghttp3 && \
     cd nghttp3 && \
     autoreconf -i && \
-    ./configure --enable-lib-only && \
+    ./configure --disable-dependency-tracking --enable-lib-only \
+        CC=clang-19 CXX=clang++-19 && \
     make -j$(nproc) && \
     make install-strip && \
     cd .. && \
     rm -rf nghttp3
 
-RUN git clone --recursive --depth 1 -b v1.5.0 https://github.com/ngtcp2/ngtcp2 && \
+RUN git clone --recursive --shallow-submodules --depth 1 -b v1.17.0 https://github.com/ngtcp2/ngtcp2 && \
     cd ngtcp2 && \
     autoreconf -i && \
-    ./configure --enable-lib-only --with-boringssl \
+    ./configure --disable-dependency-tracking --enable-lib-only \
+        --with-boringssl \
+        CC=clang-19 CXX=clang++-19 \
         LIBTOOL_LDFLAGS="-static-libtool-libs" \
         BORINGSSL_LIBS="-l:libssl.a -l:libcrypto.a" \
         PKG_CONFIG_PATH="/usr/local/lib64/pkgconfig" && \
@@ -38,20 +42,21 @@ RUN git clone --recursive --depth 1 -b v1.5.0 https://github.com/ngtcp2/ngtcp2 &
     cd .. && \
     rm -rf ngtcp2
 
-RUN git clone --depth 1 -b v1.3.0 https://github.com/libbpf/libbpf && \
+RUN git clone --depth 1 -b v1.6.2 https://github.com/libbpf/libbpf && \
     cd libbpf && \
-    PREFIX=/usr/local make -C src install && \
+    CC=clang-19 PREFIX=/usr/local make -C src install && \
     cd .. && \
     rm -rf libbpf
 
-RUN git clone --recursive --depth 1 -b $NGHTTP2_BRANCH https://github.com/nghttp2/nghttp2 && \
+RUN git clone --recursive --shallow-submodules --depth 1 -b $NGHTTP2_BRANCH https://github.com/nghttp2/nghttp2 && \
     cd nghttp2 && \
     autoreconf -i && \
-    ./configure --disable-examples --disable-hpack-tools \
+    ./configure --disable-dependency-tracking --disable-examples \
+        --disable-hpack-tools \
         --with-mruby \
         --enable-http3 --with-libbpf \
         --with-libbrotlienc --with-libbrotlidec \
-        CC=clang CXX=clang++ \
+        CC=clang-19 CXX=clang++-19 \
         LIBTOOL_LDFLAGS="-static-libtool-libs" \
         OPENSSL_LIBS="-l:libssl.a -l:libcrypto.a" \
         LIBEV_LIBS="-l:libev.a" \
@@ -69,9 +74,6 @@ RUN git clone --recursive --depth 1 -b $NGHTTP2_BRANCH https://github.com/nghttp
 
 FROM gcr.io/distroless/base-nossl-debian12
 
-COPY --from=build --link \
-    /usr/local/share/nghttp2/ \
-    /usr/local/share/nghttp2/
 COPY --from=build --link \
     /usr/local/bin/h2load \
     /usr/local/bin/nghttpx \

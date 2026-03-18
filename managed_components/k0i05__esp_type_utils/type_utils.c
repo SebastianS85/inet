@@ -33,7 +33,7 @@
  * MIT Licensed as described in the file LICENSE
  */
 
-#include "include/type_utils.h"
+#include "type_utils.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -58,10 +58,19 @@
 * functions and subroutines
 */
 
-uint32_t get_chip_id(void) {
+
+uint32_t get_uint32_chip_id(void) {
     uint32_t chipid = 0L;
     for (int i = 0; i < 17; i = i + 8) {
         chipid |= ((get_efuse_mac() >> (40 - i)) & 0xff) << i;
+    }
+    return chipid;
+}
+
+uint64_t get_uint64_chip_id(void) {
+    uint64_t chipid = 0LL;
+    for (int i = 0; i < 63; i = i + 8) {
+        chipid |= ((get_efuse_mac() >> (56 - i)) & 0xff) << i;
     }
     return chipid;
 }
@@ -178,11 +187,11 @@ const char* int64_to_binary(const int64_t value) {
 
 uint16_t bytes_to_uint16(const uint8_t* bytes, const bool little_endian) {
     if(little_endian == true) {
-        return  (uint16_t)bytes[0] | 
-                ((uint16_t)bytes[1] << 8);
+        return  (uint16_t)(bytes[0] | 
+                ((uint16_t)bytes[1] << 8));
     } else {
-        return  ((uint16_t)bytes[0] << 8) | 
-                (uint16_t)bytes[1];
+        return  (uint16_t)(((uint16_t)bytes[0] << 8) | 
+                bytes[1]);
     }
 }
 
@@ -224,11 +233,10 @@ uint64_t bytes_to_uint64(const uint8_t* bytes, const bool little_endian) {
 
 int16_t bytes_to_int16(const uint8_t* bytes, const bool little_endian) {
     if(little_endian == true) {
-        return  (int16_t)bytes[0] | 
-                ((int16_t)bytes[1] << 8);
+        return  (int16_t)(bytes[0] | 
+                ((int16_t)bytes[1] << 8));
     } else {
-        return  ((int16_t)bytes[0] << 8) | 
-                (int16_t)bytes[1];
+        return  (int16_t)(((int16_t)bytes[0] << 8) | bytes[1]);
     }
 }
 

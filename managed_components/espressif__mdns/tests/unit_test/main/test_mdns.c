@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2022-2024 Espressif Systems (Shanghai) CO LTD
+ * SPDX-FileCopyrightText: 2022-2025 Espressif Systems (Shanghai) CO LTD
  *
  * SPDX-License-Identifier: Unlicense OR CC0-1.0
  */
@@ -45,18 +45,57 @@ static void yield_to_all_priorities(void)
 
 TEST(mdns, api_fails_with_invalid_state)
 {
-    TEST_ASSERT_NOT_EQUAL(ESP_OK, mdns_init() );
-    TEST_ASSERT_NOT_EQUAL(ESP_OK, mdns_hostname_set(MDNS_HOSTNAME) );
-    TEST_ASSERT_NOT_EQUAL(ESP_OK, mdns_instance_name_set(MDNS_INSTANCE) );
-    TEST_ASSERT_NOT_EQUAL(ESP_OK, mdns_service_add(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_SERVICE_PORT, NULL, 0) );
+    TEST_ASSERT_NOT_EQUAL(ESP_OK, mdns_init());
+    TEST_ASSERT_NOT_EQUAL(ESP_OK, mdns_hostname_set(MDNS_HOSTNAME));
+    TEST_ASSERT_NOT_EQUAL(ESP_OK, mdns_instance_name_set(MDNS_INSTANCE));
+    TEST_ASSERT_NOT_EQUAL(ESP_OK, mdns_service_add(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_SERVICE_PORT, NULL, 0));
 }
 
 TEST(mdns, init_deinit)
 {
     test_case_uses_tcpip();
     TEST_ASSERT_EQUAL(ESP_OK, esp_event_loop_create_default());
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_init() );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_init());
     yield_to_all_priorities(); // Make sure that mdns task has executed to complete initialization
+    mdns_free();
+    esp_event_loop_delete_default();
+}
+
+TEST(mdns, boolean_txt_null_value)
+{
+    mdns_result_t *results = NULL;
+    test_case_uses_tcpip();
+    TEST_ASSERT_EQUAL(ESP_OK, esp_event_loop_create_default());
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_init());
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_hostname_set(MDNS_HOSTNAME));
+
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_add(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_SERVICE_PORT, NULL, 0));
+
+    mdns_txt_item_t txt_data[] = {
+        {"bool", NULL},
+        {"key", "value"},
+    };
+    const size_t txt_data_count = sizeof(txt_data) / sizeof(txt_data[0]);
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_txt_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, txt_data, txt_data_count));
+    yield_to_all_priorities();
+
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_lookup_selfhosted_service(NULL, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 1, &results));
+    TEST_ASSERT_NOT_EQUAL(NULL, results);
+    TEST_ASSERT_NOT_EQUAL(NULL, results->txt);
+    TEST_ASSERT_EQUAL(txt_data_count, results->txt_count);
+
+    bool found_bool = false;
+    for (size_t i = 0; i < results->txt_count; ++i) {
+        if (strcmp(results->txt[i].key, "bool") == 0) {
+            TEST_ASSERT_NOT_EQUAL(NULL, results->txt_value_len);
+            TEST_ASSERT_EQUAL_UINT8(0, results->txt_value_len[i]);
+            found_bool = true;
+        }
+    }
+    TEST_ASSERT_TRUE(found_bool);
+    mdns_query_results_free(results);
+
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_remove(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO));
     mdns_free();
     esp_event_loop_delete_default();
 }
@@ -76,33 +115,33 @@ TEST(mdns, api_fails_with_expected_err)
     test_case_uses_tcpip();
     TEST_ASSERT_EQUAL(ESP_OK, esp_event_loop_create_default());
 
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_init() );
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_hostname_set(MDNS_HOSTNAME) );
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_delegate_hostname_add(MDNS_DELEGATE_HOSTNAME, &addr) );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_init());
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_hostname_set(MDNS_HOSTNAME));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_delegate_hostname_add(MDNS_DELEGATE_HOSTNAME, &addr));
     yield_to_all_priorities();  // Make sure that mdns task has executed to add the hostname
-    TEST_ASSERT_TRUE(mdns_hostname_exists(MDNS_DELEGATE_HOSTNAME) );
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_instance_name_set(MDNS_INSTANCE) );
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_add(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_SERVICE_PORT, serviceTxtData, CONFIG_MDNS_MAX_SERVICES) );
-    TEST_ASSERT_FALSE(mdns_service_exists(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_DELEGATE_HOSTNAME) );
+    TEST_ASSERT_TRUE(mdns_hostname_exists(MDNS_DELEGATE_HOSTNAME));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_instance_name_set(MDNS_INSTANCE));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_add(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_SERVICE_PORT, serviceTxtData, CONFIG_MDNS_MAX_SERVICES));
+    TEST_ASSERT_FALSE(mdns_service_exists(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_DELEGATE_HOSTNAME));
     TEST_ASSERT_EQUAL(ESP_OK, mdns_service_add_for_host(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_DELEGATE_HOSTNAME,
-                      MDNS_SERVICE_PORT, serviceTxtData, CONFIG_MDNS_MAX_SERVICES) );
-    TEST_ASSERT_TRUE(mdns_service_exists(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_DELEGATE_HOSTNAME) );
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_txt_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, serviceTxtData, CONFIG_MDNS_MAX_SERVICES) );
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_txt_item_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, "key1", "value1") );
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_txt_item_remove(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, "key1") );
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_port_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 8080) );
+                                                        MDNS_SERVICE_PORT, serviceTxtData, CONFIG_MDNS_MAX_SERVICES));
+    TEST_ASSERT_TRUE(mdns_service_exists(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_DELEGATE_HOSTNAME));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_txt_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, serviceTxtData, CONFIG_MDNS_MAX_SERVICES));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_txt_item_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, "key1", "value1"));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_txt_item_remove(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, "key1"));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_port_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 8080));
     yield_to_all_priorities();  // to remove the service with the updated txt records
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_remove(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO) );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_remove(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO));
     yield_to_all_priorities();  // Make sure that mdns task has executed to remove the service
 
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_add(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_SERVICE_PORT, NULL, 0) );
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_delegate_hostname_remove(MDNS_DELEGATE_HOSTNAME) );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_add(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_SERVICE_PORT, NULL, 0));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_delegate_hostname_remove(MDNS_DELEGATE_HOSTNAME));
     yield_to_all_priorities();  // Make sure that mdns task has executed to remove the hostname
-    TEST_ASSERT_FALSE(mdns_service_exists(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_DELEGATE_HOSTNAME) );
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_remove_all() );
+    TEST_ASSERT_FALSE(mdns_service_exists(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_DELEGATE_HOSTNAME));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_remove_all());
     yield_to_all_priorities();  // Make sure that mdns task has executed to remove all services
 
-    TEST_ASSERT_EQUAL(ESP_ERR_INVALID_ARG, mdns_service_port_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 8080) );
+    TEST_ASSERT_EQUAL(ESP_ERR_INVALID_ARG, mdns_service_port_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 8080));
 
     mdns_free();
     esp_event_loop_delete_default();
@@ -116,7 +155,7 @@ TEST(mdns, query_api_fails_with_expected_err)
     test_case_uses_tcpip();
     TEST_ASSERT_EQUAL(ESP_OK, esp_event_loop_create_default());
 
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_init() );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_init());
     // check it is not possible to register a service or set an instance without configuring the hostname
     TEST_ASSERT_EQUAL(ESP_ERR_INVALID_ARG, mdns_service_add(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_SERVICE_PORT, NULL, 0));
     TEST_ASSERT_EQUAL(ESP_ERR_INVALID_ARG, mdns_instance_name_set(MDNS_INSTANCE));
@@ -125,19 +164,19 @@ TEST(mdns, query_api_fails_with_expected_err)
     TEST_ASSERT_EQUAL(ESP_OK, mdns_service_add(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_SERVICE_PORT, NULL, 0));
     TEST_ASSERT_EQUAL(ESP_OK, mdns_instance_name_set(MDNS_INSTANCE));
 
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_query_ptr(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 10, CONFIG_MDNS_MAX_SERVICES,  &results) );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_query_ptr(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 10, CONFIG_MDNS_MAX_SERVICES,  &results));
     mdns_query_results_free(results);
 
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_query_srv(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 10, &results) );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_query_srv(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 10, &results));
     mdns_query_results_free(results);
 
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_query_txt(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 10, &results) );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_query_txt(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 10, &results));
     mdns_query_results_free(results);
 
-    TEST_ASSERT_EQUAL(ESP_ERR_NOT_FOUND, mdns_query_a(MDNS_HOSTNAME, 10, &addr4) );
+    TEST_ASSERT_EQUAL(ESP_ERR_NOT_FOUND, mdns_query_a(MDNS_HOSTNAME, 10, &addr4));
     mdns_query_results_free(results);
 
-    TEST_ASSERT_EQUAL(ESP_ERR_NOT_FOUND, mdns_query_aaaa(MDNS_HOSTNAME, 10, &addr6) );
+    TEST_ASSERT_EQUAL(ESP_ERR_NOT_FOUND, mdns_query_aaaa(MDNS_HOSTNAME, 10, &addr6));
     mdns_query_results_free(results);
 
     mdns_free();
@@ -149,7 +188,7 @@ TEST(mdns, add_remove_service)
     mdns_result_t *results = NULL;
     test_case_uses_tcpip();
     TEST_ASSERT_EQUAL(ESP_OK, esp_event_loop_create_default());
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_init() );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_init());
     TEST_ASSERT_EQUAL(ESP_OK, mdns_hostname_set(MDNS_HOSTNAME));
     TEST_ASSERT_EQUAL(ESP_OK, mdns_service_add(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_SERVICE_PORT, NULL, 0));
     yield_to_all_priorities();  // Make sure that mdns task has executed to add the hostname
@@ -170,7 +209,7 @@ TEST(mdns, add_remove_service)
     mdns_query_results_free(results);
 
     // Update service properties: instance
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_instance_name_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_INSTANCE "1" ));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_instance_name_set(MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_INSTANCE "1"));
     yield_to_all_priorities();  // Make sure that mdns task has executed to add the hostname
     TEST_ASSERT_EQUAL(ESP_OK, mdns_lookup_selfhosted_service(MDNS_INSTANCE "1", MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 1, &results));
     TEST_ASSERT_NOT_EQUAL(NULL, results);
@@ -220,9 +259,9 @@ TEST(mdns, add_remove_deleg_service)
     mdns_result_t *results = NULL;
     test_case_uses_tcpip();
     TEST_ASSERT_EQUAL(ESP_OK, esp_event_loop_create_default());
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_init() );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_init());
     TEST_ASSERT_EQUAL(ESP_OK, mdns_hostname_set(MDNS_HOSTNAME));
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_delegate_hostname_add(MDNS_DELEGATE_HOSTNAME, &addr) );
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_delegate_hostname_add(MDNS_DELEGATE_HOSTNAME, &addr));
 
     TEST_ASSERT_EQUAL(ESP_OK, mdns_service_add_for_host(MDNS_INSTANCE, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_DELEGATE_HOSTNAME, MDNS_SERVICE_PORT, NULL, 0));
     yield_to_all_priorities();  // Make sure that mdns task has executed to add the hostname
@@ -243,7 +282,7 @@ TEST(mdns, add_remove_deleg_service)
     mdns_query_results_free(results);
 
     // Update service properties: instance
-    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_instance_name_set_for_host(NULL, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_DELEGATE_HOSTNAME, MDNS_INSTANCE "1" ));
+    TEST_ASSERT_EQUAL(ESP_OK, mdns_service_instance_name_set_for_host(NULL, MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, MDNS_DELEGATE_HOSTNAME, MDNS_INSTANCE "1"));
     yield_to_all_priorities();  // Make sure that mdns task has executed to add the hostname
     TEST_ASSERT_EQUAL(ESP_OK, mdns_lookup_delegated_service(MDNS_INSTANCE "1", MDNS_SERVICE_NAME, MDNS_SERVICE_PROTO, 1, &results));
     TEST_ASSERT_NOT_EQUAL(NULL, results);
@@ -290,6 +329,7 @@ TEST_GROUP_RUNNER(mdns)
     RUN_TEST_CASE(mdns, init_deinit)
     RUN_TEST_CASE(mdns, add_remove_service)
     RUN_TEST_CASE(mdns, add_remove_deleg_service)
+    RUN_TEST_CASE(mdns, boolean_txt_null_value)
 
 }
 

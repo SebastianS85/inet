@@ -29,7 +29,14 @@
 
 #include <ev.h>
 
-#include <openssl/ssl.h>
+#include "ssl_compat.h"
+
+#ifdef NGHTTP2_OPENSSL_IS_WOLFSSL
+#  include <wolfssl/options.h>
+#  include <wolfssl/openssl/ssl.h>
+#else // !defined(NGHTTP2_OPENSSL_IS_WOLFSSL)
+#  include <openssl/ssl.h>
+#endif // !defined(NGHTTP2_OPENSSL_IS_WOLFSSL)
 
 namespace shrpx {
 
@@ -65,4 +72,4 @@ private:
 
 } // namespace shrpx
 
-#endif // SHRPX_RATE_LIMIT_H
+#endif // !defined(SHRPX_RATE_LIMIT_H)

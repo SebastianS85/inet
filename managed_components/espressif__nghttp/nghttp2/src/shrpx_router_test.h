@@ -27,7 +27,7 @@
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
-#endif // HAVE_CONFIG_H
+#endif // defined(HAVE_CONFIG_H)
 
 #define MUNIT_ENABLE_ASSERT_ALIASES
 
@@ -37,10 +37,10 @@ namespace shrpx {
 
 extern const MunitSuite router_suite;
 
-munit_void_test_decl(test_shrpx_router_match);
-munit_void_test_decl(test_shrpx_router_match_wildcard);
-munit_void_test_decl(test_shrpx_router_match_prefix);
+munit_void_test_decl(test_shrpx_router_match)
+munit_void_test_decl(test_shrpx_router_match_wildcard)
+munit_void_test_decl(test_shrpx_router_match_prefix)
 
 } // namespace shrpx
 
-#endif // SHRPX_ROUTER_TEST_H
+#endif // !defined(SHRPX_ROUTER_TEST_H)

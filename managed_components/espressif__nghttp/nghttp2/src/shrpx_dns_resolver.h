@@ -64,7 +64,7 @@ enum class DNSResolverStatus {
 // result.  In other words, callback is called if get_status() returns
 // DNSResolverStatus::RUNNING.
 using CompleteCb =
-    std::function<void(DNSResolverStatus status, const Address *result)>;
+  std::function<void(DNSResolverStatus status, const Address *result)>;
 
 // DNSResolver is asynchronous name resolver, backed by c-ares
 // library.
@@ -74,7 +74,7 @@ public:
   ~DNSResolver();
 
   // Starts resolving hostname |name|.
-  int resolve(const StringRef &name, int family);
+  int resolve(const std::string_view &name, int family);
   // Returns status.  If status_ is DNSResolverStatus::SUCCESS &&
   // |result| is not nullptr, |*result| is filled.
   DNSResolverStatus get_status(Address *result) const;
@@ -103,7 +103,7 @@ private:
   Address result_;
   CompleteCb completeCb_;
   ev_timer timer_;
-  StringRef name_;
+  std::string_view name_;
   struct ev_loop *loop_;
   // ares_channel is pointer type
   ares_channel channel_;
@@ -115,4 +115,4 @@ private:
 
 } // namespace shrpx
 
-#endif // SHRPX_DNS_RESOLVER_H
+#endif // !defined(SHRPX_DNS_RESOLVER_H)

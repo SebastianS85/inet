@@ -25,8 +25,9 @@
 #include "shrpx_downstream.h"
 
 #include <cassert>
+#include <algorithm>
 
-#include "url-parser/url_parser.h"
+#include "urlparse.h"
 
 #include "shrpx_upstream.h"
 #include "shrpx_client_handler.h"
@@ -39,7 +40,7 @@
 #include "shrpx_log.h"
 #ifdef HAVE_MRUBY
 #  include "shrpx_mruby.h"
-#endif // HAVE_MRUBY
+#endif // defined(HAVE_MRUBY)
 #include "util.h"
 #include "http2.h"
 
@@ -131,40 +132,39 @@ void downstream_wtimeoutcb(struct ev_loop *loop, ev_timer *w, int revents) {
 // upstream could be nullptr for unittests
 Downstream::Downstream(Upstream *upstream, MemchunkPool *mcpool,
                        int64_t stream_id)
-    : dlnext(nullptr),
-      dlprev(nullptr),
-      response_sent_body_length(0),
-      balloc_(1024, 1024),
-      req_(balloc_),
-      resp_(balloc_),
-      request_start_time_(std::chrono::high_resolution_clock::now()),
-      blocked_request_buf_(mcpool),
-      request_buf_(mcpool),
-      response_buf_(mcpool),
-      upstream_(upstream),
-      blocked_link_(nullptr),
-      addr_(nullptr),
-      num_retry_(0),
-      stream_id_(stream_id),
-      assoc_stream_id_(-1),
-      downstream_stream_id_(-1),
-      response_rst_stream_error_code_(NGHTTP2_NO_ERROR),
-      affinity_cookie_(0),
-      request_state_(DownstreamState::INITIAL),
-      response_state_(DownstreamState::INITIAL),
-      dispatch_state_(DispatchState::NONE),
-      upgraded_(false),
-      chunked_request_(false),
-      chunked_response_(false),
-      expect_final_response_(false),
-      request_pending_(false),
-      request_header_sent_(false),
-      accesslog_written_(false),
-      new_affinity_cookie_(false),
-      blocked_request_data_eof_(false),
-      expect_100_continue_(false),
-      stop_reading_(false) {
-
+  : dlnext(nullptr),
+    dlprev(nullptr),
+    response_sent_body_length(0),
+    balloc_(1024, 1024),
+    req_(balloc_),
+    resp_(balloc_),
+    request_start_time_(std::chrono::high_resolution_clock::now()),
+    blocked_request_buf_(mcpool),
+    request_buf_(mcpool),
+    response_buf_(mcpool),
+    upstream_(upstream),
+    blocked_link_(nullptr),
+    addr_(nullptr),
+    num_retry_(0),
+    stream_id_(stream_id),
+    assoc_stream_id_(-1),
+    downstream_stream_id_(-1),
+    response_rst_stream_error_code_(NGHTTP2_NO_ERROR),
+    affinity_cookie_(0),
+    request_state_(DownstreamState::INITIAL),
+    response_state_(DownstreamState::INITIAL),
+    dispatch_state_(DispatchState::NONE),
+    upgraded_(false),
+    chunked_request_(false),
+    chunked_response_(false),
+    expect_final_response_(false),
+    request_pending_(false),
+    request_header_sent_(false),
+    accesslog_written_(false),
+    new_affinity_cookie_(false),
+    blocked_request_data_eof_(false),
+    expect_100_continue_(false),
+    stop_reading_(false) {
   auto config = get_config();
   auto &httpconf = config->http;
 
@@ -190,7 +190,7 @@ Downstream::Downstream(Upstream *upstream, MemchunkPool *mcpool,
   rcbufs_.reserve(32);
 #ifdef ENABLE_HTTP3
   rcbufs3_.reserve(32);
-#endif // ENABLE_HTTP3
+#endif // defined(ENABLE_HTTP3)
 }
 
 Downstream::~Downstream() {
@@ -214,7 +214,7 @@ Downstream::~Downstream() {
     auto mruby_ctx = worker->get_mruby_context();
 
     mruby_ctx->delete_downstream(this);
-#endif // HAVE_MRUBY
+#endif // defined(HAVE_MRUBY)
   }
 
 #ifdef HAVE_MRUBY
@@ -225,7 +225,7 @@ Downstream::~Downstream() {
       mruby_ctx->delete_downstream(this);
     }
   }
-#endif // HAVE_MRUBY
+#endif // defined(HAVE_MRUBY)
 
   // DownstreamConnection may refer to this object.  Delete it now
   // explicitly.
@@ -235,7 +235,7 @@ Downstream::~Downstream() {
   for (auto rcbuf : rcbufs3_) {
     nghttp3_rcbuf_decref(rcbuf);
   }
-#endif // ENABLE_HTTP3
+#endif // defined(ENABLE_HTTP3)
 
   for (auto rcbuf : rcbufs_) {
     nghttp2_rcbuf_decref(rcbuf);
@@ -247,7 +247,7 @@ Downstream::~Downstream() {
 }
 
 int Downstream::attach_downstream_connection(
-    std::unique_ptr<DownstreamConnection> dconn) {
+  std::unique_ptr<DownstreamConnection> dconn) {
   if (dconn->attach_downstream(this) != 0) {
     return -1;
   }
@@ -268,14 +268,14 @@ void Downstream::detach_downstream_connection() {
     const auto &mruby_ctx = group->shared_addr->mruby_ctx;
     mruby_ctx->delete_downstream(this);
   }
-#endif // HAVE_MRUBY
+#endif // defined(HAVE_MRUBY)
 
   dconn_->detach_downstream(this);
 
   auto handler = dconn_->get_client_handler();
 
   handler->pool_downstream_connection(
-      std::unique_ptr<DownstreamConnection>(dconn_.release()));
+    std::unique_ptr<DownstreamConnection>(dconn_.release()));
 }
 
 DownstreamConnection *Downstream::get_downstream_connection() {
@@ -293,7 +293,7 @@ std::unique_ptr<DownstreamConnection> Downstream::pop_downstream_connection() {
     const auto &mruby_ctx = group->shared_addr->mruby_ctx;
     mruby_ctx->delete_downstream(this);
   }
-#endif // HAVE_MRUBY
+#endif // defined(HAVE_MRUBY)
 
   return std::unique_ptr<DownstreamConnection>(dconn_.release());
 }
@@ -321,7 +321,7 @@ void Downstream::force_resume_read() {
 namespace {
 const HeaderRefs::value_type *
 search_header_linear_backwards(const HeaderRefs &headers,
-                               const StringRef &name) {
+                               const std::string_view &name) {
   for (auto it = headers.rbegin(); it != headers.rend(); ++it) {
     auto &kv = *it;
     if (kv.name == name) {
@@ -332,7 +332,7 @@ search_header_linear_backwards(const HeaderRefs &headers,
 }
 } // namespace
 
-StringRef Downstream::assemble_request_cookie() {
+std::string_view Downstream::assemble_request_cookie() {
   size_t len = 0;
 
   for (auto &kv : req_.fs.headers()) {
@@ -344,16 +344,16 @@ StringRef Downstream::assemble_request_cookie() {
   }
 
   auto iov = make_byte_ref(balloc_, len + 1);
-  auto p = std::begin(iov);
+  auto p = std::ranges::begin(iov);
 
   for (auto &kv : req_.fs.headers()) {
     if (kv.token != http2::HD_COOKIE || kv.value.empty()) {
       continue;
     }
 
-    auto end = std::end(kv.value);
-    for (auto it = std::begin(kv.value) + kv.value.size();
-         it != std::begin(kv.value); --it) {
+    auto end = std::ranges::end(kv.value);
+    for (auto it = std::ranges::begin(kv.value) + kv.value.size();
+         it != std::ranges::begin(kv.value); --it) {
       auto c = *(it - 1);
       if (c == ' ' || c == ';') {
         continue;
@@ -362,42 +362,43 @@ StringRef Downstream::assemble_request_cookie() {
       break;
     }
 
-    p = std::copy(std::begin(kv.value), end, p);
-    p = util::copy_lit(p, "; ");
+    p = std::ranges::copy(std::ranges::begin(kv.value), end, p).out;
+    p = std::ranges::copy("; "sv, p).out;
   }
 
   // cut trailing "; "
-  if (p - std::begin(iov) >= 2) {
+  if (p - std::ranges::begin(iov) >= 2) {
     p -= 2;
   }
 
-  return StringRef{std::span{std::begin(iov), p}};
+  return as_string_view(std::ranges::begin(iov), p);
 }
 
-uint32_t Downstream::find_affinity_cookie(const StringRef &name) {
+uint32_t Downstream::find_affinity_cookie(const std::string_view &name) {
   for (auto &kv : req_.fs.headers()) {
     if (kv.token != http2::HD_COOKIE) {
       continue;
     }
 
-    for (auto it = std::begin(kv.value); it != std::end(kv.value);) {
+    for (auto it = std::ranges::begin(kv.value);
+         it != std::ranges::end(kv.value);) {
       if (*it == '\t' || *it == ' ' || *it == ';') {
         ++it;
         continue;
       }
 
-      auto end = std::find(it, std::end(kv.value), '=');
-      if (end == std::end(kv.value)) {
+      auto end = std::ranges::find(it, std::ranges::end(kv.value), '=');
+      if (end == std::ranges::end(kv.value)) {
         return 0;
       }
 
-      if (name != StringRef{it, end}) {
-        it = std::find(it, std::end(kv.value), ';');
+      if (name != std::string_view{it, end}) {
+        it = std::ranges::find(it, std::ranges::end(kv.value), ';');
         continue;
       }
 
-      it = std::find(end + 1, std::end(kv.value), ';');
-      auto val = StringRef{end + 1, it};
+      it = std::ranges::find(end + 1, std::ranges::end(kv.value), ';');
+      auto val = std::string_view{end + 1, it};
       if (val.size() != 8) {
         return 0;
       }
@@ -424,13 +425,14 @@ size_t Downstream::count_crumble_request_cookie() {
       continue;
     }
 
-    for (auto it = std::begin(kv.value); it != std::end(kv.value);) {
+    for (auto it = std::ranges::begin(kv.value);
+         it != std::ranges::end(kv.value);) {
       if (*it == '\t' || *it == ' ' || *it == ';') {
         ++it;
         continue;
       }
 
-      it = std::find(it, std::end(kv.value), ';');
+      it = std::ranges::find(it, std::ranges::end(kv.value), ';');
 
       ++n;
     }
@@ -444,7 +446,8 @@ void Downstream::crumble_request_cookie(std::vector<nghttp2_nv> &nva) {
       continue;
     }
 
-    for (auto it = std::begin(kv.value); it != std::end(kv.value);) {
+    for (auto it = std::ranges::begin(kv.value);
+         it != std::ranges::end(kv.value);) {
       if (*it == '\t' || *it == ' ' || *it == ';') {
         ++it;
         continue;
@@ -452,7 +455,7 @@ void Downstream::crumble_request_cookie(std::vector<nghttp2_nv> &nva) {
 
       auto first = it;
 
-      it = std::find(it, std::end(kv.value), ';');
+      it = std::ranges::find(it, std::ranges::end(kv.value), ';');
 
       nva.push_back({(uint8_t *)"cookie", (uint8_t *)first, str_size("cookie"),
                      (size_t)(it - first),
@@ -464,35 +467,32 @@ void Downstream::crumble_request_cookie(std::vector<nghttp2_nv> &nva) {
 }
 
 namespace {
-void add_header(size_t &sum, HeaderRefs &headers, const StringRef &name,
-                const StringRef &value, bool no_index, int32_t token) {
+void add_header(size_t &sum, HeaderRefs &headers, const std::string_view &name,
+                const std::string_view &value, bool no_index, int32_t token) {
   sum += name.size() + value.size();
   headers.emplace_back(name, value, no_index, token);
 }
 } // namespace
 
 namespace {
-StringRef alloc_header_name(BlockAllocator &balloc, const StringRef &name) {
+std::string_view alloc_header_name(BlockAllocator &balloc,
+                                   const std::string_view &name) {
   auto iov = make_byte_ref(balloc, name.size() + 1);
-  auto p = std::copy(std::begin(name), std::end(name), std::begin(iov));
-  util::inp_strlower(std::begin(iov), p);
+  auto p = util::tolower(name, std::ranges::begin(iov));
   *p = '\0';
 
-  return StringRef{std::span{std::begin(iov), p}};
+  return as_string_view(std::ranges::begin(iov), p);
 }
 } // namespace
 
 namespace {
 void append_last_header_key(BlockAllocator &balloc, bool &key_prev, size_t &sum,
-                            HeaderRefs &headers, const char *data, size_t len) {
+                            HeaderRefs &headers, const std::string_view &data) {
   assert(key_prev);
-  sum += len;
+  sum += data.size();
   auto &item = headers.back();
-  auto name =
-      realloc_concat_string_ref(balloc, item.name, StringRef{data, len});
-
-  auto p = const_cast<uint8_t *>(name.byte());
-  util::inp_strlower(p + name.size() - len, p + name.size());
+  auto name = realloc_concat_string_ref(
+    balloc, item.name, std::views::transform(data, util::lowcase));
 
   item.name = name;
   item.token = http2::lookup_token(item.name);
@@ -502,12 +502,11 @@ void append_last_header_key(BlockAllocator &balloc, bool &key_prev, size_t &sum,
 namespace {
 void append_last_header_value(BlockAllocator &balloc, bool &key_prev,
                               size_t &sum, HeaderRefs &headers,
-                              const char *data, size_t len) {
+                              const std::string_view &data) {
   key_prev = false;
-  sum += len;
+  sum += data.size();
   auto &item = headers.back();
-  item.value =
-      realloc_concat_string_ref(balloc, item.value, StringRef{data, len});
+  item.value = realloc_concat_string_ref(balloc, item.value, data);
 }
 } // namespace
 
@@ -551,30 +550,32 @@ HeaderRefs::value_type *FieldStore::header(int32_t token) {
   return nullptr;
 }
 
-const HeaderRefs::value_type *FieldStore::header(const StringRef &name) const {
+const HeaderRefs::value_type *
+FieldStore::header(const std::string_view &name) const {
   return search_header_linear_backwards(headers_, name);
 }
 
-void FieldStore::add_header_token(const StringRef &name, const StringRef &value,
-                                  bool no_index, int32_t token) {
+void FieldStore::add_header_token(const std::string_view &name,
+                                  const std::string_view &value, bool no_index,
+                                  int32_t token) {
   shrpx::add_header(buffer_size_, headers_, name, value, no_index, token);
 }
 
-void FieldStore::alloc_add_header_name(const StringRef &name) {
+void FieldStore::alloc_add_header_name(const std::string_view &name) {
   auto name_ref = alloc_header_name(balloc_, name);
   auto token = http2::lookup_token(name_ref);
-  add_header_token(name_ref, StringRef{}, false, token);
+  add_header_token(name_ref, ""sv, false, token);
   header_key_prev_ = true;
 }
 
-void FieldStore::append_last_header_key(const char *data, size_t len) {
+void FieldStore::append_last_header_key(const std::string_view &data) {
   shrpx::append_last_header_key(balloc_, header_key_prev_, buffer_size_,
-                                headers_, data, len);
+                                headers_, data);
 }
 
-void FieldStore::append_last_header_value(const char *data, size_t len) {
+void FieldStore::append_last_header_value(const std::string_view &data) {
   shrpx::append_last_header_value(balloc_, header_key_prev_, buffer_size_,
-                                  headers_, data, len);
+                                  headers_, data);
 }
 
 void FieldStore::clear_headers() {
@@ -582,29 +583,29 @@ void FieldStore::clear_headers() {
   header_key_prev_ = false;
 }
 
-void FieldStore::add_trailer_token(const StringRef &name,
-                                   const StringRef &value, bool no_index,
+void FieldStore::add_trailer_token(const std::string_view &name,
+                                   const std::string_view &value, bool no_index,
                                    int32_t token) {
   // Header size limit should be applied to all header and trailer
   // fields combined.
   shrpx::add_header(buffer_size_, trailers_, name, value, no_index, token);
 }
 
-void FieldStore::alloc_add_trailer_name(const StringRef &name) {
+void FieldStore::alloc_add_trailer_name(const std::string_view &name) {
   auto name_ref = alloc_header_name(balloc_, name);
   auto token = http2::lookup_token(name_ref);
-  add_trailer_token(name_ref, StringRef{}, false, token);
+  add_trailer_token(name_ref, ""sv, false, token);
   trailer_key_prev_ = true;
 }
 
-void FieldStore::append_last_trailer_key(const char *data, size_t len) {
+void FieldStore::append_last_trailer_key(const std::string_view &data) {
   shrpx::append_last_header_key(balloc_, trailer_key_prev_, buffer_size_,
-                                trailers_, data, len);
+                                trailers_, data);
 }
 
-void FieldStore::append_last_trailer_value(const char *data, size_t len) {
+void FieldStore::append_last_trailer_value(const std::string_view &data) {
   shrpx::append_last_header_value(balloc_, trailer_key_prev_, buffer_size_,
-                                  trailers_, data, len);
+                                  trailers_, data);
 }
 
 void FieldStore::erase_content_length_and_transfer_encoding() {
@@ -612,7 +613,7 @@ void FieldStore::erase_content_length_and_transfer_encoding() {
     switch (kv.token) {
     case http2::HD_CONTENT_LENGTH:
     case http2::HD_TRANSFER_ENCODING:
-      kv.name = StringRef{};
+      kv.name = ""sv;
       kv.token = -1;
       break;
     }
@@ -620,7 +621,7 @@ void FieldStore::erase_content_length_and_transfer_encoding() {
 }
 
 void Downstream::set_request_start_time(
-    std::chrono::high_resolution_clock::time_point time) {
+  std::chrono::high_resolution_clock::time_point time) {
   request_start_time_ = std::move(time);
 }
 
@@ -720,7 +721,7 @@ int Downstream::end_upload_data() {
 }
 
 void Downstream::rewrite_location_response_header(
-    const StringRef &upstream_scheme) {
+  const std::string_view &upstream_scheme) {
   auto hd = resp_.fs.header(http2::HD_LOCATION);
   if (!hd) {
     return;
@@ -730,15 +731,15 @@ void Downstream::rewrite_location_response_header(
     return;
   }
 
-  http_parser_url u{};
-  auto rv = http_parser_parse_url(hd->value.data(), hd->value.size(), 0, &u);
+  urlparse_url u;
+  auto rv = urlparse_parse_url(hd->value.data(), hd->value.size(), 0, &u);
   if (rv != 0) {
     return;
   }
 
-  auto new_uri = http2::rewrite_location_uri(balloc_, hd->value, u,
-                                             request_downstream_host_,
-                                             req_.authority, upstream_scheme);
+  auto new_uri =
+    http2::rewrite_location_uri(balloc_, hd->value, u, request_downstream_host_,
+                                req_.authority, upstream_scheme);
 
   if (new_uri.empty()) {
     return;
@@ -838,7 +839,7 @@ void Downstream::check_upgrade_fulfilled_http1() {
 
       std::array<uint8_t, base64::encode_length(20)> accept_buf;
       auto expected =
-          http2::make_websocket_accept_token(accept_buf.data(), ws_key_);
+        http2::make_websocket_accept_token(accept_buf.data(), ws_key_);
 
       upgraded_ = !expected.empty() && expected == accept->value;
     } else {
@@ -870,14 +871,14 @@ void Downstream::inspect_http1_request() {
     if (upgrade) {
       const auto &val = upgrade->value;
       // TODO Perform more strict checking for upgrade headers
-      if (NGHTTP2_CLEARTEXT_PROTO_VERSION_ID ""_sr == val) {
+      if (NGHTTP2_CLEARTEXT_PROTO_VERSION_ID ""sv == val) {
         req_.http2_upgrade_seen = true;
       } else {
         req_.upgrade_request = true;
 
         // TODO Should we check Sec-WebSocket-Key, and
         // Sec-WebSocket-Version as well?
-        if (util::strieq("websocket"_sr, val)) {
+        if (util::strieq("websocket"sv, val)) {
           req_.connect_proto = ConnectProto::WEBSOCKET;
         }
       }
@@ -890,7 +891,7 @@ void Downstream::inspect_http1_request() {
 
   auto expect = req_.fs.header(http2::HD_EXPECT);
   expect_100_continue_ =
-      expect && util::strieq(expect->value, "100-continue"_sr);
+    expect && util::strieq(expect->value, "100-continue"sv);
 }
 
 void Downstream::inspect_http1_response() {
@@ -922,10 +923,10 @@ bool Downstream::get_http2_upgrade_request() const {
          response_state_ == DownstreamState::INITIAL;
 }
 
-StringRef Downstream::get_http2_settings() const {
+std::string_view Downstream::get_http2_settings() const {
   auto http2_settings = req_.fs.header(http2::HD_HTTP2_SETTINGS);
   if (!http2_settings) {
-    return StringRef{};
+    return ""sv;
   }
   return http2_settings->value;
 }
@@ -1103,7 +1104,7 @@ void Downstream::add_retry() { ++num_retry_; }
 
 bool Downstream::no_more_retry() const { return num_retry_ > 50; }
 
-void Downstream::set_request_downstream_host(const StringRef &host) {
+void Downstream::set_request_downstream_host(const std::string_view &host) {
   request_downstream_host_ = host;
 }
 
@@ -1172,10 +1173,10 @@ void Downstream::add_rcbuf(nghttp3_rcbuf *rcbuf) {
   nghttp3_rcbuf_incref(rcbuf);
   rcbufs3_.push_back(rcbuf);
 }
-#endif // ENABLE_HTTP3
+#endif // defined(ENABLE_HTTP3)
 
 void Downstream::set_downstream_addr_group(
-    const std::shared_ptr<DownstreamAddrGroup> &group) {
+  const std::shared_ptr<DownstreamAddrGroup> &group) {
   group_ = group;
 }
 
@@ -1209,7 +1210,7 @@ void Downstream::set_blocked_request_data_eof(bool f) {
   blocked_request_data_eof_ = f;
 }
 
-void Downstream::set_ws_key(const StringRef &key) { ws_key_ = key; }
+void Downstream::set_ws_key(const std::string_view &key) { ws_key_ = key; }
 
 bool Downstream::get_expect_100_continue() const {
   return expect_100_continue_;

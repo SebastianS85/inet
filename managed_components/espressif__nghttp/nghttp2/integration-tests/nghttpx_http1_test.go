@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -62,6 +63,7 @@ func TestH1H1InvalidMethod(t *testing.T) {
 			t.Errorf("server should not forward this request")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -86,6 +88,7 @@ func TestH1H1MultipleRequestCL(t *testing.T) {
 			t.Errorf("server should not forward bad request")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -133,6 +136,7 @@ func TestH1H1AffinityCookie(t *testing.T) {
 	opts := options{
 		args: []string{"--affinity-cookie"},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -149,6 +153,7 @@ func TestH1H1AffinityCookie(t *testing.T) {
 
 	const pattern = `affinity=[0-9a-f]{8}; Path=/foo/bar`
 	validCookie := regexp.MustCompile(pattern)
+
 	if got := res.header.Get("Set-Cookie"); !validCookie.MatchString(got) {
 		t.Errorf("Set-Cookie: %v; want pattern %v", got, pattern)
 	}
@@ -161,6 +166,7 @@ func TestH1H1AffinityCookieTLS(t *testing.T) {
 		args: []string{"--alpn-h1", "--affinity-cookie"},
 		tls:  true,
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -177,6 +183,7 @@ func TestH1H1AffinityCookieTLS(t *testing.T) {
 
 	const pattern = `affinity=[0-9a-f]{8}; Path=/foo/bar; Secure`
 	validCookie := regexp.MustCompile(pattern)
+
 	if got := res.header.Get("Set-Cookie"); !validCookie.MatchString(got) {
 		t.Errorf("Set-Cookie: %v; want pattern %v", got, pattern)
 	}
@@ -221,7 +228,8 @@ func TestH1H1GracefulShutdown(t *testing.T) {
 
 	want := io.EOF
 	b := make([]byte, 256)
-	if _, err := st.conn.Read(b); err == nil || err != want {
+
+	if _, err := st.conn.Read(b); !errors.Is(err, want) {
 		t.Errorf("st.conn.Read(): %v; want %v", err, want)
 	}
 }
@@ -234,6 +242,7 @@ func TestH1H1HostRewrite(t *testing.T) {
 			w.Header().Add("request-host", r.Host)
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -243,9 +252,11 @@ func TestH1H1HostRewrite(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusOK; got != want {
 		t.Errorf("status: %v; want %v", got, want)
 	}
+
 	if got, want := res.header.Get("request-host"), st.backendHost; got != want {
 		t.Errorf("request-host: %v; want %v", got, want)
 	}
@@ -259,12 +270,14 @@ func TestH1H1BadHost(t *testing.T) {
 			t.Errorf("server should not forward this request")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
 	if _, err := io.WriteString(st.conn, "GET / HTTP/1.1\r\nTest-Case: TestH1H1HBadHost\r\nHost: foo\"bar\r\n\r\n"); err != nil {
 		t.Fatalf("Error io.WriteString() = %v", err)
 	}
+
 	resp, err := http.ReadResponse(bufio.NewReader(st.conn), nil)
 	if err != nil {
 		t.Fatalf("Error http.ReadResponse() = %v", err)
@@ -285,12 +298,14 @@ func TestH1H1BadAuthority(t *testing.T) {
 			t.Errorf("server should not forward this request")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
 	if _, err := io.WriteString(st.conn, "GET http://foo\"bar/ HTTP/1.1\r\nTest-Case: TestH1H1HBadAuthority\r\nHost: foobar\r\n\r\n"); err != nil {
 		t.Fatalf("Error io.WriteString() = %v", err)
 	}
+
 	resp, err := http.ReadResponse(bufio.NewReader(st.conn), nil)
 	if err != nil {
 		t.Fatalf("Error http.ReadResponse() = %v", err)
@@ -311,12 +326,14 @@ func TestH1H1BadScheme(t *testing.T) {
 			t.Errorf("server should not forward this request")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
 	if _, err := io.WriteString(st.conn, "GET http*://example.com/ HTTP/1.1\r\nTest-Case: TestH1H1HBadScheme\r\nHost: example.com\r\n\r\n"); err != nil {
 		t.Fatalf("Error io.WriteString() = %v", err)
 	}
+
 	resp, err := http.ReadResponse(bufio.NewReader(st.conn), nil)
 	if err != nil {
 		t.Fatalf("Error http.ReadResponse() = %v", err)
@@ -337,6 +354,7 @@ func TestH1H1HTTP10(t *testing.T) {
 			w.Header().Add("request-host", r.Host)
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -354,6 +372,7 @@ func TestH1H1HTTP10(t *testing.T) {
 	if got, want := resp.StatusCode, http.StatusOK; got != want {
 		t.Errorf("status: %v; want %v", got, want)
 	}
+
 	if got, want := resp.Header.Get("request-host"), st.backendHost; got != want {
 		t.Errorf("request-host: %v; want %v", got, want)
 	}
@@ -368,6 +387,7 @@ func TestH1H1HTTP10NoHostRewrite(t *testing.T) {
 			w.Header().Add("request-host", r.Host)
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -385,6 +405,7 @@ func TestH1H1HTTP10NoHostRewrite(t *testing.T) {
 	if got, want := resp.StatusCode, http.StatusOK; got != want {
 		t.Errorf("status: %v; want %v", got, want)
 	}
+
 	if got, want := resp.Header.Get("request-host"), st.backendHost; got != want {
 		t.Errorf("request-host: %v; want %v", got, want)
 	}
@@ -398,10 +419,11 @@ func TestH1H1RequestTrailer(t *testing.T) {
 			buf := make([]byte, 4096)
 			for {
 				_, err := r.Body.Read(buf)
-				if err == io.EOF {
-					break
-				}
 				if err != nil {
+					if errors.Is(err, io.EOF) {
+						break
+					}
+
 					t.Fatalf("r.Body.Read() = %v", err)
 				}
 			}
@@ -410,6 +432,7 @@ func TestH1H1RequestTrailer(t *testing.T) {
 			}
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -423,6 +446,7 @@ func TestH1H1RequestTrailer(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusOK; got != want {
 		t.Errorf("res.status: %v; want %v", got, want)
 	}
@@ -440,6 +464,7 @@ func TestH1H1HeaderFieldBufferPath(t *testing.T) {
 			t.Fatal("execution path should not be here")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -450,6 +475,7 @@ func TestH1H1HeaderFieldBufferPath(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusRequestHeaderFieldsTooLarge; got != want {
 		t.Errorf("status: %v; want %v", got, want)
 	}
@@ -464,6 +490,7 @@ func TestH1H1HeaderFieldBuffer(t *testing.T) {
 			t.Fatal("execution path should not be here")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -473,6 +500,7 @@ func TestH1H1HeaderFieldBuffer(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusRequestHeaderFieldsTooLarge; got != want {
 		t.Errorf("status: %v; want %v", got, want)
 	}
@@ -487,6 +515,7 @@ func TestH1H1HeaderFields(t *testing.T) {
 			t.Fatal("execution path should not be here")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -501,6 +530,7 @@ func TestH1H1HeaderFields(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusRequestHeaderFieldsTooLarge; got != want {
 		t.Errorf("status: %v; want %v", got, want)
 	}
@@ -515,6 +545,7 @@ func TestH1H1Websocket(t *testing.T) {
 			}
 		}).ServeHTTP,
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -523,6 +554,7 @@ func TestH1H1Websocket(t *testing.T) {
 		name: "TestH1H1Websocket",
 		body: content,
 	})
+
 	if got, want := res.body, content; !bytes.Equal(got, want) {
 		t.Errorf("echo: %q; want %q", got, want)
 	}
@@ -539,6 +571,7 @@ func TestH1H1ReqPhaseSetHeader(t *testing.T) {
 			}
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -563,6 +596,7 @@ func TestH1H1ReqPhaseReturn(t *testing.T) {
 			t.Fatalf("request should not be forwarded")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -603,6 +637,7 @@ func TestH1H1ReqPhaseReturnCONNECTMethod(t *testing.T) {
 			t.Fatalf("request should not be forwarded")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -670,6 +705,7 @@ func TestH1H1RespPhaseSetHeader(t *testing.T) {
 	opts := options{
 		args: []string{"--mruby-file=" + testDir + "/resp-set-header.rb"},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -695,6 +731,7 @@ func TestH1H1RespPhaseReturn(t *testing.T) {
 	opts := options{
 		args: []string{"--mruby-file=" + testDir + "/resp-return.rb"},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -732,6 +769,7 @@ func TestH1H1HTTPSRedirect(t *testing.T) {
 	opts := options{
 		args: []string{"--redirect-if-not-tls"},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -745,6 +783,7 @@ func TestH1H1HTTPSRedirect(t *testing.T) {
 	if got, want := res.status, http.StatusPermanentRedirect; got != want {
 		t.Errorf("status = %v; want %v", got, want)
 	}
+
 	if got, want := res.header.Get("location"), "https://127.0.0.1/"; got != want {
 		t.Errorf("location: %v; want %v", got, want)
 	}
@@ -759,6 +798,7 @@ func TestH1H1HTTPSRedirectPort(t *testing.T) {
 			"--redirect-https-port=8443",
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -773,6 +813,7 @@ func TestH1H1HTTPSRedirectPort(t *testing.T) {
 	if got, want := res.status, http.StatusPermanentRedirect; got != want {
 		t.Errorf("status = %v; want %v", got, want)
 	}
+
 	if got, want := res.header.Get("location"), "https://127.0.0.1:8443/foo?bar"; got != want {
 		t.Errorf("location: %v; want %v", got, want)
 	}
@@ -791,6 +832,7 @@ func TestH1H1POSTRequests(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusOK; got != want {
 		t.Errorf("res.status: %v; want %v", got, want)
 	}
@@ -802,6 +844,7 @@ func TestH1H1POSTRequests(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusOK; got != want {
 		t.Errorf("res.status: %v; want %v", got, want)
 	}
@@ -817,6 +860,7 @@ func TestH1H1CONNECTMethodFailure(t *testing.T) {
 			}
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -838,12 +882,39 @@ func TestH1H1CONNECTMethodFailure(t *testing.T) {
 	if _, err := io.ReadAll(resp.Body); err != nil {
 		t.Fatalf("Error io.ReadAll() = %v", err)
 	}
+}
 
-	if _, err := io.WriteString(st.conn, "CONNECT 127.0.0.1:443 HTTP/1.1\r\nTest-Case: TestH1H1CONNECTMethodFailure\r\nHost: 127.0.0.1:443\r\nrequired-header: foo\r\n\r\n"); err != nil {
+// TestH1H1CONNECTMethod tests that CONNECT request succeeds.
+func TestH1H1CONNECTMethod(t *testing.T) {
+	opts := options{
+		handler: func(w http.ResponseWriter, r *http.Request) {
+			hj, ok := w.(http.Hijacker)
+			if !ok {
+				http.Error(w, "Could not hijack the connection", http.StatusInternalServerError)
+				return
+			}
+			_, bufrw, err := hj.Hijack()
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			if _, err := bufrw.WriteString("HTTP/1.1 200\r\n\r\n"); err != nil {
+				t.Fatalf("Error bufrw.WriteString() = %v", err)
+			}
+
+			bufrw.Flush()
+		},
+	}
+
+	st := newServerTester(t, opts)
+	defer st.Close()
+
+	if _, err := io.WriteString(st.conn, "CONNECT 127.0.0.1:443 HTTP/1.1\r\nTest-Case: TestH1H1CONNECTMethod\r\nHost: 127.0.0.1:443\r\n\r\n"); err != nil {
 		t.Fatalf("Error io.WriteString() = %v", err)
 	}
 
-	resp, err = http.ReadResponse(bufio.NewReader(st.conn), nil)
+	resp, err := http.ReadResponse(bufio.NewReader(st.conn), nil)
 	if err != nil {
 		t.Fatalf("Error http.ReadResponse() = %v", err)
 	}
@@ -888,6 +959,7 @@ func TestH1H2NoHost(t *testing.T) {
 			t.Errorf("server should not forward bad request")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -917,6 +989,7 @@ func TestH1H2HTTP10(t *testing.T) {
 			w.Header().Add("request-host", r.Host)
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -934,6 +1007,7 @@ func TestH1H2HTTP10(t *testing.T) {
 	if got, want := resp.StatusCode, http.StatusOK; got != want {
 		t.Errorf("status: %v; want %v", got, want)
 	}
+
 	if got, want := resp.Header.Get("request-host"), st.backendHost; got != want {
 		t.Errorf("request-host: %v; want %v", got, want)
 	}
@@ -949,6 +1023,7 @@ func TestH1H2HTTP10NoHostRewrite(t *testing.T) {
 			w.Header().Add("request-host", r.Host)
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -966,6 +1041,7 @@ func TestH1H2HTTP10NoHostRewrite(t *testing.T) {
 	if got, want := resp.StatusCode, http.StatusOK; got != want {
 		t.Errorf("status: %v; want %v", got, want)
 	}
+
 	if got, want := resp.Header.Get("request-host"), st.backendHost; got != want {
 		t.Errorf("request-host: %v; want %v", got, want)
 	}
@@ -984,6 +1060,7 @@ func TestH1H2CrumbleCookie(t *testing.T) {
 			}
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -996,6 +1073,7 @@ func TestH1H2CrumbleCookie(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusOK; got != want {
 		t.Errorf("status: %v; want %v", got, want)
 	}
@@ -1012,6 +1090,7 @@ func TestH1H2GenerateVia(t *testing.T) {
 			}
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1021,6 +1100,7 @@ func TestH1H2GenerateVia(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.header.Get("Via"), "2 nghttpx"; got != want {
 		t.Errorf("Via: %v; want %v", got, want)
 	}
@@ -1038,6 +1118,7 @@ func TestH1H2AppendVia(t *testing.T) {
 			w.Header().Add("Via", "bar")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1050,6 +1131,7 @@ func TestH1H2AppendVia(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.header.Get("Via"), "bar, 2 nghttpx"; got != want {
 		t.Errorf("Via: %v; want %v", got, want)
 	}
@@ -1067,6 +1149,7 @@ func TestH1H2NoVia(t *testing.T) {
 			w.Header().Add("Via", "bar")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1079,6 +1162,7 @@ func TestH1H2NoVia(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.header.Get("Via"), "bar"; got != want {
 		t.Errorf("Via: %v; want %v", got, want)
 	}
@@ -1096,6 +1180,7 @@ func TestH1H2ReqPhaseReturn(t *testing.T) {
 			t.Fatalf("request should not be forwarded")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1136,6 +1221,7 @@ func TestH1H2RespPhaseReturn(t *testing.T) {
 			"--mruby-file=" + testDir + "/resp-return.rb",
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1178,6 +1264,7 @@ func TestH1H2TE(t *testing.T) {
 			}
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1190,6 +1277,7 @@ func TestH1H2TE(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusOK; got != want {
 		t.Errorf("status: %v; want %v", got, want)
 	}
@@ -1205,6 +1293,7 @@ func TestH1APIBackendconfig(t *testing.T) {
 		},
 		connectPort: 3010,
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1220,18 +1309,21 @@ backend=127.0.0.1,3011
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusOK; got != want {
 		t.Errorf("res.status: %v; want %v", got, want)
 	}
 
 	var apiResp APIResponse
-	err = json.Unmarshal(res.body, &apiResp)
-	if err != nil {
+
+	if err := json.Unmarshal(res.body, &apiResp); err != nil {
 		t.Fatalf("Error unmarshaling API response: %v", err)
 	}
+
 	if got, want := apiResp.Status, "Success"; got != want {
 		t.Errorf("apiResp.Status: %v; want %v", got, want)
 	}
+
 	if got, want := apiResp.Code, 200; got != want {
 		t.Errorf("apiResp.Status: %v; want %v", got, want)
 	}
@@ -1247,6 +1339,7 @@ func TestH1APIBackendconfigQuery(t *testing.T) {
 		},
 		connectPort: 3010,
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1262,18 +1355,21 @@ backend=127.0.0.1,3011
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusOK; got != want {
 		t.Errorf("res.status: %v; want %v", got, want)
 	}
 
 	var apiResp APIResponse
-	err = json.Unmarshal(res.body, &apiResp)
-	if err != nil {
+
+	if err := json.Unmarshal(res.body, &apiResp); err != nil {
 		t.Fatalf("Error unmarshaling API response: %v", err)
 	}
+
 	if got, want := apiResp.Status, "Success"; got != want {
 		t.Errorf("apiResp.Status: %v; want %v", got, want)
 	}
+
 	if got, want := apiResp.Code, 200; got != want {
 		t.Errorf("apiResp.Status: %v; want %v", got, want)
 	}
@@ -1289,6 +1385,7 @@ func TestH1APIBackendconfigBadMethod(t *testing.T) {
 		},
 		connectPort: 3010,
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1304,18 +1401,21 @@ backend=127.0.0.1,3011
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusMethodNotAllowed; got != want {
 		t.Errorf("res.status: %v; want %v", got, want)
 	}
 
 	var apiResp APIResponse
-	err = json.Unmarshal(res.body, &apiResp)
-	if err != nil {
+
+	if err := json.Unmarshal(res.body, &apiResp); err != nil {
 		t.Fatalf("Error unmarshaling API response: %v", err)
 	}
+
 	if got, want := apiResp.Status, "Failure"; got != want {
 		t.Errorf("apiResp.Status: %v; want %v", got, want)
 	}
+
 	if got, want := apiResp.Code, 405; got != want {
 		t.Errorf("apiResp.Status: %v; want %v", got, want)
 	}
@@ -1330,6 +1430,7 @@ func TestH1APIConfigrevision(t *testing.T) {
 		},
 		connectPort: 3010,
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1341,23 +1442,28 @@ func TestH1APIConfigrevision(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusOK; got != want {
 		t.Errorf("res.status: %v; want = %v", got, want)
 	}
 
 	var apiResp APIResponse
+
 	d := json.NewDecoder(bytes.NewBuffer(res.body))
 	d.UseNumber()
-	err = d.Decode(&apiResp)
-	if err != nil {
+
+	if err := d.Decode(&apiResp); err != nil {
 		t.Fatalf("Error unmarshalling API response: %v", err)
 	}
+
 	if got, want := apiResp.Status, "Success"; got != want {
 		t.Errorf("apiResp.Status: %v; want %v", got, want)
 	}
+
 	if got, want := apiResp.Code, 200; got != want {
 		t.Errorf("apiResp.Status: %v; want %v", got, want)
 	}
+
 	if got, want := apiResp.Data["configRevision"], json.Number("0"); got != want {
 		t.Errorf(`apiResp.Data["configRevision"]: %v %t; want %v`, got, got, want)
 	}
@@ -1373,6 +1479,7 @@ func TestH1APINotFound(t *testing.T) {
 		},
 		connectPort: 3010,
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1388,18 +1495,21 @@ backend=127.0.0.1,3011
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusNotFound; got != want {
 		t.Errorf("res.status: %v; want %v", got, want)
 	}
 
 	var apiResp APIResponse
-	err = json.Unmarshal(res.body, &apiResp)
-	if err != nil {
+
+	if err := json.Unmarshal(res.body, &apiResp); err != nil {
 		t.Fatalf("Error unmarshaling API response: %v", err)
 	}
+
 	if got, want := apiResp.Status, "Failure"; got != want {
 		t.Errorf("apiResp.Status: %v; want %v", got, want)
 	}
+
 	if got, want := apiResp.Code, 404; got != want {
 		t.Errorf("apiResp.Status: %v; want %v", got, want)
 	}
@@ -1414,6 +1524,7 @@ func TestH1Healthmon(t *testing.T) {
 		},
 		connectPort: 3011,
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1424,6 +1535,7 @@ func TestH1Healthmon(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusOK; got != want {
 		t.Errorf("res.status: %v; want %v", got, want)
 	}
@@ -1438,6 +1550,7 @@ func TestH1ResponseBeforeRequestEnd(t *testing.T) {
 			t.Fatal("request should not be forwarded")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1480,6 +1593,7 @@ func TestH1H1ChunkedEndsPrematurely(t *testing.T) {
 			bufrw.Flush()
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1499,6 +1613,7 @@ func TestH1H1RequestMalformedTransferEncoding(t *testing.T) {
 			t.Errorf("server should not forward bad request")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1541,6 +1656,7 @@ func TestH1H1ResponseMalformedTransferEncoding(t *testing.T) {
 			bufrw.Flush()
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1550,6 +1666,7 @@ func TestH1H1ResponseMalformedTransferEncoding(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error st.http1() = %v", err)
 	}
+
 	if got, want := res.status, http.StatusBadGateway; got != want {
 		t.Errorf("res.status: %v; want %v", got, want)
 	}
@@ -1577,6 +1694,7 @@ func TestH1H1ResponseUnknownTransferEncoding(t *testing.T) {
 			bufrw.Flush()
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 
@@ -1611,6 +1729,7 @@ func TestH1H1RequestHTTP10TransferEncoding(t *testing.T) {
 			t.Errorf("server should not forward bad request")
 		},
 	}
+
 	st := newServerTester(t, opts)
 	defer st.Close()
 

@@ -34,10 +34,18 @@
 
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <memory>
+#include <string_view>
 
-#include <openssl/ssl.h>
+#include "ssl_compat.h"
+
+#ifdef NGHTTP2_OPENSSL_IS_WOLFSSL
+#  include <wolfssl/options.h>
+#  include <wolfssl/openssl/ssl.h>
+#else // !defined(NGHTTP2_OPENSSL_IS_WOLFSSL)
+#  include <openssl/ssl.h>
+#endif // !defined(NGHTTP2_OPENSSL_IS_WOLFSSL)
 
 #include <ev.h>
 
@@ -52,8 +60,8 @@
 namespace nghttp2 {
 
 struct Config {
-  std::map<std::string, std::vector<std::string>> push;
-  std::map<std::string, std::string> mime_types;
+  std::unordered_map<std::string, std::vector<std::string>> push;
+  std::unordered_map<std::string, std::string> mime_types;
   Headers trailer;
   std::string trailer_names;
   std::string htdocs;
@@ -63,6 +71,7 @@ struct Config {
   std::string dh_param_file;
   std::string address;
   std::string mime_types_file;
+  std::string_view groups;
   ev_tstamp stream_read_timeout;
   ev_tstamp stream_write_timeout;
   void *data_ptr;
@@ -84,7 +93,6 @@ struct Config {
   bool echo_upload;
   bool no_content_length;
   bool ktls;
-  bool no_rfc7540_pri;
   Config();
   ~Config();
 };
@@ -96,18 +104,18 @@ struct FileEntry {
             const std::string *content_type,
             const std::chrono::steady_clock::time_point &last_valid,
             bool stale = false)
-      : path(std::move(path)),
-        length(length),
-        mtime(mtime),
-        last_valid(last_valid),
-        content_type(content_type),
-        dlnext(nullptr),
-        dlprev(nullptr),
-        fd(fd),
-        usecount(1),
-        stale(stale) {}
+    : path(std::move(path)),
+      length(length),
+      mtime(mtime),
+      last_valid(last_valid),
+      content_type(content_type),
+      dlnext(nullptr),
+      dlprev(nullptr),
+      fd(fd),
+      usecount(1),
+      stale(stale) {}
   std::string path;
-  std::multimap<std::string, std::unique_ptr<FileEntry>>::iterator it;
+  std::unordered_multimap<std::string, std::unique_ptr<FileEntry>>::iterator it;
   int64_t length;
   int64_t mtime;
   std::chrono::steady_clock::time_point last_valid;
@@ -119,13 +127,13 @@ struct FileEntry {
 };
 
 struct RequestHeader {
-  StringRef method;
-  StringRef scheme;
-  StringRef authority;
-  StringRef host;
-  StringRef path;
-  StringRef ims;
-  StringRef expect;
+  std::string_view method;
+  std::string_view scheme;
+  std::string_view authority;
+  std::string_view host;
+  std::string_view path;
+  std::string_view ims;
+  std::string_view expect;
 
   struct {
     nghttp2_rcbuf *method;
@@ -170,21 +178,21 @@ public:
   int connection_made();
   int verify_alpn_result();
 
-  int submit_file_response(const StringRef &status, Stream *stream,
+  int submit_file_response(const std::string_view &status, Stream *stream,
                            time_t last_modified, off_t file_length,
                            const std::string *content_type,
                            nghttp2_data_provider2 *data_prd);
 
-  int submit_response(const StringRef &status, int32_t stream_id,
+  int submit_response(const std::string_view &status, int32_t stream_id,
                       nghttp2_data_provider2 *data_prd);
 
-  int submit_response(const StringRef &status, int32_t stream_id,
+  int submit_response(const std::string_view &status, int32_t stream_id,
                       const HeaderRefs &headers,
                       nghttp2_data_provider2 *data_prd);
 
   int submit_non_final_response(const std::string &status, int32_t stream_id);
 
-  int submit_push_promise(Stream *stream, const StringRef &push_path);
+  int submit_push_promise(Stream *stream, const std::string_view &push_path);
 
   int submit_rst_stream(Stream *stream, uint32_t error_code);
 
@@ -215,7 +223,7 @@ private:
   ev_io wev_;
   ev_io rev_;
   ev_timer settings_timerev_;
-  std::map<int32_t, std::unique_ptr<Stream>> id2stream_;
+  std::unordered_map<int32_t, std::unique_ptr<Stream>> id2stream_;
   WriteBuf wb_;
   std::function<int(Http2Handler &)> read_, write_;
   int64_t session_id_;
@@ -252,4 +260,4 @@ nghttp2_ssize file_read_callback(nghttp2_session *session, int32_t stream_id,
 
 } // namespace nghttp2
 
-#endif // HTTP_SERVER_H
+#endif // !defined(HTTP_SERVER_H)

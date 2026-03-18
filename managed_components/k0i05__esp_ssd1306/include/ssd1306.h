@@ -42,7 +42,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <esp_err.h>
-#include <i2c_master_ext.h>
+#include <driver/i2c_master.h>
+#include <type_utils.h>
 #include "ssd1306_version.h"
 
 #ifdef __cplusplus
@@ -56,6 +57,8 @@ extern "C" {
 #define I2C_SSD1306_DEV_CLK_SPD           		UINT32_C(100000) //!< ssd1306 I2C default clock frequency (100KHz)
 
 #define I2C_SSD1306_DEV_ADDR               		UINT8_C(0x3c)   //!< ssd1306 I2C address
+
+#define I2C_XFR_TIMEOUT_MS      (500)          //!< I2C transaction timeout in milliseconds
 
 
 #define SSD1306_PAGE_SEGMENT_SIZE				128		//!< ssd1306 segment size
@@ -667,6 +670,21 @@ esp_err_t ssd1306_remove(ssd1306_handle_t handle);
  * @return esp_err_t ESP_OK on success.
  */
 esp_err_t ssd1306_delete(ssd1306_handle_t handle);
+
+/**
+ * @brief Converts SSD1306 firmware version numbers (major, minor, patch) into a string.
+ * 
+ * @return char* SSD1306 firmware version as a string that is formatted as X.X.X (e.g. 4.0.0).
+ */
+const char* ssd1306_get_fw_version(void);
+
+/**
+ * @brief Converts SSD1306 firmware version numbers (major, minor, patch) into an integer value.
+ * 
+ * @return int32_t SSD1306 firmware version number.
+ */
+int32_t ssd1306_get_fw_version_number(void);
+
 
 
 #ifdef __cplusplus

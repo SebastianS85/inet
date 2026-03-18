@@ -27,7 +27,14 @@
 
 #include "shrpx.h"
 
-#include <openssl/ssl.h>
+#include "ssl_compat.h"
+
+#ifdef NGHTTP2_OPENSSL_IS_WOLFSSL
+#  include <wolfssl/options.h>
+#  include <wolfssl/openssl/ssl.h>
+#else // !defined(NGHTTP2_OPENSSL_IS_WOLFSSL)
+#  include <openssl/ssl.h>
+#endif // !defined(NGHTTP2_OPENSSL_IS_WOLFSSL)
 
 #include <nghttp2/nghttp2.h>
 
@@ -85,4 +92,4 @@ private:
 
 } // namespace shrpx
 
-#endif // SHRPX_HTTP2_DOWNSTREAM_CONNECTION_H
+#endif // !defined(SHRPX_HTTP2_DOWNSTREAM_CONNECTION_H)

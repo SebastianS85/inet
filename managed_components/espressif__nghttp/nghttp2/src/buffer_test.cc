@@ -38,13 +38,13 @@ namespace nghttp2 {
 
 namespace {
 const MunitTest tests[]{
-    munit_void_test(test_buffer_write),
-    munit_test_end(),
+  munit_void_test(test_buffer_write),
+  munit_test_end(),
 };
 } // namespace
 
 const MunitSuite buffer_suite{
-    "/buffer", tests, NULL, 1, MUNIT_SUITE_OPTION_NONE,
+  "/buffer", tests, nullptr, 1, MUNIT_SUITE_OPTION_NONE,
 };
 
 void test_buffer_write(void) {
@@ -56,34 +56,34 @@ void test_buffer_write(void) {
 
   assert_size(3, ==, b.rleft());
   assert_size(13, ==, b.wleft());
-  assert_ptr_equal(b.pos, std::begin(b.buf));
+  assert_ptr_equal(b.pos, std::ranges::begin(b.buf));
 
   b.drain(3);
 
   assert_size(0, ==, b.rleft());
   assert_size(13, ==, b.wleft());
-  assert_ptrdiff(3, ==, b.pos - std::begin(b.buf));
+  assert_ptrdiff(3, ==, b.pos - std::ranges::begin(b.buf));
 
   auto n = b.write("0123456789ABCDEF", 16);
 
-  assert_ssize(13, ==, n);
+  assert_size(13, ==, n);
 
   assert_size(13, ==, b.rleft());
   assert_size(0, ==, b.wleft());
-  assert_ptrdiff(3, ==, b.pos - std::begin(b.buf));
+  assert_ptrdiff(3, ==, b.pos - std::ranges::begin(b.buf));
   assert_memory_equal(13, b.pos, "0123456789ABC");
 
   b.reset();
 
   assert_size(0, ==, b.rleft());
   assert_size(16, ==, b.wleft());
-  assert_ptr_equal(b.pos, std::begin(b.buf));
+  assert_ptr_equal(b.pos, std::ranges::begin(b.buf));
 
   b.write(5);
 
   assert_size(5, ==, b.rleft());
   assert_size(11, ==, b.wleft());
-  assert_ptr_equal(b.pos, std::begin(b.buf));
+  assert_ptr_equal(b.pos, std::ranges::begin(b.buf));
 }
 
 } // namespace nghttp2

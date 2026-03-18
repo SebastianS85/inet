@@ -10,9 +10,9 @@ CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
 CONFIG_FREERTOS_ENABLE_BACKWARD_COMPATIBILITY=y
 
 # Increase default app partition size to accommodate living example
-# by providing new partition table in "partitions_living_example.csv"
+# by providing new partition table in "partitions.csv"
 CONFIG_PARTITION_TABLE_CUSTOM=y
-CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions_living_example.csv"
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
 CONFIG_ESP_TLS_INSECURE=y
 CONFIG_ESP_TLS_SKIP_SERVER_CERT_VERIFY=y
 

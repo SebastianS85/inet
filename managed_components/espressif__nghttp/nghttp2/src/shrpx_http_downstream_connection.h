@@ -95,7 +95,7 @@ public:
 private:
   Connection conn_;
   std::function<int(HttpDownstreamConnection &)> on_read_, on_write_,
-      signal_write_;
+    signal_write_;
   Worker *worker_;
   // nullptr if TLS is not used.
   SSL_CTX *ssl_ctx_;
@@ -121,4 +121,4 @@ private:
 
 } // namespace shrpx
 
-#endif // SHRPX_HTTP_DOWNSTREAM_CONNECTION_H
+#endif // !defined(SHRPX_HTTP_DOWNSTREAM_CONNECTION_H)

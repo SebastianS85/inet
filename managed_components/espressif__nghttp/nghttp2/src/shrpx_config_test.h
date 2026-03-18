@@ -27,7 +27,7 @@
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
-#endif // HAVE_CONFIG_H
+#endif // defined(HAVE_CONFIG_H)
 
 #define MUNIT_ENABLE_ASSERT_ALIASES
 
@@ -37,11 +37,11 @@ namespace shrpx {
 
 extern const MunitSuite config_suite;
 
-munit_void_test_decl(test_shrpx_config_parse_header);
-munit_void_test_decl(test_shrpx_config_parse_log_format);
-munit_void_test_decl(test_shrpx_config_read_tls_ticket_key_file);
-munit_void_test_decl(test_shrpx_config_read_tls_ticket_key_file_aes_256);
+munit_void_test_decl(test_shrpx_config_parse_header)
+munit_void_test_decl(test_shrpx_config_parse_log_format)
+munit_void_test_decl(test_shrpx_config_read_tls_ticket_key_file)
+munit_void_test_decl(test_shrpx_config_read_tls_ticket_key_file_aes_256)
 
 } // namespace shrpx
 
-#endif // SHRPX_CONFIG_TEST_H
+#endif // !defined(SHRPX_CONFIG_TEST_H)

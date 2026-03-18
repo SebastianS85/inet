@@ -24,7 +24,14 @@
  */
 #include "shrpx_http_downstream_connection.h"
 
-#include <openssl/rand.h>
+#include "ssl_compat.h"
+
+#ifdef NGHTTP2_OPENSSL_IS_WOLFSSL
+#  include <wolfssl/options.h>
+#  include <wolfssl/openssl/rand.h>
+#else // !defined(NGHTTP2_OPENSSL_IS_WOLFSSL)
+#  include <openssl/rand.h>
+#endif // !defined(NGHTTP2_OPENSSL_IS_WOLFSSL)
 
 #include "shrpx_client_handler.h"
 #include "shrpx_upstream.h"
@@ -41,7 +48,6 @@
 #include "shrpx_log.h"
 #include "http2.h"
 #include "util.h"
-#include "ssl_compat.h"
 
 using namespace nghttp2;
 
@@ -202,26 +208,26 @@ void connectcb(struct ev_loop *loop, ev_io *w, int revents) {
 } // namespace
 
 HttpDownstreamConnection::HttpDownstreamConnection(
-    const std::shared_ptr<DownstreamAddrGroup> &group, DownstreamAddr *addr,
-    struct ev_loop *loop, Worker *worker)
-    : conn_(loop, -1, nullptr, worker->get_mcpool(),
-            group->shared_addr->timeout.write, group->shared_addr->timeout.read,
-            {}, {}, connectcb, readcb, connect_timeoutcb, this,
-            get_config()->tls.dyn_rec.warmup_threshold,
-            get_config()->tls.dyn_rec.idle_timeout, Proto::HTTP1),
-      on_read_(&HttpDownstreamConnection::noop),
-      on_write_(&HttpDownstreamConnection::noop),
-      signal_write_(&HttpDownstreamConnection::noop),
-      worker_(worker),
-      ssl_ctx_(worker->get_cl_ssl_ctx()),
-      group_(group),
-      addr_(addr),
-      raddr_(nullptr),
-      ioctrl_(&conn_.rlimit),
-      response_htp_{0},
-      first_write_done_(false),
-      reusable_(true),
-      request_header_written_(false) {}
+  const std::shared_ptr<DownstreamAddrGroup> &group, DownstreamAddr *addr,
+  struct ev_loop *loop, Worker *worker)
+  : conn_(loop, -1, nullptr, worker->get_mcpool(),
+          group->shared_addr->timeout.write, group->shared_addr->timeout.read,
+          {}, {}, connectcb, readcb, connect_timeoutcb, this,
+          get_config()->tls.dyn_rec.warmup_threshold,
+          get_config()->tls.dyn_rec.idle_timeout, Proto::HTTP1),
+    on_read_(&HttpDownstreamConnection::noop),
+    on_write_(&HttpDownstreamConnection::noop),
+    signal_write_(&HttpDownstreamConnection::noop),
+    worker_(worker),
+    ssl_ctx_(worker->get_cl_ssl_ctx()),
+    group_(group),
+    addr_(addr),
+    raddr_(nullptr),
+    ioctrl_(&conn_.rlimit),
+    response_htp_{0},
+    first_write_done_(false),
+    reusable_(true),
+    request_header_written_(false) {}
 
 HttpDownstreamConnection::~HttpDownstreamConnection() {
   if (LOG_ENABLED(INFO)) {
@@ -263,29 +269,12 @@ int htp_msg_completecb(llhttp_t *htp);
 
 namespace {
 constexpr llhttp_settings_t htp_hooks = {
-    htp_msg_begincb,     // llhttp_cb      on_message_begin;
-    nullptr,             // llhttp_data_cb on_url;
-    nullptr,             // llhttp_data_cb on_status;
-    nullptr,             // llhttp_data_cb on_method;
-    nullptr,             // llhttp_data_cb on_version;
-    htp_hdr_keycb,       // llhttp_data_cb on_header_field;
-    htp_hdr_valcb,       // llhttp_data_cb on_header_value;
-    nullptr,             // llhttp_data_cb on_chunk_extension_name;
-    nullptr,             // llhttp_data_cb on_chunk_extension_value;
-    htp_hdrs_completecb, // llhttp_cb      on_headers_complete;
-    htp_bodycb,          // llhttp_data_cb on_body;
-    htp_msg_completecb,  // llhttp_cb      on_message_complete;
-    nullptr,             // llhttp_cb      on_url_complete;
-    nullptr,             // llhttp_cb      on_status_complete;
-    nullptr,             // llhttp_cb      on_method_complete;
-    nullptr,             // llhttp_cb      on_version_complete;
-    nullptr,             // llhttp_cb      on_header_field_complete;
-    nullptr,             // llhttp_cb      on_header_value_complete;
-    nullptr,             // llhttp_cb      on_chunk_extension_name_complete;
-    nullptr,             // llhttp_cb      on_chunk_extension_value_complete;
-    nullptr,             // llhttp_cb      on_chunk_header;
-    nullptr,             // llhttp_cb      on_chunk_complete;
-    nullptr,             // llhttp_cb      on_reset;
+  .on_message_begin = htp_msg_begincb,
+  .on_header_field = htp_hdr_keycb,
+  .on_header_value = htp_hdr_valcb,
+  .on_headers_complete = htp_hdrs_completecb,
+  .on_body = htp_bodycb,
+  .on_message_complete = htp_msg_completecb,
 };
 } // namespace
 
@@ -296,7 +285,7 @@ int HttpDownstreamConnection::initiate_connection() {
   if (worker_blocker->blocked()) {
     if (LOG_ENABLED(INFO)) {
       DCLOG(INFO, this)
-          << "Worker wide backend connection was blocked temporarily";
+        << "Worker wide backend connection was blocked temporarily";
     }
     return SHRPX_ERR_NETWORK;
   }
@@ -326,21 +315,20 @@ int HttpDownstreamConnection::initiate_connection() {
     if (addr_->dns) {
       if (!check_dns_result) {
         auto dns_query = std::make_unique<DNSQuery>(
-            addr_->host,
-            [this](DNSResolverStatus status, const Address *result) {
-              int rv;
+          addr_->host, [this](DNSResolverStatus status, const Address *result) {
+            int rv;
 
-              if (status == DNSResolverStatus::OK) {
-                *this->resolved_addr_ = *result;
-              }
+            if (status == DNSResolverStatus::OK) {
+              *this->resolved_addr_ = *result;
+            }
 
-              rv = this->initiate_connection();
-              if (rv != 0) {
-                // This callback destroys |this|.
-                auto downstream = this->downstream_;
-                backend_retry(downstream);
-              }
-            });
+            rv = this->initiate_connection();
+            if (rv != 0) {
+              // This callback destroys |this|.
+              auto downstream = this->downstream_;
+              backend_retry(downstream);
+            }
+          });
 
         auto dns_tracker = worker_->get_dns_tracker();
 
@@ -423,8 +411,7 @@ int HttpDownstreamConnection::initiate_connection() {
       conn_.set_ssl(ssl);
       conn_.tls.client_session_cache = &addr_->tls_session_cache;
 
-      auto sni_name =
-          addr_->sni.empty() ? StringRef{addr_->host} : StringRef{addr_->sni};
+      auto sni_name = addr_->sni.empty() ? addr_->host : addr_->sni;
       if (!util::numeric_host(sni_name.data())) {
         SSL_set_tlsext_host_name(conn_.tls.ssl, sni_name.data());
       }
@@ -474,7 +461,6 @@ int HttpDownstreamConnection::push_request_headers() {
     return 0;
   }
 
-  const auto &downstream_hostport = addr_->hostport;
   const auto &req = downstream_->request();
 
   auto &balloc = downstream_->get_block_allocator();
@@ -488,9 +474,9 @@ int HttpDownstreamConnection::push_request_headers() {
 
   // For HTTP/1.0 request, there is no authority in request.  In that
   // case, we use backend server's host nonetheless.
-  auto authority = StringRef(downstream_hostport);
+  auto authority = addr_->hostport;
   auto no_host_rewrite =
-      httpconf.no_host_rewrite || config->http2_proxy || connect_method;
+    httpconf.no_host_rewrite || config->http2_proxy || connect_method;
 
   if (no_host_rewrite && !req.authority.empty()) {
     authority = req.authority;
@@ -502,7 +488,7 @@ int HttpDownstreamConnection::push_request_headers() {
 
   // Assume that method and request path do not contain \r\n.
   auto meth = http2::to_method_string(
-      req.connect_proto == ConnectProto::WEBSOCKET ? HTTP_GET : req.method);
+    req.connect_proto == ConnectProto::WEBSOCKET ? HTTP_GET : req.method);
   buf->append(meth);
   buf->append(' ');
 
@@ -513,18 +499,18 @@ int HttpDownstreamConnection::push_request_headers() {
     // send a request to a HTTP/1 proxy.
     assert(!req.scheme.empty());
     buf->append(req.scheme);
-    buf->append("://");
+    buf->append("://"sv);
     buf->append(authority);
     buf->append(req.path);
   } else if (req.method == HTTP_OPTIONS && req.path.empty()) {
     // Server-wide OPTIONS
-    buf->append("*");
+    buf->append('*');
   } else {
     buf->append(req.path);
   }
-  buf->append(" HTTP/1.1\r\nHost: ");
+  buf->append(" HTTP/1.1\r\nHost: "sv);
   buf->append(authority);
-  buf->append("\r\n");
+  buf->append("\r\n"sv);
 
   auto &fwdconf = httpconf.forwarded;
   auto &xffconf = httpconf.xff;
@@ -532,21 +518,21 @@ int HttpDownstreamConnection::push_request_headers() {
   auto &earlydataconf = httpconf.early_data;
 
   uint32_t build_flags =
-      (fwdconf.strip_incoming ? http2::HDOP_STRIP_FORWARDED : 0) |
-      (xffconf.strip_incoming ? http2::HDOP_STRIP_X_FORWARDED_FOR : 0) |
-      (xfpconf.strip_incoming ? http2::HDOP_STRIP_X_FORWARDED_PROTO : 0) |
-      (earlydataconf.strip_incoming ? http2::HDOP_STRIP_EARLY_DATA : 0) |
-      ((req.http_major == 3 || req.http_major == 2)
-           ? http2::HDOP_STRIP_SEC_WEBSOCKET_KEY
-           : 0);
+    (fwdconf.strip_incoming ? http2::HDOP_STRIP_FORWARDED : 0) |
+    (xffconf.strip_incoming ? http2::HDOP_STRIP_X_FORWARDED_FOR : 0) |
+    (xfpconf.strip_incoming ? http2::HDOP_STRIP_X_FORWARDED_PROTO : 0) |
+    (earlydataconf.strip_incoming ? http2::HDOP_STRIP_EARLY_DATA : 0) |
+    ((req.http_major == 3 || req.http_major == 2)
+       ? http2::HDOP_STRIP_SEC_WEBSOCKET_KEY
+       : 0);
 
   http2::build_http1_headers_from_headers(buf, req.fs.headers(), build_flags);
 
   auto cookie = downstream_->assemble_request_cookie();
   if (!cookie.empty()) {
-    buf->append("Cookie: ");
+    buf->append("Cookie: "sv);
     buf->append(cookie);
-    buf->append("\r\n");
+    buf->append("\r\n"sv);
   }
 
   // set transfer-encoding only when content-length is unknown and
@@ -554,7 +540,7 @@ int HttpDownstreamConnection::push_request_headers() {
   if (req.method != HTTP_CONNECT && req.http2_expect_body &&
       req.fs.content_length == -1) {
     downstream_->set_chunked_request(true);
-    buf->append("Transfer-Encoding: chunked\r\n");
+    buf->append("Transfer-Encoding: chunked\r\n"sv);
   }
 
   if (req.connect_proto == ConnectProto::WEBSOCKET) {
@@ -564,143 +550,144 @@ int HttpDownstreamConnection::push_request_headers() {
         return -1;
       }
       auto iov = make_byte_ref(balloc, base64::encode_length(nonce.size()) + 1);
-      auto p =
-          base64::encode(std::begin(nonce), std::end(nonce), std::begin(iov));
+      auto p = base64::encode(nonce, std::ranges::begin(iov));
       *p = '\0';
-      auto key = StringRef{std::span{std::begin(iov), p}};
+      auto key = as_string_view(std::ranges::begin(iov), p);
       downstream_->set_ws_key(key);
 
-      buf->append("Sec-Websocket-Key: ");
+      buf->append("Sec-Websocket-Key: "sv);
       buf->append(key);
-      buf->append("\r\n");
+      buf->append("\r\n"sv);
     }
 
-    buf->append("Upgrade: websocket\r\nConnection: Upgrade\r\n");
+    buf->append("Upgrade: websocket\r\nConnection: Upgrade\r\n"sv);
   } else if (!connect_method && req.upgrade_request) {
     auto connection = req.fs.header(http2::HD_CONNECTION);
     if (connection) {
-      buf->append("Connection: ");
+      buf->append("Connection: "sv);
       buf->append((*connection).value);
-      buf->append("\r\n");
+      buf->append("\r\n"sv);
     }
 
     auto upgrade = req.fs.header(http2::HD_UPGRADE);
     if (upgrade) {
-      buf->append("Upgrade: ");
+      buf->append("Upgrade: "sv);
       buf->append((*upgrade).value);
-      buf->append("\r\n");
+      buf->append("\r\n"sv);
     }
   } else if (req.connection_close) {
-    buf->append("Connection: close\r\n");
+    buf->append("Connection: close\r\n"sv);
   }
 
   auto upstream = downstream_->get_upstream();
   auto handler = upstream->get_client_handler();
 
-#if defined(NGHTTP2_GENUINE_OPENSSL) || defined(NGHTTP2_OPENSSL_IS_BORINGSSL)
+#if defined(NGHTTP2_GENUINE_OPENSSL) ||                                        \
+  defined(NGHTTP2_OPENSSL_IS_BORINGSSL) || defined(NGHTTP2_OPENSSL_IS_WOLFSSL)
   auto conn = handler->get_connection();
 
   if (conn->tls.ssl && !SSL_is_init_finished(conn->tls.ssl)) {
-    buf->append("Early-Data: 1\r\n");
+    buf->append("Early-Data: 1\r\n"sv);
   }
-#endif // NGHTTP2_GENUINE_OPENSSL || NGHTTP2_OPENSSL_IS_BORINGSSL
+#endif // defined(NGHTTP2_GENUINE_OPENSSL) ||
+       // defined(NGHTTP2_OPENSSL_IS_BORINGSSL) ||
+       // defined(NGHTTP2_OPENSSL_IS_WOLFSSL)
 
   auto fwd =
-      fwdconf.strip_incoming ? nullptr : req.fs.header(http2::HD_FORWARDED);
+    fwdconf.strip_incoming ? nullptr : req.fs.header(http2::HD_FORWARDED);
 
   if (fwdconf.params) {
     auto params = fwdconf.params;
 
     if (config->http2_proxy || connect_method) {
-      params &= ~FORWARDED_PROTO;
+      params &= static_cast<uint32_t>(~FORWARDED_PROTO);
     }
 
     auto value = http::create_forwarded(
-        balloc, params, handler->get_forwarded_by(),
-        handler->get_forwarded_for(), req.authority, req.scheme);
+      balloc, params, handler->get_forwarded_by(), handler->get_forwarded_for(),
+      req.authority, req.scheme);
 
     if (fwd || !value.empty()) {
-      buf->append("Forwarded: ");
+      buf->append("Forwarded: "sv);
       if (fwd) {
         buf->append(fwd->value);
 
         if (!value.empty()) {
-          buf->append(", ");
+          buf->append(", "sv);
         }
       }
       buf->append(value);
-      buf->append("\r\n");
+      buf->append("\r\n"sv);
     }
   } else if (fwd) {
-    buf->append("Forwarded: ");
+    buf->append("Forwarded: "sv);
     buf->append(fwd->value);
-    buf->append("\r\n");
+    buf->append("\r\n"sv);
   }
 
-  auto xff = xffconf.strip_incoming ? nullptr
-                                    : req.fs.header(http2::HD_X_FORWARDED_FOR);
+  auto xff =
+    xffconf.strip_incoming ? nullptr : req.fs.header(http2::HD_X_FORWARDED_FOR);
 
   if (xffconf.add) {
-    buf->append("X-Forwarded-For: ");
+    buf->append("X-Forwarded-For: "sv);
     if (xff) {
       buf->append((*xff).value);
-      buf->append(", ");
+      buf->append(", "sv);
     }
     buf->append(client_handler_->get_ipaddr());
-    buf->append("\r\n");
+    buf->append("\r\n"sv);
   } else if (xff) {
-    buf->append("X-Forwarded-For: ");
+    buf->append("X-Forwarded-For: "sv);
     buf->append((*xff).value);
-    buf->append("\r\n");
+    buf->append("\r\n"sv);
   }
   if (!config->http2_proxy && !connect_method) {
     auto xfp = xfpconf.strip_incoming
-                   ? nullptr
-                   : req.fs.header(http2::HD_X_FORWARDED_PROTO);
+                 ? nullptr
+                 : req.fs.header(http2::HD_X_FORWARDED_PROTO);
 
     if (xfpconf.add) {
-      buf->append("X-Forwarded-Proto: ");
+      buf->append("X-Forwarded-Proto: "sv);
       if (xfp) {
         buf->append((*xfp).value);
-        buf->append(", ");
+        buf->append(", "sv);
       }
       assert(!req.scheme.empty());
       buf->append(req.scheme);
-      buf->append("\r\n");
+      buf->append("\r\n"sv);
     } else if (xfp) {
-      buf->append("X-Forwarded-Proto: ");
+      buf->append("X-Forwarded-Proto: "sv);
       buf->append((*xfp).value);
-      buf->append("\r\n");
+      buf->append("\r\n"sv);
     }
   }
   auto via = req.fs.header(http2::HD_VIA);
   if (httpconf.no_via) {
     if (via) {
-      buf->append("Via: ");
+      buf->append("Via: "sv);
       buf->append((*via).value);
-      buf->append("\r\n");
+      buf->append("\r\n"sv);
     }
   } else {
-    buf->append("Via: ");
+    buf->append("Via: "sv);
     if (via) {
       buf->append((*via).value);
-      buf->append(", ");
+      buf->append(", "sv);
     }
-    std::array<char, 16> viabuf;
-    auto end = http::create_via_header_value(viabuf.data(), req.http_major,
-                                             req.http_minor);
-    buf->append(viabuf.data(), end - viabuf.data());
-    buf->append("\r\n");
+
+    buf->append(16, std::bind_front(http::ViaValueGenerator{}, req.http_major,
+                                    req.http_minor));
+    buf->append("\r\n"sv);
   }
 
   for (auto &p : httpconf.add_request_headers) {
     buf->append(p.name);
-    buf->append(": ");
+    buf->append(": "sv);
     buf->append(p.value);
-    buf->append("\r\n");
+    buf->append("\r\n"sv);
   }
 
-  buf->append("\r\n");
+  buf->append("\r\n"sv);
 
   if (LOG_ENABLED(INFO)) {
     std::string nhdrs;
@@ -708,7 +695,7 @@ int HttpDownstreamConnection::push_request_headers() {
       nhdrs.append(chunk->pos, chunk->last);
     }
     if (log_config()->errorlog_tty) {
-      nhdrs = http::colorizeHeaders(nhdrs.c_str());
+      nhdrs = http::colorize_headers(nhdrs);
     }
     DCLOG(INFO, this) << "HTTP request headers. stream_id="
                       << downstream_->get_stream_id() << "\n"
@@ -735,15 +722,15 @@ int HttpDownstreamConnection::process_blocked_request_buf() {
     auto dest = downstream_->get_request_buf();
     auto chunked = downstream_->get_chunked_request();
     if (chunked) {
-      auto chunk_size_hex = util::utox(src->rleft());
-      dest->append(chunk_size_hex);
-      dest->append("\r\n");
+      dest->append(sizeof(size_t) * 2,
+                   std::bind_front(util::CompactHexFormatter{}, src->rleft()));
+      dest->append("\r\n"sv);
     }
 
     src->copy(*dest);
 
     if (chunked) {
-      dest->append("\r\n");
+      dest->append("\r\n"sv);
     }
   }
 
@@ -772,15 +759,15 @@ int HttpDownstreamConnection::push_upload_data_chunk(const uint8_t *data,
   auto output = downstream_->get_request_buf();
 
   if (chunked) {
-    auto chunk_size_hex = util::utox(datalen);
-    output->append(chunk_size_hex);
-    output->append("\r\n");
+    output->append(sizeof(datalen) * 2,
+                   std::bind_front(util::CompactHexFormatter{}, datalen));
+    output->append("\r\n"sv);
   }
 
   output->append(data, datalen);
 
   if (chunked) {
-    output->append("\r\n");
+    output->append("\r\n"sv);
   }
 
   signal_write();
@@ -814,12 +801,12 @@ void HttpDownstreamConnection::end_upload_data_chunk() {
   auto output = downstream_->get_request_buf();
   const auto &trailers = req.fs.trailers();
   if (trailers.empty()) {
-    output->append("0\r\n\r\n");
+    output->append("0\r\n\r\n"sv);
   } else {
-    output->append("0\r\n");
+    output->append("0\r\n"sv);
     http2::build_http1_headers_from_headers(output, trailers,
                                             http2::HDOP_STRIP_ALL);
-    output->append("\r\n");
+    output->append("\r\n"sv);
   }
 }
 
@@ -1075,8 +1062,8 @@ int ensure_header_field_buffer(const Downstream *downstream,
 
   if (resp.fs.buffer_size() + len > httpconf.response_header_field_buffer) {
     if (LOG_ENABLED(INFO)) {
-      DLOG(INFO, downstream) << "Too large header header field size="
-                             << resp.fs.buffer_size() + len;
+      DLOG(INFO, downstream)
+        << "Too large header header field size=" << resp.fs.buffer_size() + len;
     }
     return -1;
   }
@@ -1093,7 +1080,7 @@ int ensure_max_header_fields(const Downstream *downstream,
   if (resp.fs.num_fields() >= httpconf.max_response_header_fields) {
     if (LOG_ENABLED(INFO)) {
       DLOG(INFO, downstream)
-          << "Too many header field num=" << resp.fs.num_fields() + 1;
+        << "Too many header field num=" << resp.fs.num_fields() + 1;
     }
     return -1;
   }
@@ -1112,19 +1099,21 @@ int htp_hdr_keycb(llhttp_t *htp, const char *data, size_t len) {
     return -1;
   }
 
+  auto name = std::string_view{data, len};
+
   if (downstream->get_response_state() == DownstreamState::INITIAL) {
     if (resp.fs.header_key_prev()) {
-      resp.fs.append_last_header_key(data, len);
+      resp.fs.append_last_header_key(name);
     } else {
       if (ensure_max_header_fields(downstream, httpconf) != 0) {
         return -1;
       }
-      resp.fs.alloc_add_header_name(StringRef{data, len});
+      resp.fs.alloc_add_header_name(name);
     }
   } else {
     // trailer part
     if (resp.fs.trailer_key_prev()) {
-      resp.fs.append_last_trailer_key(data, len);
+      resp.fs.append_last_trailer_key(name);
     } else {
       if (ensure_max_header_fields(downstream, httpconf) != 0) {
         // Could not ignore this trailer field easily, since we may
@@ -1132,7 +1121,7 @@ int htp_hdr_keycb(llhttp_t *htp, const char *data, size_t len) {
         // wrong place or crash if trailer fields are currently empty.
         return -1;
       }
-      resp.fs.alloc_add_trailer_name(StringRef{data, len});
+      resp.fs.alloc_add_trailer_name(name);
     }
   }
   return 0;
@@ -1149,10 +1138,12 @@ int htp_hdr_valcb(llhttp_t *htp, const char *data, size_t len) {
     return -1;
   }
 
+  auto value = std::string_view{data, len};
+
   if (downstream->get_response_state() == DownstreamState::INITIAL) {
-    resp.fs.append_last_header_value(data, len);
+    resp.fs.append_last_header_value(value);
   } else {
-    resp.fs.append_last_trailer_value(data, len);
+    resp.fs.append_last_trailer_value(value);
   }
   return 0;
 }
@@ -1166,7 +1157,7 @@ int htp_bodycb(llhttp_t *htp, const char *data, size_t len) {
   resp.recv_body_length += len;
 
   return downstream->get_upstream()->on_downstream_body(
-      downstream, reinterpret_cast<const uint8_t *>(data), len, true);
+    downstream, reinterpret_cast<const uint8_t *>(data), len, true);
 }
 } // namespace
 
@@ -1271,10 +1262,10 @@ int HttpDownstreamConnection::read_clear() {
         }
       }
 
-      return nread;
+      return static_cast<int>(nread);
     }
 
-    rv = process_input(buf.data(), nread);
+    rv = process_input(buf.data(), as_unsigned(nread));
     if (rv != 0) {
       return rv;
     }
@@ -1304,7 +1295,7 @@ int HttpDownstreamConnection::write_clear() {
 
     if (nwrite < 0) {
       if (!first_write_done_) {
-        return nwrite;
+        return static_cast<int>(nwrite);
       }
       // We may have pending data in receive buffer which may contain
       // part of response body.  So keep reading.  Invoke read event
@@ -1315,7 +1306,7 @@ int HttpDownstreamConnection::write_clear() {
       break;
     }
 
-    input->drain(nwrite);
+    input->drain(as_unsigned(nwrite));
   }
 
   conn_.wlimit.stopw();
@@ -1402,10 +1393,10 @@ int HttpDownstreamConnection::read_tls() {
         }
       }
 
-      return nread;
+      return static_cast<int>(nread);
     }
 
-    rv = process_input(buf.data(), nread);
+    rv = process_input(buf.data(), as_unsigned(nread));
     if (rv != 0) {
       return rv;
     }
@@ -1440,7 +1431,7 @@ int HttpDownstreamConnection::write_tls() {
 
     if (nwrite < 0) {
       if (!first_write_done_) {
-        return nwrite;
+        return static_cast<int>(nwrite);
       }
       // We may have pending data in receive buffer which may contain
       // part of response body.  So keep reading.  Invoke read event
@@ -1451,7 +1442,7 @@ int HttpDownstreamConnection::write_tls() {
       break;
     }
 
-    input->drain(nwrite);
+    input->drain(as_unsigned(nwrite));
   }
 
   conn_.wlimit.stopw();
@@ -1489,12 +1480,11 @@ int HttpDownstreamConnection::process_input(const uint8_t *data,
 
   auto htperr = llhttp_execute(&response_htp_,
                                reinterpret_cast<const char *>(data), datalen);
-  auto nproc =
-      htperr == HPE_OK
-          ? datalen
-          : static_cast<size_t>(reinterpret_cast<const uint8_t *>(
-                                    llhttp_get_error_pos(&response_htp_)) -
-                                data);
+  auto nproc = htperr == HPE_OK
+                 ? datalen
+                 : static_cast<size_t>(reinterpret_cast<const uint8_t *>(
+                                         llhttp_get_error_pos(&response_htp_)) -
+                                       data);
 
   if (htperr != HPE_OK &&
       (!downstream_->get_upgraded() || htperr != HPE_PAUSED_UPGRADE)) {
@@ -1517,7 +1507,7 @@ int HttpDownstreamConnection::process_input(const uint8_t *data,
     if (nproc < datalen) {
       // Data from data + nproc are for upgraded protocol.
       rv = downstream_->get_upstream()->on_downstream_body(
-          downstream_, data + nproc, datalen - nproc, true);
+        downstream_, data + nproc, datalen - nproc, true);
       if (rv != 0) {
         return rv;
       }

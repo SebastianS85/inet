@@ -25,19 +25,19 @@
 #include <sys/types.h>
 #ifdef HAVE_SYS_SOCKET_H
 #  include <sys/socket.h>
-#endif // HAVE_SYS_SOCKET_H
+#endif // defined(HAVE_SYS_SOCKET_H)
 #ifdef HAVE_NETDB_H
 #  include <netdb.h>
-#endif // HAVE_NETDB_H
+#endif // defined(HAVE_NETDB_H)
 #ifdef HAVE_UNISTD_H
 #  include <unistd.h>
-#endif // HAVE_UNISTD_H
+#endif // defined(HAVE_UNISTD_H)
 #ifdef HAVE_FCNTL_H
 #  include <fcntl.h>
-#endif // HAVE_FCNTL_H
+#endif // defined(HAVE_FCNTL_H)
 #ifdef HAVE_NETINET_IN_H
 #  include <netinet/in.h>
-#endif // HAVE_NETINET_IN_H
+#endif // defined(HAVE_NETINET_IN_H)
 #include <netinet/tcp.h>
 #include <poll.h>
 
@@ -49,7 +49,6 @@
 #include <string>
 #include <iostream>
 #include <string>
-#include <set>
 #include <iomanip>
 #include <fstream>
 
@@ -119,7 +118,7 @@ std::string strframetype(uint8_t type) {
   s += ')';
 
   return s;
-};
+}
 } // namespace
 
 namespace {
@@ -329,20 +328,20 @@ void print_frame(print_type ptype, const nghttp2_frame *frame) {
   case NGHTTP2_PING:
     print_frame_attr_indent();
     fprintf(outfile, "(opaque_data=%s)\n",
-            util::format_hex(frame->ping.opaque_data).c_str());
+            util::format_hex(std::span{frame->ping.opaque_data}).c_str());
     break;
   case NGHTTP2_GOAWAY:
     print_frame_attr_indent();
-    fprintf(outfile,
-            "(last_stream_id=%d, error_code=%s(0x%02x), "
-            "opaque_data(%u)=[%s])\n",
-            frame->goaway.last_stream_id,
-            nghttp2_http2_strerror(frame->goaway.error_code),
-            frame->goaway.error_code,
-            static_cast<unsigned int>(frame->goaway.opaque_data_len),
-            util::ascii_dump(frame->goaway.opaque_data,
-                             frame->goaway.opaque_data_len)
-                .c_str());
+    fprintf(
+      outfile,
+      "(last_stream_id=%d, error_code=%s(0x%02x), "
+      "opaque_data(%u)=[%s])\n",
+      frame->goaway.last_stream_id,
+      nghttp2_http2_strerror(frame->goaway.error_code),
+      frame->goaway.error_code,
+      static_cast<unsigned int>(frame->goaway.opaque_data_len),
+      util::ascii_dump(frame->goaway.opaque_data, frame->goaway.opaque_data_len)
+        .c_str());
     break;
   case NGHTTP2_WINDOW_UPDATE:
     print_frame_attr_indent();
@@ -368,7 +367,7 @@ void print_frame(print_type ptype, const nghttp2_frame *frame) {
   }
   case NGHTTP2_PRIORITY_UPDATE: {
     auto priority_update =
-        static_cast<nghttp2_ext_priority_update *>(frame->ext.payload);
+      static_cast<nghttp2_ext_priority_update *>(frame->ext.payload);
     print_frame_attr_indent();
     fprintf(outfile,
             "(prioritized_stream_id=%d, priority_field_value=[%.*s])\n",
@@ -441,7 +440,7 @@ int verbose_on_data_chunk_recv_callback(nghttp2_session *session, uint8_t flags,
                                         size_t len, void *user_data) {
   print_timer();
   auto srecv =
-      nghttp2_session_get_stream_effective_recv_data_length(session, stream_id);
+    nghttp2_session_get_stream_effective_recv_data_length(session, stream_id);
   auto crecv = nghttp2_session_get_effective_recv_data_length(session);
 
   fprintf(outfile,

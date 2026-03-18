@@ -42,7 +42,7 @@ public:
   virtual ~Upstream() {}
   virtual int on_read() = 0;
   virtual int on_write() = 0;
-  virtual int on_timeout(Downstream *downstream) { return 0; };
+  virtual int on_timeout(Downstream *downstream) { return 0; }
   virtual int on_downstream_abort_request(Downstream *downstream,
                                           unsigned int status_code) = 0;
   // Called when the current request is aborted without forwarding it
@@ -76,7 +76,8 @@ public:
   // Starts server push.  The |downstream| is an associated stream for
   // the pushed resource.  This function returns 0 if it succeeds,
   // otherwise -1.
-  virtual int initiate_push(Downstream *downstream, const StringRef &uri) = 0;
+  virtual int initiate_push(Downstream *downstream,
+                            const std::string_view &uri) = 0;
 
   // Fills response data in |iov| whose capacity is |iovcnt|.  Returns
   // the number of iovs filled.
@@ -109,4 +110,4 @@ public:
 
 } // namespace shrpx
 
-#endif // SHRPX_UPSTREAM_H
+#endif // !defined(SHRPX_UPSTREAM_H)

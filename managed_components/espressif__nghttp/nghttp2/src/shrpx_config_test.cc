@@ -26,7 +26,7 @@
 
 #ifdef HAVE_UNISTD_H
 #  include <unistd.h>
-#endif // HAVE_UNISTD_H
+#endif // defined(HAVE_UNISTD_H)
 
 #include <cstdlib>
 
@@ -41,47 +41,47 @@ namespace shrpx {
 
 namespace {
 const MunitTest tests[]{
-    munit_void_test(test_shrpx_config_parse_header),
-    munit_void_test(test_shrpx_config_parse_log_format),
-    munit_void_test(test_shrpx_config_read_tls_ticket_key_file),
-    munit_void_test(test_shrpx_config_read_tls_ticket_key_file_aes_256),
-    munit_test_end(),
+  munit_void_test(test_shrpx_config_parse_header),
+  munit_void_test(test_shrpx_config_parse_log_format),
+  munit_void_test(test_shrpx_config_read_tls_ticket_key_file),
+  munit_void_test(test_shrpx_config_read_tls_ticket_key_file_aes_256),
+  munit_test_end(),
 };
 } // namespace
 
 const MunitSuite config_suite{
-    "/config_suite", tests, NULL, 1, MUNIT_SUITE_OPTION_NONE,
+  "/config_suite", tests, nullptr, 1, MUNIT_SUITE_OPTION_NONE,
 };
 
 void test_shrpx_config_parse_header(void) {
   BlockAllocator balloc(4096, 4096);
 
-  auto p = parse_header(balloc, "a: b"_sr);
+  auto p = parse_header(balloc, "a: b"sv);
   assert_stdsv_equal("a"sv, p.name);
   assert_stdsv_equal("b"sv, p.value);
 
-  p = parse_header(balloc, "a:  b"_sr);
+  p = parse_header(balloc, "a:  b"sv);
   assert_stdsv_equal("a"sv, p.name);
   assert_stdsv_equal("b"sv, p.value);
 
-  p = parse_header(balloc, ":a: b"_sr);
+  p = parse_header(balloc, ":a: b"sv);
   assert_true(p.name.empty());
 
-  p = parse_header(balloc, "a: :b"_sr);
+  p = parse_header(balloc, "a: :b"sv);
   assert_stdsv_equal("a"sv, p.name);
   assert_stdsv_equal(":b"sv, p.value);
 
-  p = parse_header(balloc, ": b"_sr);
+  p = parse_header(balloc, ": b"sv);
   assert_true(p.name.empty());
 
-  p = parse_header(balloc, "alpha: bravo charlie"_sr);
+  p = parse_header(balloc, "alpha: bravo charlie"sv);
   assert_stdsv_equal("alpha", p.name);
   assert_stdsv_equal("bravo charlie", p.value);
 
-  p = parse_header(balloc, "a,: b"_sr);
+  p = parse_header(balloc, "a,: b"sv);
   assert_true(p.name.empty());
 
-  p = parse_header(balloc, "a: b\x0a"_sr);
+  p = parse_header(balloc, "a: b\x0a"sv);
   assert_true(p.name.empty());
 }
 
@@ -89,9 +89,9 @@ void test_shrpx_config_parse_log_format(void) {
   BlockAllocator balloc(4096, 4096);
 
   auto res = parse_log_format(
-      balloc, R"($remote_addr - $remote_user [$time_local] )"
-              R"("$request" $status $body_bytes_sent )"
-              R"("${http_referer}" $http_host "$http_user_agent")"_sr);
+    balloc, R"($remote_addr - $remote_user [$time_local] )"
+            R"("$request" $status $body_bytes_sent )"
+            R"("${http_referer}" $http_host "$http_user_agent")"sv);
   assert_size(16, ==, res.size());
 
   assert_enum_class(LogFragmentType::REMOTE_ADDR, ==, res[0].type);
@@ -136,35 +136,35 @@ void test_shrpx_config_parse_log_format(void) {
   assert_enum_class(LogFragmentType::LITERAL, ==, res[15].type);
   assert_stdsv_equal("\""sv, res[15].value);
 
-  res = parse_log_format(balloc, "$"_sr);
+  res = parse_log_format(balloc, "$"sv);
 
   assert_size(1, ==, res.size());
 
   assert_enum_class(LogFragmentType::LITERAL, ==, res[0].type);
   assert_stdsv_equal("$"sv, res[0].value);
 
-  res = parse_log_format(balloc, "${"_sr);
+  res = parse_log_format(balloc, "${"sv);
 
   assert_size(1, ==, res.size());
 
   assert_enum_class(LogFragmentType::LITERAL, ==, res[0].type);
   assert_stdsv_equal("${"sv, res[0].value);
 
-  res = parse_log_format(balloc, "${a"_sr);
+  res = parse_log_format(balloc, "${a"sv);
 
   assert_size(1, ==, res.size());
 
   assert_enum_class(LogFragmentType::LITERAL, ==, res[0].type);
   assert_stdsv_equal("${a"sv, res[0].value);
 
-  res = parse_log_format(balloc, "${a "_sr);
+  res = parse_log_format(balloc, "${a "sv);
 
   assert_size(1, ==, res.size());
 
   assert_enum_class(LogFragmentType::LITERAL, ==, res[0].type);
   assert_stdsv_equal("${a "sv, res[0].value);
 
-  res = parse_log_format(balloc, "$$remote_addr"_sr);
+  res = parse_log_format(balloc, "$$remote_addr"sv);
 
   assert_size(2, ==, res.size());
 
@@ -180,43 +180,36 @@ void test_shrpx_config_read_tls_ticket_key_file(void) {
   auto fd1 = mkstemp(file1);
   assert_int(-1, !=, fd1);
   assert_ssize(
-      48, ==,
-      write(fd1, "0..............12..............34..............5", 48));
+    48, ==, write(fd1, "0..............12..............34..............5", 48));
   char file2[] = "/tmp/nghttpx-unittest.XXXXXX";
   auto fd2 = mkstemp(file2);
   assert_int(-1, !=, fd2);
   assert_ssize(
-      48, ==,
-      write(fd2, "6..............78..............9a..............b", 48));
+    48, ==, write(fd2, "6..............78..............9a..............b", 48));
 
   close(fd1);
   close(fd2);
-  auto ticket_keys = read_tls_ticket_key_file(
-      {StringRef{file1}, StringRef{file2}}, EVP_aes_128_cbc(), EVP_sha256());
+  auto ticket_keys =
+    read_tls_ticket_key_file({std::string_view{file1}, std::string_view{file2}},
+                             EVP_aes_128_cbc(), EVP_sha256());
   unlink(file1);
   unlink(file2);
   assert_not_null(ticket_keys.get());
   assert_size(2, ==, ticket_keys->keys.size());
   auto key = &ticket_keys->keys[0];
-  assert_true(std::equal(std::begin(key->data.name), std::end(key->data.name),
-                         "0..............1"));
-  assert_true(std::equal(std::begin(key->data.enc_key),
-                         std::begin(key->data.enc_key) + 16,
-                         "2..............3"));
-  assert_true(std::equal(std::begin(key->data.hmac_key),
-                         std::begin(key->data.hmac_key) + 16,
-                         "4..............5"));
+  assert_true(std::ranges::equal(key->data.name, "0..............1"sv));
+  assert_true(std::ranges::equal(std::span{key->data.enc_key}.first(16),
+                                 "2..............3"sv));
+  assert_true(std::ranges::equal(std::span{key->data.hmac_key}.first(16),
+                                 "4..............5"sv));
   assert_size(16, ==, key->hmac_keylen);
 
   key = &ticket_keys->keys[1];
-  assert_true(std::equal(std::begin(key->data.name), std::end(key->data.name),
-                         "6..............7"));
-  assert_true(std::equal(std::begin(key->data.enc_key),
-                         std::begin(key->data.enc_key) + 16,
-                         "8..............9"));
-  assert_true(std::equal(std::begin(key->data.hmac_key),
-                         std::begin(key->data.hmac_key) + 16,
-                         "a..............b"));
+  assert_true(std::ranges::equal(key->data.name, "6..............7"sv));
+  assert_true(std::ranges::equal(std::span{key->data.enc_key}.first(16),
+                                 "8..............9"sv));
+  assert_true(std::ranges::equal(std::span{key->data.hmac_key}.first(16),
+                                 "a..............b"sv));
   assert_size(16, ==, key->hmac_keylen);
 }
 
@@ -240,31 +233,26 @@ void test_shrpx_config_read_tls_ticket_key_file_aes_256(void) {
 
   close(fd1);
   close(fd2);
-  auto ticket_keys = read_tls_ticket_key_file(
-      {StringRef{file1}, StringRef{file2}}, EVP_aes_256_cbc(), EVP_sha256());
+  auto ticket_keys =
+    read_tls_ticket_key_file({std::string_view{file1}, std::string_view{file2}},
+                             EVP_aes_256_cbc(), EVP_sha256());
   unlink(file1);
   unlink(file2);
   assert_not_null(ticket_keys.get());
   assert_size(2, ==, ticket_keys->keys.size());
   auto key = &ticket_keys->keys[0];
-  assert_true(std::equal(std::begin(key->data.name), std::end(key->data.name),
-                         "0..............1"));
-  assert_true(std::equal(std::begin(key->data.enc_key),
-                         std::end(key->data.enc_key),
-                         "2..............................3"));
-  assert_true(std::equal(std::begin(key->data.hmac_key),
-                         std::end(key->data.hmac_key),
-                         "4..............................5"));
+  assert_true(std::ranges::equal(key->data.name, "0..............1"sv));
+  assert_true(std::ranges::equal(key->data.enc_key,
+                                 "2..............................3"sv));
+  assert_true(std::ranges::equal(key->data.hmac_key,
+                                 "4..............................5"sv));
 
   key = &ticket_keys->keys[1];
-  assert_true(std::equal(std::begin(key->data.name), std::end(key->data.name),
-                         "6..............7"));
-  assert_true(std::equal(std::begin(key->data.enc_key),
-                         std::end(key->data.enc_key),
-                         "8..............................9"));
-  assert_true(std::equal(std::begin(key->data.hmac_key),
-                         std::end(key->data.hmac_key),
-                         "a..............................b"));
+  assert_true(std::ranges::equal(key->data.name, "6..............7"sv));
+  assert_true(std::ranges::equal(key->data.enc_key,
+                                 "8..............................9"sv));
+  assert_true(std::ranges::equal(key->data.hmac_key,
+                                 "a..............................b"sv));
 }
 
 } // namespace shrpx
