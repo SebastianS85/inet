@@ -1,5 +1,6 @@
 #ifndef AUDIO_H
 #define AUDIO_H
+#include <stdbool.h>
 #include "http_stream.h"
 #include "esp_peripherals.h"
 
@@ -15,10 +16,12 @@ typedef struct {
 extern Station stations[MAX_STATIONS];
 extern SemaphoreHandle_t station_Mutex; 
 extern int station_count;
+extern int current_station_index;
 void audio_init(void);
 void audio_start(esp_periph_set_handle_t periph_set_handle);
 void audio_pause();
 void audio_resume();
+bool audio_is_paused(void);
 void stream_task(void *arg);
 int _http_stream_event_handle(http_stream_event_msg_t *msg);
 void change_radio_station(uint8_t station_index);

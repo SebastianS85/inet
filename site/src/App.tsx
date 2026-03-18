@@ -30,9 +30,10 @@ export default function App() {
     try {
       const response = await fetch("/current-station");
       if (!response.ok) throw new Error("Failed to fetch current station");
-      const stationIndex = await response.text();
-      setCurrentStation(stations[Number(stationIndex)]?.name || "Unknown Station");
-      setSelectedIndex(Number(stationIndex));
+      const data = await response.json();
+      setCurrentStation(stations[data.index]?.name || "Unknown Station");
+      setSelectedIndex(data.index);
+      setIsPlaying(data.playing);
     } catch (error) {
       console.error("Error fetching current station:", error);
       setCurrentStation("Unknown Station");

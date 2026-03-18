@@ -205,7 +205,7 @@ static esp_err_t save_wifi_handler(httpd_req_t *req)
         return ESP_FAIL;
     }
 
-    ESP_LOGI(TAG, "SSID: %s, Password: %s", ssid_json->valuestring, password_json->valuestring);
+    ESP_LOGI(TAG, "Saving credentials for SSID length=%d", (int)strlen(ssid_json->valuestring));
 
     // Save credentials
     esp_err_t save_result = save_wifi_credentials(ssid_json->valuestring, password_json->valuestring);
@@ -354,20 +354,30 @@ static esp_err_t current_station(httpd_req_t *req)
 {
     ESP_LOGI(TAG, "URL: %s", req->uri);
 
-    // Get the current station information
-    char *response = current_station_info(); // No need to dereference
-
-    // Check if response is valid before sending
-    if (response == NULL)
+    if (current_station_index < 0 || current_station_index >= station_count)
     {
-        const char *error_msg = "Error: Invalid station index or no station info available.";
-        httpd_resp_send(req, error_msg, HTTPD_RESP_USE_STRLEN);
-        return ESP_FAIL; // Return an error if the station info is not available
+        httpd_resp_send_err(req, HTTPD_500_INTERNAL_SERVER_ERROR,
+                            "No station info available");
+        return ESP_FAIL;
     }
 
-    // Send the station info as a response
+    cJSON *root = cJSON_CreateObject();
+    cJSON_AddNumberToObject(root, "index", current_station_index);
+    cJSON_AddBoolToObject(root, "playing", !audio_is_paused());
 
-    httpd_resp_send(req, response, HTTPD_RESP_USE_STRLEN);
+    char *json_str = cJSON_PrintUnformatted(root);
+    cJSON_Delete(root);
+
+    if (json_str == NULL)
+    {
+        httpd_resp_send_500(req);
+        return ESP_FAIL;
+    }
+
+    httpd_resp_set_type(req, "application/json");
+    httpd_resp_send(req, json_str, HTTPD_RESP_USE_STRLEN);
+    free(json_str);
+
     return ESP_OK;
 }
 

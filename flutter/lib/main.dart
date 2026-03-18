@@ -115,8 +115,10 @@ class _RadioHomePageState extends State<RadioHomePage> {
     try {
       final res = await http.get(Uri.parse('$baseUrl/current-station'));
       if (res.statusCode == 200) {
+        final data = json.decode(res.body);
         setState(() {
-          currentStation = int.tryParse(res.body.trim());
+          currentStation = data['index'] as int?;
+          isPlaying = (data['playing'] as bool?) ?? isPlaying;
         });
       }
     } catch (_) {}
