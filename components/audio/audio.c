@@ -16,6 +16,7 @@
 /* ============================================================================ */
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "freertos/queue.h"
 
 /* ============================================================================ */
 /* ESP-IDF and ESP-ADF Includes */
@@ -111,6 +112,23 @@ static TickType_t last_http_activity_tick = 0;        /* Last HTTP data received
 static TickType_t last_i2s_data_tick = 0;             /* Last PCM data written tick */
 static TickType_t last_stream_restart_tick = 0;       /* Last stream restart tick */
 static TickType_t last_pipeline_run_tick = 0;         /* Last pipeline.run() tick */
+
+/* Dedicated restart task — keeps stream_task free to drain the event queue */
+static TaskHandle_t s_restart_task_handle = NULL;
+static volatile bool s_restart_in_progress = false;
+static QueueHandle_t s_restart_queue = NULL;
+static int s_consecutive_restart_failures = 0;
+
+typedef enum {
+    RESTART_REQ_WATCHDOG = 0,
+    RESTART_REQ_STATION_CHANGE,
+} restart_req_type_t;
+
+typedef struct {
+    restart_req_type_t type;
+    int station_index;
+    char reason[64];
+} restart_req_t;
 
 /* ============================================================================ */
 /* Utility: Time Calculations */
@@ -486,6 +504,41 @@ static void log_stream_diagnostics(const char *reason)
              current_station_index);
 }
 
+/**
+ * Stop/terminate pipeline with fallback and post-check.
+ * Returns ESP_OK only when pipeline threads are confirmed stopped.
+ */
+static esp_err_t stop_pipeline_safely(const char *context)
+{
+    if (!pipeline)
+        return ESP_ERR_INVALID_STATE;
+
+    audio_pipeline_stop(pipeline);
+
+    esp_err_t stop_ret = audio_pipeline_wait_for_stop_with_ticks(pipeline, pdMS_TO_TICKS(3000));
+    if (stop_ret == ESP_OK)
+        return ESP_OK;
+
+    ESP_LOGW(TAG, "%s: pipeline stop wait timeout, forcing terminate: %d", context, stop_ret);
+
+    stop_ret = audio_pipeline_terminate_with_ticks(pipeline, pdMS_TO_TICKS(2000));
+    if (stop_ret == ESP_OK)
+        return ESP_OK;
+
+    ESP_LOGW(TAG, "%s: terminate with ticks failed, forcing terminate: %d", context, stop_ret);
+    audio_pipeline_terminate(pipeline);
+
+    /* Verify that force-terminate actually stopped all element tasks. */
+    stop_ret = audio_pipeline_wait_for_stop_with_ticks(pipeline, pdMS_TO_TICKS(800));
+    if (stop_ret != ESP_OK)
+    {
+        ESP_LOGW(TAG, "%s: pipeline still not stopped after force terminate: %d", context, stop_ret);
+        return ESP_FAIL;
+    }
+
+    return ESP_OK;
+}
+
 /* ============================================================================ */
 /* Stream Recovery: Restart Logic */
 /* ============================================================================ */
@@ -522,18 +575,16 @@ static esp_err_t restart_stream_for_station_locked(int station_index, const char
     last_i2s_data_tick = last_stream_restart_tick;
     audio_user_paused = false;
 
-    /* Stop pipeline with timeout fallbacks */
-    audio_pipeline_stop(pipeline);
-    esp_err_t stop_ret = audio_pipeline_wait_for_stop_with_ticks(pipeline, pdMS_TO_TICKS(3000));
+    /* Drop stale events before restart to reduce queue pressure during teardown */
+    if (evt)
+        audio_event_iface_discard(evt);
+
+    /* Stop pipeline before resetting/running it again. */
+    esp_err_t stop_ret = stop_pipeline_safely("Restart");
     if (stop_ret != ESP_OK)
     {
-        ESP_LOGW(TAG, "Pipeline stop wait timeout, forcing terminate: %d", stop_ret);
-        stop_ret = audio_pipeline_terminate_with_ticks(pipeline, pdMS_TO_TICKS(2000));
-        if (stop_ret != ESP_OK)
-        {
-            ESP_LOGW(TAG, "Pipeline terminate with ticks failed, forcing terminate: %d", stop_ret);
-            audio_pipeline_terminate(pipeline);
-        }
+        ESP_LOGW(TAG, "Restart aborted: pipeline did not stop cleanly");
+        return stop_ret;
     }
 
     /* Reset all elements */
@@ -570,29 +621,240 @@ static esp_err_t restart_stream_for_station_locked(int station_index, const char
 }
 
 /**
- * Request stream restart with proper locking and diagnostics
- * Public interface for restart requests
+ * Full pipeline teardown and recreation.
+ * Called when the normal restart sequence fails repeatedly because the pipeline
+ * is stuck in an unrecoverable internal state (e.g. state:7 / RUNNING with no
+ * element tasks alive) that audio_pipeline_stop/terminate cannot escape.
+ * Destroys all ADF objects and builds a fresh pipeline from scratch.
+ */
+static esp_err_t full_pipeline_recover(int station_index)
+{
+    ESP_LOGW(TAG, "Full pipeline recovery: teardown + recreate for station %d (%s)",
+             station_index,
+             (station_index >= 0 && station_index < station_count)
+                 ? stations[station_index].name : "?");
+
+    /* Best-effort stop before teardown to avoid destroy-command failures. */
+    if (evt)
+        audio_event_iface_discard(evt);
+    if (pipeline)
+        stop_pipeline_safely("Full recovery");
+
+    /* Detach event listener before destroying so evt queue stays valid */
+    if (pipeline && evt)
+        audio_pipeline_remove_listener(pipeline);
+
+    /* Force-destroy pipeline; warns internally but frees the struct */
+    if (pipeline)
+    {
+        audio_pipeline_deinit(pipeline);
+        pipeline = NULL;
+    }
+
+    /* Free elements — audio_pipeline_deinit only frees list nodes, not elements */
+    if (http_stream_reader) { audio_element_deinit(http_stream_reader); http_stream_reader = NULL; }
+    if (mp3_decoder)        { audio_element_deinit(mp3_decoder);        mp3_decoder        = NULL; }
+    if (i2s_stream_writer)  { audio_element_deinit(i2s_stream_writer);  i2s_stream_writer  = NULL; }
+
+    /* Let FreeRTOS reap any lingering zombie tasks */
+    vTaskDelay(pdMS_TO_TICKS(500));
+
+    /* --- Recreate pipeline --- */
+    audio_pipeline_cfg_t pipeline_cfg = DEFAULT_AUDIO_PIPELINE_CONFIG();
+    pipeline = audio_pipeline_init(&pipeline_cfg);
+    if (!pipeline)
+    {
+        ESP_LOGE(TAG, "Full recovery: failed to create pipeline");
+        return ESP_FAIL;
+    }
+
+    /* Recreate HTTP stream element */
+    http_stream_cfg_t http_cfg = HTTP_STREAM_CFG_DEFAULT();
+    http_cfg.event_handle = _http_stream_event_handle;
+    http_cfg.type = AUDIO_STREAM_READER;
+    http_cfg.enable_playlist_parser = true;
+    http_cfg.out_rb_size = HTTP_STREAM_RB_SIZE_BYTES;
+    http_stream_reader = http_stream_init(&http_cfg);
+
+    /* Recreate I2S stream element */
+#if defined CONFIG_ESP32_C3_LYRA_V2_BOARD
+    i2s_stream_cfg_t i2s_cfg = I2S_STREAM_PDM_TX_CFG_DEFAULT();
+#else
+    i2s_stream_cfg_t i2s_cfg = I2S_STREAM_CFG_DEFAULT();
+#endif
+    i2s_cfg.type = AUDIO_STREAM_WRITER;
+    i2s_cfg.task_prio = 8;
+    i2s_cfg.out_rb_size = I2S_STREAM_RB_SIZE_BYTES;
+    i2s_stream_writer = i2s_stream_init(&i2s_cfg);
+
+    /* Recreate MP3 decoder element */
+    mp3_decoder_cfg_t mp3_cfg = DEFAULT_MP3_DECODER_CONFIG();
+    mp3_cfg.out_rb_size = MP3_DECODER_RB_SIZE_BYTES;
+    mp3_decoder = mp3_decoder_init(&mp3_cfg);
+
+    if (!http_stream_reader || !mp3_decoder || !i2s_stream_writer)
+    {
+        ESP_LOGE(TAG, "Full recovery: failed to create audio elements");
+        return ESP_FAIL;
+    }
+
+    /* Register and link elements: http -> mp3 -> i2s */
+    audio_pipeline_register(pipeline, http_stream_reader, "http");
+    audio_pipeline_register(pipeline, mp3_decoder, "mp3");
+    audio_pipeline_register(pipeline, i2s_stream_writer, "i2s");
+    const char *link_tag[3] = {"http", "mp3", "i2s"};
+    audio_pipeline_link(pipeline, &link_tag[0], 3);
+
+    /* Reattach existing event listener to the new pipeline */
+    if (evt)
+    {
+        audio_pipeline_set_listener(pipeline, evt);
+        audio_event_iface_discard(evt);
+    }
+
+    /* Set URI and run fresh pipeline */
+    int safe_idx = (station_index >= 0 && station_index < station_count) ? station_index : 0;
+    const char *uri = stations[safe_idx].url;
+    esp_err_t err = audio_element_set_uri(http_stream_reader, uri);
+    if (err != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Full recovery: failed to set URI: %d", err);
+        return err;
+    }
+
+    err = audio_pipeline_run(pipeline);
+    if (err == ESP_OK)
+    {
+        last_pipeline_run_tick = xTaskGetTickCount();
+        last_stream_restart_tick = last_pipeline_run_tick;
+        mark_stream_activity();
+        display_set_text("                ", 1, false);
+        display_set_text(stations[safe_idx].name, 1, false);
+        ESP_LOGI(TAG, "Full recovery successful, now playing station %d (%s)",
+                 safe_idx, stations[safe_idx].name);
+    }
+    else
+    {
+        ESP_LOGE(TAG, "Full recovery: audio_pipeline_run also failed: %d", err);
+    }
+    return err;
+}
+
+/**
+ * Worker task that performs the blocking pipeline stop/restart sequence.
+ * Runs separately from stream_task so the event queue stays drained during restart.
+ */
+static void audio_restart_task(void *arg)
+{
+    (void)arg;
+    while (1)
+    {
+        restart_req_t req = {0};
+        if (!s_restart_queue)
+        {
+            vTaskDelay(pdMS_TO_TICKS(100));
+            continue;
+        }
+
+        if (xQueueReceive(s_restart_queue, &req, portMAX_DELAY) != pdTRUE)
+            continue;
+
+        s_restart_in_progress = true;
+
+        /* Coalesce bursts: keep only the latest queued station change request. */
+        if (req.type == RESTART_REQ_STATION_CHANGE)
+        {
+            restart_req_t queued = {0};
+            while (xQueueReceive(s_restart_queue, &queued, 0) == pdTRUE)
+            {
+                if (queued.type == RESTART_REQ_STATION_CHANGE)
+                    req = queued;
+            }
+        }
+
+        if (xSemaphoreTake(station_Mutex, pdMS_TO_TICKS(2000)) == pdTRUE)
+        {
+            int target_station = current_station_index;
+            const char *reason = req.reason;
+
+            if (req.type == RESTART_REQ_STATION_CHANGE)
+            {
+                if (req.station_index < 0 || req.station_index >= station_count)
+                {
+                    ESP_LOGW(TAG, "Restart task: invalid queued station index %d", req.station_index);
+                    xSemaphoreGive(station_Mutex);
+                    s_restart_in_progress = false;
+                    continue;
+                }
+
+                if (req.station_index == current_station_index)
+                {
+                    xSemaphoreGive(station_Mutex);
+                    s_restart_in_progress = false;
+                    continue;
+                }
+
+                target_station = req.station_index;
+                ESP_LOGI(TAG, "Changing station to: %s", stations[target_station].name);
+                current_station_index = target_station;
+            }
+
+            log_stream_diagnostics(reason);
+            esp_err_t err = restart_stream_for_station_locked(target_station, reason);
+            if (err == ESP_OK)
+            {
+                s_consecutive_restart_failures = 0;
+                if (req.type == RESTART_REQ_STATION_CHANGE)
+                    save_station_index_to_nvs(current_station_index);
+            }
+            else
+            {
+                s_consecutive_restart_failures++;
+                ESP_LOGW(TAG, "Restart task: restart failed (attempt %d/2), err=%d, station=%d",
+                         s_consecutive_restart_failures, err, target_station);
+
+                if (s_consecutive_restart_failures >= 2)
+                {
+                    /* Pipeline is stuck in an unrecoverable state — tear down and
+                     * recreate all ADF objects so we can play again. */
+                    s_consecutive_restart_failures = 0;
+                    full_pipeline_recover(target_station);
+                }
+            }
+            xSemaphoreGive(station_Mutex);
+        }
+        else
+        {
+            ESP_LOGW(TAG, "Restart task: failed to acquire station mutex");
+        }
+        s_restart_in_progress = false;
+    }
+}
+
+/**
+ * Request stream restart — non-blocking.
+ * Signals audio_restart_task to do the heavy lifting so stream_task
+ * is never blocked and continues draining the ADF event queue.
  * @param reason String describing restart reason
- * @return ESP_OK on success
+ * @return ESP_OK if restart was scheduled, ESP_ERR_INVALID_STATE otherwise
  */
 static esp_err_t restart_current_stream(const char *reason)
 {
-    if (audio_user_paused)
+    if (audio_user_paused || restart_cooldown_active() || s_restart_in_progress)
         return ESP_ERR_INVALID_STATE;
 
-    if (restart_cooldown_active())
+    if (!s_restart_task_handle || !s_restart_queue)
         return ESP_ERR_INVALID_STATE;
 
-    if (xSemaphoreTake(station_Mutex, pdMS_TO_TICKS(1000)) != pdTRUE)
-    {
-        ESP_LOGW(TAG, "Failed to acquire station mutex for stream restart");
-        return ESP_ERR_TIMEOUT;
-    }
+    restart_req_t req = {
+        .type = RESTART_REQ_WATCHDOG,
+        .station_index = current_station_index,
+    };
+    last_stream_restart_tick = xTaskGetTickCount(); /* Start cooldown immediately */
+    strncpy(req.reason, reason, sizeof(req.reason) - 1);
+    req.reason[sizeof(req.reason) - 1] = '\0';
 
-    log_stream_diagnostics(reason);
-    esp_err_t err = restart_stream_for_station_locked(current_station_index, reason);
-    xSemaphoreGive(station_Mutex);
-    return err;
+    return (xQueueOverwrite(s_restart_queue, &req) == pdTRUE) ? ESP_OK : ESP_FAIL;
 }
 
 /* ============================================================================ */
@@ -607,7 +869,7 @@ static esp_err_t restart_current_stream(const char *reason)
  */
 static const char *stream_watchdog_restart_reason(void)
 {
-    if (audio_user_paused || restart_cooldown_active())
+    if (audio_user_paused || restart_cooldown_active() || s_restart_in_progress)
         return NULL;
 
     if (!http_stream_reader || !mp3_decoder || !i2s_stream_writer)
@@ -762,6 +1024,18 @@ void audio_start(esp_periph_set_handle_t set)
     audio_pipeline_run(pipeline);
     last_pipeline_run_tick = xTaskGetTickCount();
     display_set_text(stations[current_station_index].name, 1, false);
+
+    /* Create restart request queue (single-slot, always keep latest request). */
+    s_restart_queue = xQueueCreate(1, sizeof(restart_req_t));
+    if (!s_restart_queue)
+    {
+        ESP_LOGE(TAG, "Failed to create restart queue");
+        return;
+    }
+
+    /* Create dedicated restart task (priority 5, below stream_task priority 7) */
+    xTaskCreatePinnedToCore(audio_restart_task, "audio_restart", 4096, NULL, 5,
+                            &s_restart_task_handle, 1);
 }
 
 /* ============================================================================ */
@@ -778,34 +1052,35 @@ void change_radio_station(uint8_t station_index)
     if (current_station_index == station_index)
         return;
 
-    if (xSemaphoreTake(station_Mutex, pdMS_TO_TICKS(1000)))
+    if (station_index >= station_count)
     {
-        if (station_index < station_count)
-        {
-            ESP_LOGI(TAG, "Changing station to: %s", stations[station_index].name);
-
-            display_set_text("                ", 1, false);
-            display_set_text(stations[station_index].name, 1, false);
-
-            current_station_index = station_index;
-
-            esp_err_t err = restart_stream_for_station_locked(current_station_index, 
-                                                               "station change");
-            if (err == ESP_OK)
-                save_station_index_to_nvs(current_station_index);
-
-            xSemaphoreGive(station_Mutex);
-        }
-        else
-        {
-            ESP_LOGE(TAG, "Invalid station index: %d", station_index);
-            xSemaphoreGive(station_Mutex);
-        }
+        ESP_LOGE(TAG, "Invalid station index: %d", station_index);
+        return;
     }
-    else
+
+    if (!s_restart_queue)
     {
-        ESP_LOGW(TAG, "Failed to acquire station mutex for station change");
+        ESP_LOGW(TAG, "Restart queue not initialized, station change ignored");
+        return;
     }
+
+    restart_req_t req = {
+        .type = RESTART_REQ_STATION_CHANGE,
+        .station_index = station_index,
+    };
+    strncpy(req.reason, "station change", sizeof(req.reason) - 1);
+    req.reason[sizeof(req.reason) - 1] = '\0';
+
+    if (xQueueOverwrite(s_restart_queue, &req) != pdTRUE)
+    {
+        ESP_LOGW(TAG, "Failed to enqueue station change to index %d", station_index);
+        return;
+    }
+
+    display_set_text("                ", 1, false);
+    display_set_text(stations[station_index].name, 1, false);
+    ESP_LOGI(TAG, "Queued station change request to index %d (%s)",
+             station_index, stations[station_index].name);
 }
 
 /* ============================================================================ */
@@ -958,8 +1233,6 @@ void stream_task(void *arg)
         const char *watchdog_reason = stream_watchdog_restart_reason();
         if (watchdog_reason)
             restart_current_stream(watchdog_reason);
-
-        vTaskDelay(pdMS_TO_TICKS(50));
     }
 }
 

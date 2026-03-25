@@ -28,3 +28,4 @@ Mykonos Scorpions|http://c6.radioboss.fm:8207/stream|Greek
 Greek Taverna|http://c15.radioboss.fm:8520/stream|Greek
 Greek Emporika|http://c2.radioboss.fm:8671/stream|Greek
 Greek vs Ethnik|http://c26.radioboss.fm:8420/stream|Ethnic
+Radio Fest|http://sluchaj2.radiopark.biz.pl:8055/fest|Variety
