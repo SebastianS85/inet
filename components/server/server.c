@@ -381,6 +381,55 @@ static esp_err_t current_station(httpd_req_t *req)
     return ESP_OK;
 }
 
+static esp_err_t audio_debug_handler(httpd_req_t *req)
+{
+    audio_debug_snapshot_t snapshot = {0};
+    audio_get_debug_snapshot(&snapshot);
+
+    cJSON *root = cJSON_CreateObject();
+    if (!root)
+    {
+        httpd_resp_send_500(req);
+        return ESP_FAIL;
+    }
+
+    cJSON_AddBoolToObject(root, "paused", snapshot.user_paused);
+    cJSON_AddNumberToObject(root, "station_index", snapshot.station_index);
+    cJSON_AddNumberToObject(root, "station_count", snapshot.station_count);
+    cJSON_AddNumberToObject(root, "http_state", snapshot.http_state);
+    cJSON_AddNumberToObject(root, "mp3_state", snapshot.mp3_state);
+    cJSON_AddNumberToObject(root, "i2s_state", snapshot.i2s_state);
+    cJSON_AddNumberToObject(root, "http_idle_ms", snapshot.http_idle_ms);
+    cJSON_AddNumberToObject(root, "pcm_idle_ms", snapshot.pcm_idle_ms);
+    cJSON_AddNumberToObject(root, "i2s_rb_filled", snapshot.i2s_rb_filled);
+    cJSON_AddNumberToObject(root, "i2s_rb_size", snapshot.i2s_rb_size);
+    cJSON_AddNumberToObject(root, "restart_requested", snapshot.restart_requested);
+    cJSON_AddNumberToObject(root, "restart_success", snapshot.restart_success);
+    cJSON_AddNumberToObject(root, "restart_failed", snapshot.restart_failed);
+    cJSON_AddNumberToObject(root, "full_recoveries", snapshot.full_recoveries);
+    cJSON_AddStringToObject(root, "last_restart_reason", snapshot.last_restart_reason);
+
+    if (snapshot.station_index >= 0 && snapshot.station_index < station_count)
+    {
+        cJSON_AddStringToObject(root, "station_name", stations[snapshot.station_index].name);
+        cJSON_AddStringToObject(root, "station_url", stations[snapshot.station_index].url);
+    }
+
+    char *json_str = cJSON_PrintUnformatted(root);
+    cJSON_Delete(root);
+
+    if (!json_str)
+    {
+        httpd_resp_send_500(req);
+        return ESP_FAIL;
+    }
+
+    httpd_resp_set_type(req, "application/json");
+    httpd_resp_send(req, json_str, HTTPD_RESP_USE_STRLEN);
+    free(json_str);
+    return ESP_OK;
+}
+
 static esp_err_t post_handler(httpd_req_t *req)
 {
     char content[100];                  // Buffer to store POST data
@@ -604,6 +653,11 @@ void init_server(void)
         .uri = "/current-station",
         .method = HTTP_GET,
         .handler = current_station};
+
+    httpd_uri_t audio_debug_url = {
+        .uri = "/audio-debug",
+        .method = HTTP_GET,
+        .handler = audio_debug_handler};
     httpd_uri_t add_station_url = {
         .uri = "/add-station",
         .method = HTTP_POST,
@@ -627,6 +681,7 @@ void init_server(void)
     httpd_register_uri_handler(server, &save_wifi);
     httpd_register_uri_handler(server, &wifi_scan_uri);
     httpd_register_uri_handler(server, &current_station_url);
+    httpd_register_uri_handler(server, &audio_debug_url);
     httpd_register_uri_handler(server, &start_url);
     httpd_register_uri_handler(server, &remove_station_url);
     httpd_register_uri_handler(server, &add_station_url);

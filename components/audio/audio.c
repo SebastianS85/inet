@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <errno.h>
+#include <string.h>
 #include <unistd.h>
 
 /* ============================================================================ */
@@ -118,6 +119,11 @@ static TaskHandle_t s_restart_task_handle = NULL;
 static volatile bool s_restart_in_progress = false;
 static QueueHandle_t s_restart_queue = NULL;
 static int s_consecutive_restart_failures = 0;
+static uint32_t s_restart_requested = 0;
+static uint32_t s_restart_success = 0;
+static uint32_t s_restart_failed = 0;
+static uint32_t s_full_recoveries = 0;
+static char s_last_restart_reason[64] = "none";
 
 typedef enum {
     RESTART_REQ_WATCHDOG = 0,
@@ -144,6 +150,15 @@ static int elapsed_ms_since(TickType_t from_tick)
     if (from_tick == 0)
         return -1;
     return (int)pdTICKS_TO_MS(xTaskGetTickCount() - from_tick);
+}
+
+static void set_last_restart_reason(const char *reason)
+{
+    if (!reason)
+        return;
+
+    strncpy(s_last_restart_reason, reason, sizeof(s_last_restart_reason) - 1);
+    s_last_restart_reason[sizeof(s_last_restart_reason) - 1] = '\0';
 }
 
 /**
@@ -725,6 +740,7 @@ static esp_err_t full_pipeline_recover(int station_index)
     err = audio_pipeline_run(pipeline);
     if (err == ESP_OK)
     {
+        s_full_recoveries++;
         last_pipeline_run_tick = xTaskGetTickCount();
         last_stream_restart_tick = last_pipeline_run_tick;
         mark_stream_activity();
@@ -803,12 +819,14 @@ static void audio_restart_task(void *arg)
             esp_err_t err = restart_stream_for_station_locked(target_station, reason);
             if (err == ESP_OK)
             {
+                s_restart_success++;
                 s_consecutive_restart_failures = 0;
                 if (req.type == RESTART_REQ_STATION_CHANGE)
                     save_station_index_to_nvs(current_station_index);
             }
             else
             {
+                s_restart_failed++;
                 s_consecutive_restart_failures++;
                 ESP_LOGW(TAG, "Restart task: restart failed (attempt %d/2), err=%d, station=%d",
                          s_consecutive_restart_failures, err, target_station);
@@ -818,7 +836,9 @@ static void audio_restart_task(void *arg)
                     /* Pipeline is stuck in an unrecoverable state — tear down and
                      * recreate all ADF objects so we can play again. */
                     s_consecutive_restart_failures = 0;
-                    full_pipeline_recover(target_station);
+                    set_last_restart_reason("full-pipeline-recover");
+                    if (full_pipeline_recover(target_station) != ESP_OK)
+                        s_restart_failed++;
                 }
             }
             xSemaphoreGive(station_Mutex);
@@ -850,9 +870,11 @@ static esp_err_t restart_current_stream(const char *reason)
         .type = RESTART_REQ_WATCHDOG,
         .station_index = current_station_index,
     };
+    s_restart_requested++;
     last_stream_restart_tick = xTaskGetTickCount(); /* Start cooldown immediately */
     strncpy(req.reason, reason, sizeof(req.reason) - 1);
     req.reason[sizeof(req.reason) - 1] = '\0';
+    set_last_restart_reason(reason);
 
     return (xQueueOverwrite(s_restart_queue, &req) == pdTRUE) ? ESP_OK : ESP_FAIL;
 }
@@ -1271,6 +1293,41 @@ void audio_resume(void)
 bool audio_is_paused(void)
 {
     return audio_user_paused;
+}
+
+void audio_get_debug_snapshot(audio_debug_snapshot_t *snapshot)
+{
+    if (!snapshot)
+        return;
+
+    memset(snapshot, 0, sizeof(*snapshot));
+    snapshot->user_paused = audio_user_paused;
+    snapshot->station_index = current_station_index;
+    snapshot->station_count = station_count;
+    snapshot->http_state = http_stream_reader ? audio_element_get_state(http_stream_reader) : AEL_STATE_NONE;
+    snapshot->mp3_state = mp3_decoder ? audio_element_get_state(mp3_decoder) : AEL_STATE_NONE;
+    snapshot->i2s_state = i2s_stream_writer ? audio_element_get_state(i2s_stream_writer) : AEL_STATE_NONE;
+    snapshot->http_idle_ms = elapsed_ms_since(last_http_activity_tick);
+    snapshot->pcm_idle_ms = elapsed_ms_since(last_i2s_data_tick);
+    snapshot->i2s_rb_filled = -1;
+    snapshot->i2s_rb_size = -1;
+    snapshot->restart_requested = s_restart_requested;
+    snapshot->restart_success = s_restart_success;
+    snapshot->restart_failed = s_restart_failed;
+    snapshot->full_recoveries = s_full_recoveries;
+    strncpy(snapshot->last_restart_reason, s_last_restart_reason,
+            sizeof(snapshot->last_restart_reason) - 1);
+    snapshot->last_restart_reason[sizeof(snapshot->last_restart_reason) - 1] = '\0';
+
+    if (i2s_stream_writer)
+    {
+        ringbuf_handle_t i2s_input_rb = audio_element_get_input_ringbuf(i2s_stream_writer);
+        if (i2s_input_rb)
+        {
+            snapshot->i2s_rb_filled = rb_bytes_filled(i2s_input_rb);
+            snapshot->i2s_rb_size = rb_get_size(i2s_input_rb);
+        }
+    }
 }
 
 char *current_station_info(void)

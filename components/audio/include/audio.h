@@ -1,6 +1,7 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 #include <stdbool.h>
+#include <stdint.h>
 #include "http_stream.h"
 #include "esp_peripherals.h"
 
@@ -12,6 +13,24 @@ typedef struct {
     char genre[64];  // Genre or other information
     int index;       // Station index
 } Station;
+
+typedef struct {
+    bool user_paused;
+    int station_index;
+    int station_count;
+    int http_state;
+    int mp3_state;
+    int i2s_state;
+    int http_idle_ms;
+    int pcm_idle_ms;
+    int i2s_rb_filled;
+    int i2s_rb_size;
+    uint32_t restart_requested;
+    uint32_t restart_success;
+    uint32_t restart_failed;
+    uint32_t full_recoveries;
+    char last_restart_reason[64];
+} audio_debug_snapshot_t;
 
 extern Station stations[MAX_STATIONS];
 extern SemaphoreHandle_t station_Mutex; 
@@ -29,6 +48,7 @@ char * current_station_info(void);
 void load_stations(void);
 esp_err_t add_station_to_file(const char *name, const char *url, const char *genre);
 esp_err_t delete_station_from_file(int index_to_delete);
+void audio_get_debug_snapshot(audio_debug_snapshot_t *snapshot);
 
 
 
